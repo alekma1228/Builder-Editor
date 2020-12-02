@@ -1,0 +1,47 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Page validator">
+    <div class="exception" *ngFor="let exception of exceptions">
+      <div class="exception__title">{{ exception.title }}</div>
+      <div class="exception__description">{{ exception.description }}</div>
+      <div class="exception__elements">
+        <button
+          class="exception__element"
+          *ngFor="let element of exception.elements"
+          [disabled]="completelyBroken(element.id)"
+          (click)="elementSelect.emit(element.id)"
+        >
+          <div (contextmenu)="moreInfo($event, element)" style="display: inline-flex;">
+            <ng-container [ngSwitch]="element.type">
+              <peb-editor-button-document-icon class="icon" *ngSwitchCase="'button'"></peb-editor-button-document-icon>
+              <peb-editor-carousel-document-icon class="icon" *ngSwitchCase="'carousel'"></peb-editor-carousel-document-icon>
+              <peb-editor-grid-document-icon class="icon" *ngSwitchCase="'grid'"></peb-editor-grid-document-icon>
+              <peb-editor-html-document-icon class="icon" *ngSwitchCase="'html'"></peb-editor-html-document-icon>
+              <peb-editor-image-document-icon class="icon" *ngSwitchCase="'image'"></peb-editor-image-document-icon>
+              <peb-editor-line-document-icon class="icon" *ngSwitchCase="'line'"></peb-editor-line-document-icon>
+              <peb-editor-navbar-document-icon class="icon" *ngSwitchCase="'navbar'"></peb-editor-navbar-document-icon>
+              <peb-editor-text-document-icon class="icon" *ngSwitchCase="'text'"></peb-editor-text-document-icon>
+              <peb-editor-video-document-icon class="icon" *ngSwitchCase="'video'"></peb-editor-video-document-icon>
+              <peb-editor-shape-document-icon class="icon" *ngSwitchCase="'shape'"></peb-editor-shape-document-icon>
+              <peb-editor-product-document-icon class="icon" *ngSwitchCase="'shop-products'" color="#797979"></peb-editor-product-document-icon>
+              <peb-editor-product-document-icon class="icon" *ngSwitchCase="'shop-product-details'" color="#797979">
+              </peb-editor-product-document-icon>
+              <peb-editor-cart-document-icon class="icon" *ngSwitchCase="'shop-cart'"></peb-editor-cart-document-icon>
+              <peb-editor-block-document-icon class="icon" *ngSwitchCase="'block'"></peb-editor-block-document-icon>
+              <ng-container *ngSwitchDefault>
+                <peb-editor-image-document-icon class="icon"></peb-editor-image-document-icon>
+              </ng-container>
+            </ng-container>
+            <span class="exception__element-name" [attr.title]="element.data?.text">{{ element.id }}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!exceptions.length">
+      <div class="passed">
+        <peb-editor-validation-passed-icon class="passed__icon"></peb-editor-validation-passed-icon>
+        <div class="passed__label">Validation Passed!</div>
+      </div>
+    </ng-container>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

@@ -1,0 +1,12 @@
+<label>
+  <input
+    #input
+    type="checkbox"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [value]="control.value"
+    (focus)="focused.emit()"
+    (blur)="blurred.emit()"
+  />
+  <span *ngIf="label">{{ label }}</span>
+</label>

@@ -1,0 +1,73 @@
+<peb-editor-sidebar-tabs [disabledScrollTabTitle]="gallerySubTab === GallerySubTab.Media ? '' : GalleryTabs.Gallery">
+  <peb-editor-sidebar-tab [title]="GalleryTabs.Gallery">
+    <div class="tabs-headers">
+      <button
+        class="tab-button"
+        [class.selected]="gallerySubTab === GallerySubTab.Selected"
+        (click)="gallerySubTab = GallerySubTab.Selected"
+      >
+        Selected
+      </button>
+      <button
+        class="tab-button"
+        [class.selected]="gallerySubTab === GallerySubTab.Media"
+        (click)="gallerySubTab = GallerySubTab.Media"
+      >
+        Media
+      </button>
+    </div>
+    <div class="tab-content">
+      <ng-container *ngIf="gallerySubTab === GallerySubTab.Selected">
+        <div class="slides-list-wrapper">
+          <div
+            cdkDropList
+            class="slides-list"
+            (cdkDropListDropped)="moveSlides($event)"
+          >
+            <ng-scrollbar>
+              <peb-editor-slides-list-element
+                cdkDrag
+                *ngFor="let slide of (slides$ | async); let i = index"
+                [slide]="slide"
+                [selected]="i === (selectedSlideIndex$ | async)"
+                [uploadProgress]="uploadProgress"
+                [isLoading]="isLoading"
+                (selectSlide)="selectSlide(i)"
+                (replaceToMediaImage)="replaceToMediaImage(i)"
+                (replaceToOwnImage)="replaceToDownloaded(i)"
+                (deleteSlide)="deleteSlide(i)"
+              ></peb-editor-slides-list-element>
+            </ng-scrollbar>
+          </div>
+          <div class="toolbar">
+            <input
+              #fileInput
+              hidden
+              type="file"
+              accept="image/*"
+              (change)="onFileChange($event)"
+            >
+            <div class="button button--create" (click)="!isLoading && fileInput.click()">
+              <div class="button__icon">
+                <div class="plus"></div>
+              </div>
+            </div>
+            <div class="button button--delete" (click)="!isLoading && deleteSlide()">
+              <div class="button__icon">
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <peb-editor-media-tab
+        *ngIf="gallerySubTab === GallerySubTab.Media"
+        (selected)="onMediaImageSelected($event)"
+      ></peb-editor-media-tab>
+    </div>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab [title]="GalleryTabs.Arrange">
+    <peb-editor-arrange-tab [form]="arrangeForm"></peb-editor-arrange-tab>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

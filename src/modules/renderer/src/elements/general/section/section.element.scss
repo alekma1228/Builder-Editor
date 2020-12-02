@@ -1,0 +1,17 @@
+@import "../../spinner";
+
+:host {
+  position: relative;
+  // flex: 1;
+}
+
+#main-slot {
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+
+  &:before { // prevent border collapsing for sections
+    content: '';
+    display: table;
+  }
+}

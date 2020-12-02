@@ -1,0 +1,35 @@
+@import '../../../../../styles/variables';
+@import '../page-item.scss';
+
+:host {
+  display: block;
+  overflow: auto;
+  background-color: #4e4e4e;
+  color: #fff;
+  padding: 0;
+  border-radius: 0.5em;
+
+  &::-webkit-scrollbar {
+    width: .5em;
+    background: $background;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.pages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px 10px;
+}

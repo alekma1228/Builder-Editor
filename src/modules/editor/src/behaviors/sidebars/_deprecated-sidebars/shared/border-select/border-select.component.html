@@ -1,0 +1,14 @@
+<mat-form-field appearance="standard" class="border-select" [style.width.px]="80" [class.disabled]="disabled">
+  <mat-select [formControl]="control" panelClass="pe-builder-select">
+    <mat-select-trigger>
+      <div class="border-select__placeholder">
+        <span [style.border-bottom-style]="selectedOption"
+              [style.border-bottom-width.px]="isSingleLineBorder(selectedOption) ? 1 : 4"></span>
+      </div>
+    </mat-select-trigger>
+    <mat-option *ngFor="let option of options" class="border-select__options" [value]="option">
+      <span [style.border-bottom-style]="option"
+            [style.border-bottom-width.px]="isSingleLineBorder(option) ? 1 : 4"></span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

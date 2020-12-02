@@ -1,0 +1,63 @@
+<form class="form" [formGroup]="formGroup" (change)="onChange()">
+  <editor-expandable-panel>
+    <ng-container slot="header">
+      Menu fields
+    </ng-container>
+    <ng-container slot="body">
+
+      <editor-dynamic-fields
+        (add)="addField($event)"
+        (remove)="removeField($event)"
+      >
+        <editor-dynamic-field
+          *ngFor="let routeFormGroup of controls; let isEven = even"
+          [even]="isEven"
+        >
+          <div [formGroup]="routeFormGroup">
+            <div class="field">
+              <span class="field__label">Name</span>
+              <peb-editor-text-input
+                class="field__control"
+                formControlName="title"
+              ></peb-editor-text-input>
+            </div>
+
+            <div class="field">
+              <span class="field__label">Type</span>
+              <peb-editor-select-input
+                class="field__control"
+                formControlName="variant"
+                [options]="options.variants"
+              ></peb-editor-select-input>
+            </div>
+
+            <div class="field">
+              <ng-container *ngIf="routeFormGroup.value.variant !== ''">
+                <span class="field__label">Path</span>
+                <peb-editor-select-input
+                  class="field__control"
+                  formControlName="value"
+                  [options]="options[routeFormGroup.value.variant]"
+                ></peb-editor-select-input>
+              </ng-container>
+
+              <peb-editor-text-input
+                *ngIf="routeFormGroup.value.variant === ''"
+                class="field__control"
+                formControlName="value"
+              ></peb-editor-text-input>
+            </div>
+
+            <div *ngIf="routeFormGroup.value.variant === ''" class="field">
+              <label class="field__checkbox">
+                <input type="checkbox" formControlName="newTab" />
+                <span>Open in new tab</span>
+              </label>
+            </div>
+          </div>
+        </editor-dynamic-field>
+      </editor-dynamic-fields>
+
+    </ng-container>
+  </editor-expandable-panel>
+</form>

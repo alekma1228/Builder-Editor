@@ -1,0 +1,44 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Style">
+    <!-- <editor-sidebar-style-presets
+      [presets]="presets"
+      [source]="component.logo.form.controls?.src?.value"
+    ></editor-sidebar-style-presets> -->
+
+    <editor-opacity-form
+      *ngIf="component.opacity?.form"
+      [formGroup]="component.opacity.form"
+      (blurred)="component.opacity.submit.next()"
+    ></editor-opacity-form>
+
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Logo">
+    <editor-image-form
+      *ngIf="component.logo?.form"
+      [formGroup]="component.logo.form"
+      (blurred)="component.logo.submit.next()"
+    ></editor-image-form>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-dimensions-form
+      *ngIf="component.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (focused)="component.dimensions.activate()"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-proportions-form
+      *ngIf="component.proportions?.form"
+      [formGroup]="component.proportions.form"
+      (blurred)="component.proportions.submit.next()"
+    ></editor-proportions-form>
+
+    <editor-position-form
+      *ngIf="component.position?.form"
+      [formGroup]="component.position.form"
+      [limits]="component.position.limits"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

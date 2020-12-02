@@ -1,0 +1,77 @@
+<form class="form" [formGroup]="formGroup" (focusout)="blur()">
+  <div class="group">
+    <div class="group__row">
+      <label class="checkbox" (change)="blur()">
+        <input type="checkbox" formControlName="hasShadow" />
+        <span>Shadow</span>
+      </label>
+    </div>
+    <ng-container *ngIf="formGroup.value.hasShadow">
+      <editor-expandable-panel>
+        <ng-container slot="header">
+          Blur
+        </ng-container>
+        <ng-container slot="body">
+          <div class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                [control]="formGroup.get('shadowBlur')"
+                unit="pt"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+        </ng-container>
+      </editor-expandable-panel>
+      <editor-expandable-panel>
+        <ng-container slot="header">
+          Offset
+        </ng-container>
+        <ng-container slot="body">
+          <div class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                [control]="formGroup.get('shadowOffset')"
+                unit="pt"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+        </ng-container>
+      </editor-expandable-panel>
+      <editor-expandable-panel>
+        <ng-container slot="header">Opacity</ng-container>
+
+        <ng-container slot="body">
+          <div class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                [control]="formGroup.get('shadowOpacity')"
+                unit="%"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+        </ng-container>
+      </editor-expandable-panel>
+      <div class="group__row" [style.marginTop.px]="20">
+        <div class="group__col fixed" [style.width.px]="40">
+          Angle
+        </div>
+        <div class="group__col fixed">
+          <peb-editor-sidebar-angle-picker
+            [control]="formGroup.get('shadowAngle')"
+          ></peb-editor-sidebar-angle-picker>
+        </div>
+        <div class="group__col">
+          <peb-editor-number-input-old
+            [control]="formGroup.get('shadowAngle')"
+            unit="°"
+          ></peb-editor-number-input-old>
+        </div>
+        <div class="group__col">
+          <peb-editor-color-picker
+            [control]="formGroup.get('shadowColor')"
+          ></peb-editor-color-picker>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

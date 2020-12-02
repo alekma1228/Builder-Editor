@@ -1,0 +1,468 @@
+<form *ngIf="settings" [formGroup]="settings">
+  <peb-editor-sidebar-tabs [activeTabIndex]="activeTabIndex$ | async">
+    <!-- <peb-editor-sidebar-tab title="Style"> -->
+      <!-- <ng-container *ngTemplateOutlet="gridColorTemplate"></ng-container> -->
+      <!-- <ng-container *ngTemplateOutlet="fillColorTemplate"></ng-container> -->
+      <!-- <ng-container *ngTemplateOutlet="textShadowTemplate"></ng-container> -->
+      <!-- <ng-container *ngTemplateOutlet="textBorderTemplate"></ng-container> -->
+    <!-- </peb-editor-sidebar-tab> -->
+    <peb-editor-sidebar-tab title="Text">
+      <ng-container *ngTemplateOutlet="linkToTemplate"></ng-container>
+      <!-- <ng-container *ngTemplateOutlet="paragraphTemplate"></ng-container> -->
+      <ng-container *ngTemplateOutlet="fontTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="alignment"></ng-container>
+      <!-- <ng-container *ngTemplateOutlet="spacing"></ng-container> -->
+
+      <div class="group">
+        <div class="group__row">
+          <label for="syncCheckbox" class="checkbox">
+            <input
+              type="checkbox"
+              id="syncCheckbox"
+              [formControl]="settings.get('sync')"
+            />
+            <span>Synchronization</span>
+          </label>
+        </div>
+      </div>
+    </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-dimensions-form
+      *ngIf="component?.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-position-form
+      *ngIf="component?.position?.form"
+      [formGroup]="component.position.form"
+      [limits]="component.position.limits"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+    <!-- <peb-editor-sidebar-tab title="Arrange">
+      <peb-editor-arrange-tab [form]="arrangeForm"></peb-editor-arrange-tab>
+    </peb-editor-sidebar-tab> -->
+  </peb-editor-sidebar-tabs>
+</form>
+
+
+<ng-template #fontTemplate>
+  <div class="group">
+    <div class="group__row">
+      <label #fontLabel>
+        <peb-editor-triangle-right-icon
+          class="group__triangle-icon"
+          [pebEditorAccordion]="fontWrapper"
+          pebEditorAccordionKey="fontWrapper"
+          [triggerContainer]="fontLabel"
+        ></peb-editor-triangle-right-icon>
+        <span>Font</span>
+      </label>
+    </div>
+    <div #fontWrapper>
+      <div class="group_row">
+        <div class="group_col">
+          <mat-form-field appearance="standard">
+            <mat-select [formControl]="settings.get('fontFamily')" panelClass="pe-builder-select">
+              <mat-option
+                *ngFor="let fontName of fontNames"
+                [value]="fontName.value"
+              >
+                  {{fontName.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="group_col">
+          <div class="group_row pull-right">
+            <editor-color-picker-spectrum-palette-input
+              cpPosition="bottom"
+              [formControl]="settings.get('color')"
+            ></editor-color-picker-spectrum-palette-input>
+          </div>
+        </div>
+      </div>
+      <div class="group_row">
+        <div class="group_col">
+          <div class="fontWeight noFlex">
+            <div class="tools-group font__option">
+              <button
+                class="tools-group__item"
+                [class.tools-group__item--active]="settings.get('bold').value"
+                [disabled]="settings.get('bold').disabled"
+                (click)="setBold()"
+              >
+                <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.tools-group__item--active]="settings.get('italic').value"
+                [disabled]="settings.get('italic').disabled"
+                (click)="setItalic()"
+              >
+                <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.tools-group__item--active]="settings.get('underline').value"
+                [disabled]="settings.get('underline').disabled"
+                (click)="setUnderline()"
+              >
+                <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.tools-group__item--active]="settings.get('strikeThrough').value"
+                [disabled]="settings.get('strikeThrough').disabled"
+                (click)="setStrikeThrough()">
+                <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="group_col" *ngIf="mode === 'local'">
+          <peb-editor-number-input-old
+            [control]="settings.controls.fontSize"
+            [min]="minFontSize"
+          ></peb-editor-number-input-old>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #paragraphTemplate>
+  <div class="group">
+    <div class="group__row">Paragraph styles</div>
+    <mat-form-field appearance="standard">
+      <mat-select [formControl]="settings.get('paragraphStyle')" panelClass="pe-builder-select">
+        <mat-option
+          *ngFor="let paragraphStyle of paragraphStyles"
+          [value]="paragraphStyle.value"
+        >
+            {{paragraphStyle.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<ng-template #linkToTemplate>
+  <div class="group">
+    <div>
+      <div class="group__row">
+        <label #linkToLabel>
+          <peb-editor-triangle-right-icon
+            class="group__triangle-icon"
+            [pebEditorAccordion]="linkToWrapper"
+            pebEditorAccordionKey="linkToWrapper"
+            [triggerContainer]="linkToLabel"
+          ></peb-editor-triangle-right-icon>
+          <span>Link to</span>
+        </label>
+      </div>
+
+      <div #linkToWrapper>
+        <mat-form-field appearance="standard">
+          <mat-select [formControl]="settings.get('linkType')" panelClass="pe-builder-select">
+            <mat-option
+              *ngFor="let linkName of linkNames"
+              [value]="linkName.value"
+            >
+                {{linkName.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="settings.get('linkType').value === PebInteractionType.NavigateExternal">
+          <input [formControl]="settings.get('linkPath')" type="text" class="sidebar-input" (blur)="setLinkPath()" />
+        </div>
+
+        <div *ngIf="settings.get('linkType').value === PebInteractionType.NavigateInternal" style="padding-top: 10px">
+
+          <mat-form-field appearance="standard">
+            <mat-select [formControl]="settings.get('linkPath')" panelClass="pe-builder-select">
+              <mat-option
+                *ngFor="let route of routes$ | async"
+                [value]="route.path"
+              >
+                  {{route.route}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template  #textBorderTemplate>
+  <div class="group">
+    <div class="group_row">
+      <label for="borderCheckbox" class="checkbox">
+        <input
+          #canChangeBorder
+          type="checkbox"
+          id="borderCheckbox"
+          [formControl]="settings.get('border')"
+         />
+        <span>Border</span>
+      </label>
+    </div>
+
+    <div class="sidebar__element" *ngIf="canChangeBorder.checked">
+      <ng-container *ngTemplateOutlet="border"></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #border>
+  <div class="group_row">
+    <div class="group_col">
+      <mat-form-field appearance="standard">
+        <mat-select [formControl]="settings.get('borderName')" panelClass="pe-builder-select">
+          <mat-option
+            *ngFor="let borderName of borderNames"
+            [value]="borderName.value"
+          >
+              {{borderName.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="group_row">
+    <div  class="group_col">
+      <peb-editor-color-picker [control]="settings.controls.borderColor"></peb-editor-color-picker>
+    </div>
+    <div  class="group_col">
+      <peb-editor-number-input-old unit="pt" [control]="settings.controls.borderWeight">
+      </peb-editor-number-input-old>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template  #textShadowTemplate>
+  <div class="group">
+    <div class="group_row">
+      <label for="shadowCheckbox" class="checkbox">
+        <input
+          #canChangeShadow
+          type="checkbox"
+          id="shadowCheckbox"
+          [formControl]="settings.get('shadow')"
+        />
+        <span>Shadow</span>
+      </label>
+    </div>
+
+    <div class="group_row" *ngIf="canChangeShadow.checked">
+      <ng-container *ngTemplateOutlet="shadow"></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template  #fillColorTemplate>
+  <div class="group">
+    <div class="group_row">
+      <label for="fillCheckbox" class="checkbox">
+        <input
+          #canChangeFill
+          type="checkbox"
+          id="fillCheckbox"
+          [formControl]="settings.get('fill')"
+        />
+        <span>Fill</span>
+      </label>
+      <div class="group_col">
+        <div class="group_row pull-right" *ngIf="canChangeFill.checked">
+          <peb-editor-color-picker
+            [control]="component.background?.form.get('bgColor')"
+            [simple]="true"
+          ></peb-editor-color-picker>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="canChangeFill.checked"
+      class="form-select">
+      <peb-editor-sidebar-select
+        [options]="fillNames"
+        [disabled]="component.background?.form.get('fillType').disabled"
+        [control]="component.background?.form.get('fillType')"
+        (blurOn)="component.background.submit.next()"
+      ></peb-editor-sidebar-select>
+      <ng-container
+        *ngTemplateOutlet="component.background?.form.get('fillType')?.value.name === 'Color fill' ? colorFill : null"
+      ></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #gridColorTemplate>
+  <div class="grid-container">
+    <div
+      *ngFor="let color of colorPalette"
+      [style.background]="color"
+      (click)="setBackgroundColor(color)"
+    >
+      Text
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #shadow>
+  <div class="shadow">
+    <div class="shadow__group">
+      <div>
+        Blur
+      </div>
+      <peb-editor-sidebar-slider max="100" unit="pt" class="corners__control" [control]="settings.controls.shadowBlur">
+      </peb-editor-sidebar-slider>
+    </div>
+    <div class="shadow__group">
+      <div>
+        Offset
+      </div>
+      <peb-editor-sidebar-slider max="50" unit="pt" class="corners__control"
+        [control]="settings.controls.shadowOffset">
+      </peb-editor-sidebar-slider>
+    </div>
+    <div class="shadow__group">
+      <div>
+        Opacity
+      </div>
+      <peb-editor-sidebar-slider max="100" unit="%" class="corners__control"
+        [control]="settings.controls.shadowOpacity">
+      </peb-editor-sidebar-slider>
+    </div>
+    <div class="shadow__group">
+      <div class="sidebar__row">
+        <div>
+          Angle <peb-editor-sidebar-angle-picker [control]="settings.controls.shadowAngle">
+          </peb-editor-sidebar-angle-picker>
+        </div>
+        <div>
+          <peb-editor-number-input-old [control]="settings.controls.shadowAngle">
+          </peb-editor-number-input-old>
+        </div>
+        <div>
+          <peb-editor-color-picker [control]="settings.controls.shadowColor"></peb-editor-color-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alignment>
+  <div class="group">
+    <div>
+      <div class="tools-group">
+        <button
+          class="tools-group__item"
+          [class.tools-group__item--active]="settings.controls.justify.value === 'left'"
+          [disabled]="settings.get('justify').disabled"
+          (click)="changeControl('justify','left');"
+        >
+          <peb-editor-alignment-left-icon></peb-editor-alignment-left-icon>
+        </button>
+        <button
+          class="tools-group__item"
+          [class.tools-group__item--active]="settings.controls.justify.value === 'center'"
+          [disabled]="settings.get('justify').disabled"
+          (click)="changeControl('justify','center');"
+        >
+          <peb-editor-alignment-center-icon></peb-editor-alignment-center-icon>
+        </button>
+        <button
+          class="tools-group__item"
+          [class.tools-group__item--active]="settings.controls.justify.value === 'right'"
+          (click)="changeControl('justify','right');"
+          [disabled]="settings.get('justify').disabled"
+        >
+          <peb-editor-alignment-right-icon></peb-editor-alignment-right-icon>
+        </button>
+        <button
+          class="tools-group__item"
+          [class.tools-group__item--active]="settings.controls.justify.value === 'full'"
+          (click)="changeControl('justify','full');"
+          [disabled]="settings.get('justify').disabled"
+        >
+          <peb-editor-alignment-justify-icon></peb-editor-alignment-justify-icon>
+        </button>
+      </div>
+      <!-- <div class="tools-group">
+        <button class="tools-group__item" [class.tools-group__item--active]="settings.controls.justifyContent.value === 'flex-start'"
+          (click)="changeControl('justifyContent','flex-start')">
+          <peb-editor-vertical-align-top-icon></peb-editor-vertical-align-top-icon>
+        </button>
+        <button class=" tools-group__item" [class.tools-group__item--active]="settings.controls.justifyContent.value === 'center'"
+          (click)="changeControl('justifyContent','center')">
+          <peb-editor-vertical-align-center-icon></peb-editor-vertical-align-center-icon>
+        </button>
+        <button class=" tools-group__item" [class.tools-group__item--active]="settings.controls.justifyContent.value === 'flex-end'"
+          (click)="changeControl('justifyContent','flex-end')">
+          <peb-editor-vertical-align-bottom-icon></peb-editor-vertical-align-bottom-icon>
+        </button>
+      </div> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spacing>
+  <div class="group">
+    <div class="sidebar__row">
+      <div class="fontWeight noFlex">
+        Spacing
+      </div>
+      <div class="noFlex">
+        <peb-editor-number-input-old [control]="settings.controls.spacing"></peb-editor-number-input-old>
+      </div>
+    </div>
+
+    <div class="sidebar__row">
+      <div class="fontWeight noFlex">
+        Before Paragraph
+      </div>
+      <div class="noFlex">
+        <peb-editor-number-input-old [control]="settings.controls.beforeParagraph"></peb-editor-number-input-old>
+      </div>
+    </div>
+
+    <div class="sidebar__row">
+      <div class="fontWeight noFlex">
+        After Paragraph
+      </div>
+      <div class="noFlex">
+        <peb-editor-number-input-old [control]="settings.controls.afterParagraph"></peb-editor-number-input-old>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #colorFont>
+  <div class="sidebar__element">
+    <div class="sidebar__colorPicker">
+      <peb-editor-color-picker [pebColorPicker]="settings.controls.fontColor.value"
+        (pebColorPickerChange)="settings.controls.fontColor.setValue($event)"></peb-editor-color-picker>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #colorFill>
+  <div class="sidebar__element">
+    <div class="sidebar__colorPicker">
+      <div class="sidebar__colorWrapper">
+        <editor-color-picker-spectrum-palette-input
+          cpPosition="bottom"
+          [formControl]="component.background.form.get('bgColor')"
+        > </editor-color-picker-spectrum-palette-input>
+      </div>
+    </div>
+  </div>
+</ng-template>

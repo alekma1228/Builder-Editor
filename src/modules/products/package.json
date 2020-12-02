@@ -1,0 +1,12 @@
+{
+  "name": "@pe/builder-products",
+  "version": "5.0.0-dev.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "@angular/material": "latest",
+    "@angular/cdk": "latest",
+    "@pe/data-grid": "0.0.10",
+    "tslib": "^1.10.0"
+  }
+}

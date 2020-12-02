@@ -1,0 +1,31 @@
+<ng-container *ngIf="context.state === ElementContextState.Ready">
+  <div class="controls" #controlsContainerRef>
+    <div
+      class="control"
+      [class.control--active]="i === (activeSlideIndex$ | async)"
+      *ngFor="let slide of images let i = index"
+      (mouseenter)="clickSlideControl(i)"
+    >
+      <div
+        class="control__image"
+        [style.backgroundImage]="'url(' + slide + ')'"
+      ></div>
+    </div>
+  </div>
+
+  <div
+    class="slides"
+    (mousemove)="zoomImage($event)"
+    (mouseleave)="zoomImage(null)"
+    #slidesContainerRef
+  >
+    <div
+      class="slide"
+      *ngFor="let slide of images; let i = index"
+      [hidden]="(activeSlideIndex$ | async) !== i"
+      [style.transform]="scaleStyle"
+      [style.transformOrigin]="zoomStyle"
+      [style.backgroundImage]="getBackgroundImage(slide)"
+    ></div>
+  </div>
+</ng-container>

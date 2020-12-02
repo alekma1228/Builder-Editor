@@ -1,0 +1,143 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Style">
+    <div
+      *ngIf="component?.background?.form"
+      class="group">
+      <peb-editor-color-palette
+        [gridColors]="gridColors"
+        [control]="component.background.form.get('bgColor')"
+      ></peb-editor-color-palette>
+    </div>
+    <div *ngIf="component?.background?.form">
+      <editor-background-form
+        [label]="'Cart Color'"
+        [formGroup]="component.background.form"
+        [fillTypes]="backgroundFillOptions"
+      >
+      </editor-background-form>
+    </div>
+    <div class="group">
+      <div class="group__label">
+        <div
+          class="group__label-pointer"
+          (click)="allowBorderControl.patchValue(!allowBorderControl.value)"
+        >
+          <input
+            #canChangeBorder
+            type="checkbox"
+            value="button color"
+            [formControl]="allowBorderControl"
+          />
+          Border
+        </div>
+      </div>
+      <div class="group__content" *ngIf="allowBorderControl.value">
+        <peb-editor-sidebar-select
+          [control]="borderStyleTypeControl"
+          [options]="borderOptions"
+        >
+        </peb-editor-sidebar-select>
+        <div class="border">
+          <peb-editor-svg-border-sidebar-select
+            class="border__control"
+            [formControl]="borderStyleControl"
+          >
+          </peb-editor-svg-border-sidebar-select>
+
+          <peb-editor-color-picker
+            [pebColorPicker]="borderColor"
+            (pebColorPickerChange)="changeStyle.next({ borderColor: $event })"
+          ></peb-editor-color-picker>
+
+          <peb-editor-number-input-old
+            class="border__control"
+            [style.width]="'30%'"
+            [control]="borderWidthControl"
+            [unit]="'px'"
+            min="0"
+            placeholder="0"
+          ></peb-editor-number-input-old>
+        </div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group__label">
+        <label #cartLabel>
+          <peb-editor-triangle-right-icon
+            class="group__triangle-icon"
+            [pebEditorAccordion]="cartWrapper"
+            pebEditorAccordionKey="cartWrapper"
+            [triggerContainer]="cartLabel"
+          ></peb-editor-triangle-right-icon>
+          <span>Cart</span>
+        </label>
+      </div>
+      <div #cartWrapper class="group__content">
+        <div class="group__label">
+          <span>Background</span>
+          <peb-editor-color-picker
+            *ngIf="allowBackgroundChange"
+            [pebColorPicker]="badgeColor"
+            (pebColorPickerChange)="changeStyle.next({ badgeColor: $event })"
+          ></peb-editor-color-picker>
+        </div>
+        <div class="group__label margin-top">
+          <span>Number</span>
+          <peb-editor-color-picker
+            *ngIf="allowBackgroundChange"
+            [pebColorPicker]="badgeTextColor"
+            (pebColorPickerChange)="changeStyle.next({ badgeTextColor: $event })"
+          ></peb-editor-color-picker>
+        </div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group__label">
+        <div
+          class="group__label-pointer"
+          (click)="allowShadowControl.patchValue(!allowShadowControl.value)"
+        >
+          <input
+            #canChangeBoxShadow
+            type="checkbox"
+            [formControl]="allowShadowControl"
+          />
+          Shadow
+        </div>
+      </div>
+      <div *ngIf="allowShadowControl.value" class="group__content">
+        <div class="shadow">
+          <div class="shadow__group">
+            <div>
+              <label #blurLabel>
+                <peb-editor-triangle-right-icon
+                  class="group__triangle-icon"
+                  [pebEditorAccordion]="blurWrapper"
+                  pebEditorAccordionKey="blurWrapper"
+                  [triggerContainer]="blurLabel"
+                ></peb-editor-triangle-right-icon>
+                <span>Blur</span>
+              </label>
+            </div>
+            <div #blurWrapper>
+              <peb-editor-sidebar-slider
+                class="corners__control"
+                [control]="shadowBlurControl"
+              >
+              </peb-editor-sidebar-slider>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-proportion-dimensions-form
+      *ngIf="component.proportionDimensions?.form"
+      [formGroup]="component.proportionDimensions.form"
+      [limits]="component.proportionDimensions.limits"
+      (blurred)="component.proportionDimensions.submit.next()"
+    ></editor-proportion-dimensions-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

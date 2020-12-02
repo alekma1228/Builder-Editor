@@ -1,0 +1,53 @@
+$borderColor: #696c70;
+$buttonBg: #6c6c6c;
+$white: white;
+
+.gradient-picker {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    min-height: 3.46em;
+    margin-top: 0.67em;
+  }
+
+  &__color-pickers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__angle {
+    display: flex;
+    align-items: center;
+
+    &-label {
+      font-size: 0.81em;
+      font-weight: 500;
+      padding-right: 0.3em;
+    }
+
+    &-input {
+      max-width: 5.3em;
+      max-height: 1.69em;
+    }
+  }
+}
+
+.flip-button {
+  margin: 0 0.153em;
+  background-color: $buttonBg;
+  border: solid 1px $borderColor;
+  color: $white;
+  border-radius: 3px;
+  width: 2.5em;
+  height: 1.584em;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(180deg);
+}
+
+.inputs-group__row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

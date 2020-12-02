@@ -1,0 +1,70 @@
+<mat-form-field
+  appearance="standard"
+  class="border-select"
+  [style.width.px]="80"
+  [class.disabled]="disabled"
+>
+  <mat-select [(ngModel)]="value" panelClass="pe-builder-select">
+    <mat-select-trigger>
+      <div class="border-select__placeholder">
+        <ng-container
+          *ngTemplateOutlet="
+            border;
+            context: { style: value, viewBox: '-2 0 30 6' }
+          "
+        ></ng-container>
+      </div>
+    </mat-select-trigger>
+    <mat-option
+      *ngFor="let option of options"
+      class="border-select__options"
+      [value]="option"
+    >
+      <mat-icon
+        *ngIf="option === value"
+        class="icon"
+        matPrefix
+      >
+        check
+      </mat-icon>
+      <ng-container
+        *ngTemplateOutlet="
+          border;
+          context: { style: option, height: '20px', viewBox: '-2 0 30 10' }
+        "
+      ></ng-container>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<ng-template
+  #border
+  let-style="style"
+  let-viewBox="viewBox"
+  let-height="height"
+>
+  <span
+    *ngIf="style !== 'longdashed' && style !== 'shortdashed'"
+    [style.border-bottom-style]="style"
+    [style.border-bottom-width.px]="isSingleLineBorder(style) ? 1 : 4"
+  ></span>
+  <span *ngIf="style === 'longdashed'">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="longdashed"
+      [attr.viewBox]="viewBox"
+      [style.height]="height"
+    >
+      <line x1="0" y1="0" x2="38" y2="0" stroke="#ffffff"></line>
+    </svg>
+  </span>
+  <span *ngIf="style === 'shortdashed'">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="shortdashed"
+      [attr.viewBox]="viewBox"
+      [style.height]="height"
+    >
+      <line x1="0" y1="0" x2="38" y2="0" stroke="#ffffff"></line>
+    </svg>
+  </span>
+</ng-template>

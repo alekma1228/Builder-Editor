@@ -1,0 +1,30 @@
+@import '../../../../styles/variables';
+
+.sidebar-container {
+  display: block;
+  padding: 1em;
+
+  &__block {
+    border-bottom: 1px solid #474747;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__textarea {
+    margin-top: 0.5em;
+    height: 10em;
+    border-radius: .25em;
+    border: solid .11em #92969a;
+    resize: none;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    padding: .55em;
+    outline: none;
+  }
+
+  &__label {
+    font-size: 1em;
+    color: #ffffff;
+  }
+}

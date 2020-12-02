@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+@import '../../../styles/spinner';
+
+
+:host {
+  height: 100%;
+}
+
+.group {
+  &__title {
+    width: 70%;
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+  }
+  .group__header {
+    font-weight: 300;
+  }
+  .group__section-button {
+    color: $formFieldTextColor;
+    background-color: $buttonBg;
+    border-radius: $borderRadius;
+    width: 100%;
+    padding: 0.125em;
+  }
+  .group__section-button.group__section-button--position {
+    width: calc(50% - 10px);
+  }
+}
+
+form.form {
+  padding: 1em;
+
+  .form-group {
+    span {
+      display: inline-block;
+      width: 4em;
+    }
+  }
+}

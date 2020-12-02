@@ -1,0 +1,175 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Products">
+    <form [formGroup]="form">
+      <div class="group">
+        <div class="group__label">
+          <button
+            class="group__label-button full-width"
+            (click)="openProductsGrid.emit()"
+          >
+            Add product
+          </button>
+        </div>
+        <div class="group__content">
+          <div *ngIf="(context$ | async)?.data as products" class="products">
+            <div
+              *ngFor="let product of products; let isLast = last"
+              class="product"
+            >
+              <div
+                class="product__image"
+                [style.backgroundImage]="'url(' + product.images[0] + ')'"
+              ></div>
+              <div class="product__info">
+                <div class="product__name">{{ product.title }}</div>
+                <div class="product__variant">White</div>
+              </div>
+              <div
+                *ngIf="products.length !== 1"
+                class="product__remove"
+                (click)="removeProduct(product)"
+              >
+                <peb-editor-small-plus-icon
+                  [style.fontSize.px]="0"
+                ></peb-editor-small-plus-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="template" class="group">
+        <div class="group__row">
+          <label #gridLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="gridWrapper"
+              pebEditorAccordionKey="gridWrapper"
+              [triggerContainer]="gridLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Products grid</span>
+          </label>
+        </div>
+
+        <div #gridWrapper>
+          <div class="group__content">
+            <label class="input-number">
+              <span>Columns</span>
+              <input formControlName="columns" type="number" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Style">
+    <div class="group">
+      <div class="group_row">
+        Position
+      </div>
+      <div class="group__content">
+        <div class="tools-group">
+          <button
+            class="tools-group__item"
+            [class.tools-group__item--active]="form.get('textAlign').value === textAlignmentConstants.LEFT"
+            (click)="updateStyle('textAlign', textAlignmentConstants.LEFT)"
+          >
+            <peb-editor-alignment-left-icon></peb-editor-alignment-left-icon>
+          </button>
+          <button
+            class="tools-group__item"
+            [class.tools-group__item--active]="form.get('textAlign').value === textAlignmentConstants.CENTER"
+            (click)="updateStyle('textAlign', textAlignmentConstants.CENTER)"
+          >
+            <peb-editor-alignment-center-icon></peb-editor-alignment-center-icon>
+          </button>
+          <button
+            class="tools-group__item"
+            [class.tools-group__item--active]="form.get('textAlign').value === textAlignmentConstants.RIGHT"
+            (click)="updateStyle('textAlign', textAlignmentConstants.RIGHT)"
+          >
+            <peb-editor-alignment-right-icon></peb-editor-alignment-right-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group_row">
+        Image corners
+      </div>
+      <div class="group__content">
+        <div class="tools-group">
+          <button
+            class="tools-group__item"
+            [class.tools-group__item--active]="form.get('imageCorners').value === imageCornersConstants.RIGHT"
+            (click)="updateStyle('imageCorners', imageCornersConstants.RIGHT)"
+          >
+            <peb-editor-right-angle-icon></peb-editor-right-angle-icon>
+          </button>
+          <button
+            class="tools-group__item"
+            [class.tools-group__item--active]="form.get('imageCorners').value === imageCornersConstants.ROUNDED"
+            (click)="updateStyle('imageCorners', imageCornersConstants.ROUNDED)"
+          >
+            <peb-editor-rounded-border-icon></peb-editor-rounded-border-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <editor-font-form
+      *ngIf="titleFont?.form"
+      title="Title"
+      [formGroup]="titleFont?.form"
+      [options]="titleFont?.options"
+      (blurred)="titleFont?.submit.next()"
+    ></editor-font-form>
+    <editor-font-form
+      *ngIf="priceFont?.form"
+      title="Price"
+      [formGroup]="priceFont?.form"
+      [options]="priceFont?.options"
+      (blurred)="priceFont?.submit.next()"
+    ></editor-font-form>
+    <editor-shadow-form
+      *ngIf="component?.shadow?.form"
+      [formGroup]="component.shadow.form"
+      (blurred)="component.shadow.submit.next()"
+    ></editor-shadow-form>
+    <editor-expandable-panel>
+      <ng-container slot="header">
+        Card
+      </ng-container>
+      <ng-container slot="body">
+        <editor-dimensions-form
+          *ngIf="component.productDimensions?.form"
+          [formGroup]="component.productDimensions.form"
+          [limits]="component.productDimensions.limits"
+          (focused)="component.productDimensions.activate()"
+          (blurred)="component.productDimensions.submit.next()"
+        ></editor-dimensions-form>
+      </ng-container>
+    </editor-expandable-panel>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-dimensions-form
+      *ngIf="component.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (focused)="component.dimensions.activate()"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-proportions-form
+      *ngIf="component.proportions?.form"
+      [formGroup]="component.proportions.form"
+      (blurred)="component.proportions.submit.next()"
+    ></editor-proportions-form>
+
+    <editor-position-form
+      *ngIf="component.position?.form"
+      [formGroup]="component.position.form"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

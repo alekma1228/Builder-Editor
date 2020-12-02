@@ -1,0 +1,44 @@
+@import '../../../styles/variables';
+
+:host {
+  background-color: #4e4e4e;
+  color: #fff;
+  padding: 0;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+}
+
+.option {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 12px;
+  padding: 1em;
+  cursor: pointer;
+  transition: background-color .2s;
+  user-select: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+
+    &:first-child {
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5em;
+    }
+  }
+
+  &__icon {
+    width: 1.23em;
+    height: 1.23em;
+    margin-right: 1.22em;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #797c81;
+  }
+}

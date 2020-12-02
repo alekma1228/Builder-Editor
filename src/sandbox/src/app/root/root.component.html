@@ -1,0 +1,29 @@
+<section *ngIf="!classFrontPage" class="toolbar">
+  <a routerLink="" style="font-size: 1.5em; line-height: .66em">⌂</a>
+  <a routerLink="pages" routerLinkActive="active">Editor...</a>
+  <a routerLink="renderer" routerLinkActive="active">Renderer</a>
+  <a (click)="openViewerDialog()">
+    Viewer...
+  </a>
+  <a routerLink="makers"  routerLinkActive="active">
+    Makers...
+  </a>
+  <a routerLink="actions" routerLinkActive="active">Actions</a>
+  <a routerLink="themes" routerLinkActive="active">Themes</a>
+  <a routerLink="shop/list" routerLinkActive="active">Shops</a>
+  <a routerLink="shop/settings" routerLinkActive="active">Settings</a>
+  <a routerLink="shop/create" routerLinkActive="active">Create shop</a>
+  <a routerLink="source-editor" routerLinkActive="active">Source editor</a>
+
+  <div class="toolbar__end">
+    <ng-template [cdkPortalOutlet]="customToolsPortal"></ng-template>
+
+    <button class="toolbar__settings" (click)="openSettings()">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </div>
+</section>
+
+<section class="content">
+  <router-outlet></router-outlet>
+</section>

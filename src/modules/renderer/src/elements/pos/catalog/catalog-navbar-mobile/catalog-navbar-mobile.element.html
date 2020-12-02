@@ -1,0 +1,50 @@
+<ng-container [ngSwitch]="context.state">
+  <ng-container *ngSwitchCase="PebElementContextState.Ready">
+    <div class="filter-buttons">
+      <div
+        *ngIf="context.data.filters.length"
+        class="navbar-button"
+        (click)="onToggleShownFilters()"
+      >
+        <div class="icon">
+          <peb-icon-mobile-filter></peb-icon-mobile-filter>
+        </div>
+      </div>
+      <div
+        *ngIf="atLeastOneFilterActive"
+        class="reset-filter-btn"
+        (click)="onResetFilters()"
+      >
+        <span class="reset-filter-btn__pipe" aria-hidden="true">|</span>
+        <a role="button" aria-hidden="false" class="reset-filter-btn__title"
+          >Reset</a
+        >
+      </div>
+    </div>
+    <div class="search-wrapper">
+      <div class="search">
+        <peb-icon-magnifier class="search__icon"></peb-icon-magnifier>
+        <input
+          class="search__input"
+          placeholder="Search"
+          [value]="context?.data.search || ''"
+          [disabled]="!options.interactions"
+          (input)="onSearch($event.target.value)"
+        />
+      </div>
+    </div>
+    <div class="navbar-button navbar-button--right" (click)="onSort()">
+      <div class="icon icon__sort-by">
+        <peb-icon-sort-by></peb-icon-sort-by>
+      </div>
+    </div>
+    <div
+      class="navbar-button navbar-button&#45;&#45;right"
+      (click)="changeProductsDisplayMode()"
+    >
+      <div class="icon icon__grid">
+        <peb-icon-grid></peb-icon-grid>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

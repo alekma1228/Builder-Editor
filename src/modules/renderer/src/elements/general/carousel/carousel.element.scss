@@ -1,0 +1,107 @@
+:host {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: auto;
+
+  &__wrapper {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__control {
+    position: absolute;
+    color: #666666;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.45);
+    }
+
+    &--left {
+      left: 10px;
+      margin-left: 0;
+    }
+
+    &--right {
+      right: 10px;
+      margin-right: 0;
+    }
+  }
+
+  .carousel-default-item {
+    width: inherit;
+    min-height: 7em;
+    border-radius: 0.125em;
+    display: grid;
+    justify-content: center;
+    color: #aaa;
+    text-align: center;
+
+    &__text {
+      display: none;
+    }
+
+    .icon {
+      justify-self: center;
+      align-self: end;
+    }
+  }
+
+  &__default-control {
+    height: 0.75em;
+    width: 0.75em;
+  }
+
+  &__loading-spinner-wrapper {
+    left: calc(50% - 1.75em);
+    top: calc(50% - 1.75em);
+    position: relative;
+  }
+
+  &__loading-spinner {
+    position: absolute !important;
+    width: 3.5em !important;
+    height: 3.5em !important;
+  }
+}
+
+::ng-deep .carousel__loading-spinner {
+  circle {
+    stroke: black !important;
+  }
+
+  svg {
+    height: 3.5em !important;
+    width: 3.5em !important;
+  }
+}

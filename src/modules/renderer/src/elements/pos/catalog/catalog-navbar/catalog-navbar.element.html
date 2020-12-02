@@ -1,0 +1,50 @@
+<ng-container *ngIf="PebElementContextState.Ready">
+  <div
+    *ngIf="context.data.filters.length"
+    class="navbar-button"
+    (click)="onToggleShownFilters()"
+  >
+    <div class="navbar-button__icon">
+      <peb-icon-filters></peb-icon-filters>
+    </div>
+    <div class="navbar-button__label">Filter</div>
+  </div>
+  <div
+    *ngIf="atLeastOneFilterActive"
+    class="reset-filter-btn"
+    (click)="onResetFilters()"
+  >
+    <span class="reset-filter-btn__pipe" aria-hidden="true">|</span>
+    <a role="button" aria-hidden="false" class="reset-filter-btn__title">
+      Reset
+    </a>
+  </div>
+
+  <label class="navbar-button navbar-button--right cursor-default">
+    <ng-container [ngSwitch]="options?.locale">
+      <span *ngSwitchCase="'de'">Sortieren nach:&nbsp;</span>
+      <span *ngSwitchCase="'sv'">Sortera efter:&nbsp;</span>
+      <span *ngSwitchDefault>Sort by:&nbsp;</span>
+    </ng-container>
+    <select
+      class="navbar-select"
+      (change)="onSort($event.target.value)"
+      [disabled]="!options.interactions"
+    >
+    <ng-container [ngSwitch]="options?.locale">
+      <ng-container *ngSwitchCase="'de'">
+        <option value="asc">Preis: Aufsteigend</option>
+        <option value="desc">Preis: Absteigend</option>
+      </ng-container>
+      <ng-container *ngSwitchCase="'sv'">
+        <option value="asc">Pris: Lågt till högt</option>
+        <option value="desc">Pris: Högt till lågt</option>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </ng-container>
+    </ng-container>
+    </select>
+  </label>
+</ng-container>

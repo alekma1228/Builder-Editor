@@ -1,0 +1,36 @@
+:host {
+  position: absolute;
+  pointer-events: none;
+}
+
+.border {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+
+  &--left {
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom,black 0,black 3px,transparent 3px,transparent 7px);
+
+  }
+
+  &--right {
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom,black 0,black 3px,transparent 3px,transparent 7px);
+  }
+}
+
+.horizontal {
+  position: relative;
+  z-index: 9999;
+
+  &--top {
+    height: 1px;
+    background: repeating-linear-gradient(to right,black 0,black 3px,transparent 3px,transparent 7px);
+  }
+}

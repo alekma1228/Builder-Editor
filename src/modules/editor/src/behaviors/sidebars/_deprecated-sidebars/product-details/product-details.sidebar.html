@@ -1,0 +1,183 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Style">
+    <form [formGroup]="styleForm">
+      <div
+        *ngIf="component.background?.form"
+        class="group">
+        <peb-editor-color-palette
+          [gridColors]="gridColors"
+          [control]="component.background.form.get('bgColor')"
+          (colorSelected)="hasBackground.patchValue(true)"
+        ></peb-editor-color-palette>
+      </div>
+      <div
+        *ngIf="component.background?.form"
+        class="group">
+        <div class="group__row">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="hasBackground" />
+            <span>Fill</span>
+          </label>
+          <peb-editor-color-picker
+            *ngIf="hasBackground.value"
+            [control]="component.background.form.get('bgColor')"
+          ></peb-editor-color-picker>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="hasButtonBackground" />
+            <span>Fill Button</span>
+          </label>
+          <peb-editor-color-picker
+            *ngIf="hasButtonBackground.value"
+            [control]="buttonBackgroundColor"
+          ></peb-editor-color-picker>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #textFontStyleLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="textFontStyleWrapper"
+              pebEditorAccordionKey="textFontStyleWrapper"
+              [triggerContainer]="textFontStyleLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Text font style</span>
+          </label>
+        </div>
+        <div #textFontStyleWrapper class="group__font-styles-wrapper">
+          <div class="group__content">
+            <div class="font">
+              <peb-editor-sidebar-select
+                valueKey="name"
+                [control]="fontFamily"
+                [options]="fontOptions"
+              ></peb-editor-sidebar-select>
+              <div class="font__format">
+                <peb-editor-color-picker [control]="color">
+                </peb-editor-color-picker>
+
+                <peb-editor-number-input-old
+                  class="font__control"
+                  [control]="fontSize"
+                  [unit]="'px'"
+                >
+                </peb-editor-number-input-old>
+              </div>
+              <div class="font__format">
+                <div class="tools-group font__option">
+                  <button
+                    class="tools-group__item"
+                    [class.active]="fontWeight.value == textStyleType.Bold"
+                    (click)="fontWeight.patchValue(fontWeight.value === textStyleType.Bold ? 'normal': textStyleType.Bold)"
+                  >
+                    <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="fontStyle.value == textStyleType.Italic"
+                    (click)="fontStyle.patchValue(fontStyle.value === textStyleType.Italic ? '' : textStyleType.Italic)"
+                  >
+                    <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="textDecoration.value == textStyleType.Underline"
+                    (click)="textDecoration.patchValue(textDecoration.value === textStyleType.Underline ? '' : textStyleType.Underline)"
+                  >
+                    <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="textDecoration.value == textStyleType.Strike"
+                    (click)="textDecoration.patchValue(textDecoration.value === textStyleType.Strike ? '' : textStyleType.Strike)"
+                  >
+                    <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #buttonFontStyleLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="buttonFontStyleWrapper"
+              pebEditorAccordionKey="buttonFontStyleWrapper"
+              [triggerContainer]="buttonFontStyleLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Button font style</span>
+          </label>
+        </div>
+        <div #buttonFontStyleWrapper class="group__font-styles-wrapper">
+          <div class="group__content">
+            <div class="font">
+              <peb-editor-sidebar-select
+                valueKey="name"
+                [control]="buttonFontFamily"
+                [options]="fontOptions"
+              ></peb-editor-sidebar-select>
+              <div class="font__format">
+                <peb-editor-color-picker [control]="buttonColor">
+                </peb-editor-color-picker>
+
+                <peb-editor-number-input-old
+                  class="font__control"
+                  [control]="buttonFontSize"
+                  [unit]="'px'"
+                >
+                </peb-editor-number-input-old>
+              </div>
+              <div class="font__format">
+                <div class="tools-group font__option">
+                  <button
+                    class="tools-group__item"
+                    [class.active]="buttonFontWeight.value == fontStyle"
+                    (click)="buttonFontWeight.patchValue(buttonFontWeight.value === textStyleType.Bold ? 'normal': textStyleType.Bold)"
+                  >
+                    <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="buttonFontStyle.value == textStyleType.Italic"
+                    (click)="buttonFontStyle.patchValue(buttonFontStyle.value === textStyleType.Italic ? '' : textStyleType.Italic)"
+                  >
+                    <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="buttonTextDecoration.value == textStyleType.Underline"
+                    (click)="buttonTextDecoration.patchValue(buttonTextDecoration.value === textStyleType.Underline ? '' : textStyleType.Underline)"
+                  >
+                    <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+                  </button>
+                  <button
+                    class="tools-group__item"
+                    [class.active]="buttonTextDecoration.value == textStyleType.Strike"
+                    (click)="buttonTextDecoration.patchValue(buttonTextDecoration.value === textStyleType.Strike ? '' : textStyleType.Strike)"
+                  >
+                    <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </peb-editor-sidebar-tab>
+
+  <!-- <peb-editor-sidebar-tab title="Arrange">
+    <peb-editor-arrange-tab
+      [form]="arrangeForm"
+      (flipHorizontal)="flipH()"
+      (flipVertical)="flipV()"
+    ></peb-editor-arrange-tab>
+  </peb-editor-sidebar-tab> -->
+</peb-editor-sidebar-tabs>

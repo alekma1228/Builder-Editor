@@ -1,0 +1,57 @@
+<div
+  class="slide-element"
+  #main
+  [class.selected]="selected"
+  (click)="onSelectSlide()"
+  (contextmenu)="openContextMenu($event)"
+>
+  <div class="slide-element__image">
+    <img
+      *ngIf="slide.sourceUrl; else spinner"
+      [src]="slide.sourceUrl | safeUrl"
+    />
+    <ng-template #spinner>
+      <mat-progress-spinner
+        class="mat-spinner-themed slider-element__image-spinner"
+        [strokeWidth]="2"
+        [diameter]="32"
+        [value]="uploadProgress"
+      >
+      </mat-progress-spinner>
+    </ng-template>
+  </div>
+  <div class="slide-element__title">
+    <input
+      #slideFormControl
+      [hidden]="mode === 'show'"
+      [formControl]="control"
+      (click)="toggleEditMode()"
+    />
+    <span *ngIf="mode === 'show'" (click)="toggleEditMode()">
+      {{ control?.value }}
+    </span>
+  </div>
+</div>
+
+<ng-template #expanded>
+  <div class="slide-element__expanded-menu">
+    <div
+      class="slide-element__expanded-menu__element"
+      (click)="onReplaceToOwn()"
+    >
+      Replace upload
+    </div>
+    <div
+      class="slide-element__expanded-menu__element"
+      (click)="onReplaceFromMedia()"
+    >
+      Replace by media
+    </div>
+    <div
+      class="slide-element__expanded-menu__element start-group"
+      (click)="onDelete()"
+    >
+      Delete
+    </div>
+  </div>
+</ng-template>

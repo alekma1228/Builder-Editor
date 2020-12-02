@@ -1,0 +1,60 @@
+<div class="shops-container">
+  <div class="active-shop shop" [class.shop--skeleton]="!shops?.length">
+    <div class="shop__logo">
+      <img *ngIf="(defaultShopSubject | async).picture" class="shop__logo-img" [src]="(defaultShopSubject | async).picture">
+      <div *ngIf="shops && (defaultShopSubject | async) && !(defaultShopSubject | async)?.picture" class="shop__logo-placeholder">
+        <h2>{{ (defaultShopSubject | async).name | abbreviation }}</h2>
+      </div>
+    </div>
+    <div class="shop__controls">
+      <button class="control" routerLink="../create">+ Add shop</button>
+    </div>
+  </div>
+
+  <div class="shops-title" [class.shops-title--skeleton]="!shops?.length">Online Shops</div>
+    <ng-container *ngIf="shops?.length else skeleton">
+      <div class="shops">
+        <div
+          class="shop"
+          *ngFor="let shop of shops"
+          [class.shop--active]="(defaultShopSubject | async) && (defaultShopSubject | async).id === shop.id"
+          (click)="defaultShopSubject.next(shop)">
+          <div class="shop__logo">
+            <img *ngIf="shop.picture" class="shop__logo-img" [src]="shop.picture">
+            <div *ngIf="!shop?.picture" class="shop__logo-placeholder">
+                <h2>{{ shop.name | abbreviation }}</h2>
+            </div>
+          </div>
+          <div class="shop__name">{{ shop.name }}</div>
+          <div *ngIf="(defaultShopSubject | async) && (defaultShopSubject | async).id === shop.id" class="shop__controls">
+            <button class="control" (click)="onOpen(shop)">Open</button>
+            <button class="control control--transparent" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+              <peb-shop-control-dots-icon></peb-shop-control-dots-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="shop-menu">
+              <button
+                *ngIf="!shop.isDefault"
+                mat-menu-item
+                (click)="onSetAsDefault(shop)">
+                Set as default
+              </button>
+              <button
+                mat-menu-item
+                (click)="onEdit(shop.id)">
+                Edit
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+</div>
+
+<ng-template #skeleton>
+  <div class="shops">
+    <div *ngFor="let i of skeletonThemes" class="shop shop--skeleton">
+      <div class="shop__logo"></div>
+      <div class="shop__name"></div>
+    </div>
+  </div>
+</ng-template>

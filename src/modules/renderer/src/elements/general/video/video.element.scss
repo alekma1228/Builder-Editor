@@ -1,0 +1,76 @@
+:host {
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  .video {
+    box-sizing: border-box;
+
+    &__loading-spinner-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__loading-spinner {
+      width: 50% !important;
+      height: 50% !important;
+      max-width: 3.5em !important;
+      max-height: 3.5em !important;
+    }
+  }
+
+  .video-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+
+    &.loaded {
+      display: inline;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-video {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border-radius: 0.125em;
+    display: grid;
+    justify-content: center;
+    color: #aaa;
+    text-align: center;
+
+    &__text {
+      display: none;
+      cursor: default;
+    }
+
+    .icon {
+      justify-self: center;
+      align-self: end;
+    }
+  }
+
+}
+
+::ng-deep .video__loading-spinner {
+  circle {
+    stroke: black !important;
+  }
+
+  svg {
+    height: 3.5em !important;
+    width: 3.5em !important;
+  }
+}

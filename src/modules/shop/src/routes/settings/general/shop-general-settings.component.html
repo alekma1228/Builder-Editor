@@ -1,0 +1,33 @@
+<div class="panel">
+  <div class="field field--bordered">
+    <div class="field__label">Live status</div>
+    <div class="field__value"></div>
+    <div>
+      <div class="toggle">
+        <input
+          type="checkbox"
+          id="toggle"
+          [ngModel]="isLiveSubject$ | async"
+          [disabled]="isLoadingSubject$ | async"
+          (ngModelChange)="onChangeIsLiveStatus($event)"
+        >
+        <label for="toggle"><i></i></label>
+      </div>
+    </div>
+  </div>
+  <div class="field field--bordered">
+    <div class="field__label">Payever domain</div>
+    <div class="field__value">{{ shopDeploy?.internalDomain }}.{{ shopHost }}</div>
+    <button class="field__control" routerLink="local-domain">Edit</button>
+  </div>
+  <div class="field field--bordered">
+    <div class="field__label">Own domain</div>
+    <div class="field__value">{{ shopDeploy?.ownDomain }}</div>
+    <button class="field__control" routerLink="external-domain">Edit</button>
+  </div>
+  <div class="field">
+    <div class="field__label">Password</div>
+    <div class="field__value">{{ shopDeploy?.isPrivate ? 'enabled' : 'disabled' }}</div>
+    <button class="field__control" routerLink="password">Edit</button>
+  </div>
+</div>

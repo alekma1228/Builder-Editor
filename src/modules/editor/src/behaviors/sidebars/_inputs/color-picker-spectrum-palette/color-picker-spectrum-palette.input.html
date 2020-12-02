@@ -1,0 +1,7 @@
+<div class="color-picker-spectrum" (click)="openOverlay()">
+  <div class="color-picker-spectrum__preview" (click)="$event.stopPropagation(); openOverlay(true)"
+       #colorPicker
+       [style.background]="color$ | async"
+  >
+  </div>
+</div>

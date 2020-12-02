@@ -1,0 +1,41 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container
+  *ngIf="(element.data.preview || videoLoaded); else defaultVideo"
+>
+  <video
+    class="video-player"
+    [class.loaded]="videoLoaded || !element.data.preview"
+    [controls]="element.data.controls"
+    [autoplay]="element.data.autoplay"
+    [loop]="element.data.loop"
+    [muted]="!element.data.sound"
+    [src]="element.data.source"
+    (canplay)="onLoaded()"
+    #video
+  ></video>
+  <img
+    #img
+    *ngIf="!videoLoaded && element.data.preview"
+    [src]="element.data.preview | safeUrl"
+    (error)="img.style.display = 'none'"
+  />
+  <div
+    *ngIf="!videoLoaded && element.data.source"
+    class="video__loading-spinner-wrapper"
+  >
+    <mat-spinner
+      class="mat-spinner-themed video__loading-spinner"
+      [strokeWidth]="5"
+    ></mat-spinner>
+  </div>
+</ng-container>
+
+<ng-template #defaultVideo>
+  <div class="default-video">
+    <ng-container *ngIf="!videoLoaded;">
+      <peb-video-icon class="icon"></peb-video-icon>
+      <div class="default-video__text">Add video</div>
+    </ng-container>
+  </div>
+</ng-template>

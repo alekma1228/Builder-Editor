@@ -1,0 +1,54 @@
+@import '../../../../../styles/variables';
+
+.color-picker-container {
+  background-color: white;
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+
+    .submit {
+      color: $formFieldTextColor;
+      background-color: $selectButtonBg;
+    }
+  }
+}
+
+.color-picker {
+  &__wrapper {
+    width: 17.5em;
+    margin-top: 0.625em;
+    margin-bottom: 0.625em;
+    background-color: #716f6f;
+    border: 1px solid #c1c1c1;
+    position: absolute;
+    right: 4em;
+    border-radius: 0.625em;
+  }
+
+  &__grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.0625em 0.0625em;
+    margin: 0.625em;
+
+    > div {
+      height: 1.8em;
+      cursor: pointer;
+      font-size: 1.125em;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      border: 0.0625em solid #c1c1c1;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

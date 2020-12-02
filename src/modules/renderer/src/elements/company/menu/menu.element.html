@@ -1,0 +1,108 @@
+<ng-container #CONTROLS></ng-container>
+
+<div
+  #wrapper
+  class="navigation"
+  *ngIf="options.screen === 'desktop'; else hamburger"
+>
+  <div
+    class="navigation_routes"
+    [style.justifyContent]="styles.justifyContent || 'center'"
+    [style.alignItems]="styles.alignItems || 'center'"
+    *ngIf="element.data?.routes"
+  >
+    <ng-container *ngFor="let route of element.data.routes">
+      <ng-container
+        [ngTemplateOutlet]="simpleLink"
+        [ngTemplateOutletContext]="{ route: route }"
+      ></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #hamburger>
+  <div
+    class="navigation_hamburger"
+    (click)="toggleMobileMenu()"
+    #mobileButtonWrapper
+  >
+    <div class="navigation_hamburger__button" #mobileButton>
+      <div class="line top" #mobileButtonLine></div>
+      <div class="line center" #mobileButtonLine></div>
+      <div class="line bottom" #mobileButtonLine></div>
+    </div>
+  </div>
+
+  <div class="mobile-menu" #mobileMenuRef>
+    <div class="mobile-menu__header">
+      <div class="mobile-menu__hamburger mobile-menu__hamburger--opened" (click)="hideMobileMenu()">
+        <div class="mobile-menu__hamburger__icon">
+          <div
+            class="mobile-menu__hamburger__line mobile-menu__hamburger__line--top"
+          ></div>
+          <div
+            class="mobile-menu__hamburger__line mobile-menu__hamburger__line--bottom"
+          ></div>
+        </div>
+      </div>
+      <div
+        *ngIf="logoContext?.data?.src as logo"
+        class="mobile-menu__logo"
+        [style.background-image]="getLogoUrl(logo)"
+        >
+      </div>
+    </div>
+    <hr />
+    <div class="mobile-menu__items">
+      <div
+        class="mobile-menu__item"
+        *ngFor="let route of element.data.routes"
+      >
+        <a class="mobile-menu__item-title" (click)="redirectTo(route)">
+          <span>{{ route.title | titlecase }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #simpleLink let-route="route">
+  <a
+    class="navigation_routes__element"
+    (click)="redirectTo(route)"
+    [class.navigation_routes__element--interactions]="options.interactions"
+  >
+    {{ route.title }}</a
+  >
+</ng-template>
+
+<!-- <ng-template #parentLink let-route="route" let-index="index">
+  <div
+    class="expansion-link"
+    #dropdownLink
+    (click)="showDropdown(dropdownLink, route)"
+  >
+    <a
+      class="navigation_routes__element"
+      [style.user-select]="options.interactions ? 'auto' : 'none'"
+    >
+      {{ route.title }}
+      <span class="arrow">
+        <svg
+          width="10"
+          height="5"
+          viewBox="-2.5 -5 75 60"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0 l35,50 l35,-50"
+            fill="none"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-width="5"
+          />
+        </svg>
+      </span>
+    </a>
+  </div>
+</ng-template> -->

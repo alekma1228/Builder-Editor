@@ -1,0 +1,341 @@
+<div class="button-sidebar">
+  <form [formGroup]="form">
+    <peb-editor-sidebar-tabs>
+      <peb-editor-sidebar-tab title="Style">
+        <div class="group">
+          <div class="group__row">
+            <label #linkToLabel class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="linkToWrapper"
+                pebEditorAccordionKey="linkToWrapper"
+                [triggerContainer]="linkToLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Link to</span>
+            </label>
+          </div>
+          <div #linkToWrapper>
+            <div class="group__row">
+              <mat-form-field appearance="standard">
+                <mat-select
+                  [formControl]="getFormControl('linkType')"
+                  panelClass="pe-builder-select"
+                >
+                  <mat-option
+                    *ngFor="let type of pageOptions"
+                    [value]="type.value"
+                  >
+                    {{type.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <ng-container *ngIf="getFormControl('linkType').value === PebInteractionType.NavigateInternal && isLinkPathVisible">
+              <peb-editor-sidebar-select
+                class="group__row"
+                [control]="getFormControl('linkToPage')"
+                [options]="routes$ | async"
+                labelKey="route"
+                valueKey="path"
+              >
+              </peb-editor-sidebar-select>
+            </ng-container>
+            <div *ngIf="getFormControl('linkType').value == PebInteractionType.NavigateExternal">
+              <input
+                type="text"
+                class="sidebar-input"
+                formControlName="linkCustom"
+                (keydown)="$event.stopPropagation()"
+              />
+            </div>
+          </div>
+        </div>
+
+        <peb-editor-color-palette
+          [gridColors]="backgroundColors"
+          [control]="component.background.form.get('bgColor')"
+        ></peb-editor-color-palette>
+
+        <editor-background-form
+          [label]="'Button Color'"
+          [formGroup]="component.background.form"
+          [fillTypes]="fillOptions"
+        ></editor-background-form>
+
+        <!-- <div class="group">
+          <div class="group__row">
+            <label for="borderCheckbox" class="checkbox group__label">
+              <input
+                #canChangeBorder
+                id="borderCheckbox"
+                type="checkbox"
+                formControlName="hasBorder"
+              />
+              <span>Border</span>
+            </label>
+                       Duplicate code! Need check why
+                       <div class="group__col">
+                         <div class="group__row pull-right" *ngIf="canChangeBorder.checked">
+                           <peb-editor-color-picker
+                             [control]="getFormControl('borderColor')"
+                             [simple]="true"
+                           ></peb-editor-color-picker>
+                         </div>
+                       </div>
+          </div>
+          <div *ngIf="canChangeBorder.checked">
+            <div class="border group__row">
+              <div class="group__col">
+                <peb-editor-border-sidebar-select
+                  class="border__control"
+                  [control]="getFormControl('borderStyle')"
+                >
+                </peb-editor-border-sidebar-select>
+              </div>
+              <div class="group__col justify-center">
+                <peb-editor-color-picker
+                  [control]="getFormControl('borderColor')"
+                ></peb-editor-color-picker>
+              </div>
+              <div class="group__col">
+                <peb-editor-number-input-old
+                  class="border__control"
+                  [style.width]="'30%'"
+                  [control]="getFormControl('borderWidth')"
+                  [unit]="'px'"
+                ></peb-editor-number-input-old>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="group">
+          <div class="group__row">
+            <label #cornersLabel class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="cornersWrapper"
+                pebEditorAccordionKey="cornersWrapper"
+                [triggerContainer]="cornersLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Corners</span>
+            </label>
+          </div>
+          <div #cornersWrapper>
+            <peb-editor-sidebar-slider
+              [control]="getFormControl('borderRadius')"
+              unit="px"
+              class="corners__control"
+            >
+            </peb-editor-sidebar-slider>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group__row">
+            <label for="shadowCheckbox" class="checkbox group__label">
+              <input
+                #canChangeBoxShadow
+                type="checkbox"
+                id="shadowCheckbox"
+                formControlName="hasShadow"
+              />
+              <span>Shadow</span>
+            </label>
+          </div>
+          <div *ngIf="canChangeBoxShadow.checked">
+            <div class="shadow">
+              <div class="shadow__group">
+                <div>
+                  <label #blurLabel class="group__label">
+                    <peb-editor-triangle-right-icon
+                      class="group__triangle-icon"
+                      [pebEditorAccordion]="blurWrapper"
+                      pebEditorAccordionKey="blurWrapper"
+                      [triggerContainer]="blurLabel"
+                    ></peb-editor-triangle-right-icon>
+                    <span>Blur</span>
+                  </label>
+                </div>
+                <div #blurWrapper>
+                  <peb-editor-sidebar-slider
+                    class="corners__control"
+                    unit="px"
+                    [control]="getFormControl('shadowBlur')"
+                  >
+                  </peb-editor-sidebar-slider>
+                </div>
+              </div>
+              <div class="shadow__group">
+                <div>
+                  <label #spreadLabel class="group__label">
+                    <peb-editor-triangle-right-icon
+                      class="group__triangle-icon"
+                      [pebEditorAccordion]="spreadWrapper"
+                      pebEditorAccordionKey="spreadWrapper"
+                      [triggerContainer]="spreadLabel"
+                    ></peb-editor-triangle-right-icon>
+                    <span>Spread</span>
+                  </label>
+                </div>
+                <div #spreadWrapper>
+                  <peb-editor-sidebar-slider
+                    class="corners__control"
+                    unit="px"
+                    [control]="getFormControl('shadowSpread')"
+                  >
+                  </peb-editor-sidebar-slider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </peb-editor-sidebar-tab>
+
+      <peb-editor-sidebar-tab title="Text">
+        <div class="group">
+          <div class="group__row">
+            <label #fontLabel class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="fontWrapper"
+                pebEditorAccordionKey="fontWrapper"
+                [triggerContainer]="fontLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Font</span>
+            </label>
+          </div>
+          <div #fontWrapper class="font">
+            <mat-form-field appearance="standard">
+              <mat-select
+                [formControl]="getFormControl('fontFamily')"
+                panelClass="pe-builder-select"
+              >
+                <mat-option
+                  *ngFor="let font of fontOptions"
+                  [value]="font.value"
+                >
+                  {{font.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="font__format">
+              <peb-editor-color-picker [control]="getFormControl('color')">
+              </peb-editor-color-picker>
+
+              <peb-editor-number-input-old
+                class="font__control"
+                [control]="getFormControl('fontSize')"
+                [unit]="'px'"
+              >
+              </peb-editor-number-input-old>
+            </div>
+            <div class="font__format">
+              <div class="tools-group font__option">
+                <button
+                  class="tools-group__item"
+                  [class.active]="styles.fontWeight == textStyleType.Bold"
+                  (click)="styles.fontWeight === textStyleType.Bold ?
+                      changeStyle.next({fontWeight: 'normal'}):
+                      changeStyle.next({fontWeight: textStyleType.Bold})"
+                >
+                  <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+                </button>
+                <button
+                  class="tools-group__item"
+                  [class.active]="styles.fontStyle == textStyleType.Italic"
+                  (click)="styles.fontStyle == textStyleType.Italic ?
+                      changeStyle.next({fontStyle: null}):
+                      changeStyle.next({fontStyle: textStyleType.Italic})"
+                >
+                  <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+                </button>
+                <button
+                  class="tools-group__item"
+                  [class.active]="styles.textDecoration == textStyleType.Underline"
+                  (click)="styles.textDecoration == textStyleType.Underline ?
+                      changeStyle.next({textDecoration: null}):
+                      changeStyle.next({textDecoration: textStyleType.Underline})"
+                >
+                  <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+                </button>
+                <button
+                  class="tools-group__item"
+                  [class.active]="styles.textDecoration == textStyleType.Strike"
+                  (click)="styles.textDecoration == textStyleType.Strike ?
+                      changeStyle.next({textDecoration: null}):
+                      changeStyle.next({textDecoration: textStyleType.Strike})"
+                >
+                  <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="group">
+          <div class="group__row">
+            <label #alignmentLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="alignmentWrapper"
+                pebEditorAccordionKey="alignmentWrapper"
+                [triggerContainer]="alignmentLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Alignment</span>
+            </label>
+          </div>
+          <div #alignmentWrapper>
+            <div class="tools-group">
+              <button class="tools-group__item" [class.active]="styles.justifyContent == textAlignType.FlexStart"
+                (click)="changeStyle.next({justifyContent: textAlignType.FlexStart})">
+                <peb-editor-alignment-left-icon></peb-editor-alignment-left-icon>
+              </button>
+              <button class=" tools-group__item" [class.active]="styles.justifyContent == textAlignType.Center"
+                (click)="changeStyle.next({justifyContent: textAlignType.Center})">
+                <peb-editor-alignment-center-icon></peb-editor-alignment-center-icon>
+              </button>
+              <button class=" tools-group__item" [class.active]="styles.justifyContent == textAlignType.FlexEnd"
+                (click)="changeStyle.next({justifyContent:textAlignType.FlexEnd})">
+                <peb-editor-alignment-right-icon></peb-editor-alignment-right-icon>
+              </button>
+              <button class="tools-group__item" [class.active]="styles.justifyContent == textAlignType.Between"
+                (click)="changeStyle.next({justifyContent:textAlignType.Between})">
+                <peb-editor-alignment-justify-icon></peb-editor-alignment-justify-icon>
+              </button>
+            </div>
+            <div class="tools-group">
+              <button class="tools-group__item" [class.active]="styles.alignItems == textAlignType.FlexStart"
+                (click)="changeStyle.next({alignItems: textAlignType.FlexStart})">
+                <peb-editor-vertical-align-top-icon></peb-editor-vertical-align-top-icon>
+              </button>
+              <button class=" tools-group__item" [class.active]="styles.alignItems == textAlignType.Center"
+                (click)="changeStyle.next({alignItems: textAlignType.Center})">
+                <peb-editor-vertical-align-center-icon></peb-editor-vertical-align-center-icon>
+              </button>
+              <button class=" tools-group__item" [class.active]="styles.alignItems == textAlignType.FlexEnd"
+                (click)="changeStyle.next({alignItems: textAlignType.FlexEnd})">
+                <peb-editor-vertical-align-bottom-icon></peb-editor-vertical-align-bottom-icon>
+              </button>
+            </div>
+          </div>
+        </div> -->
+      </peb-editor-sidebar-tab>
+      <peb-editor-sidebar-tab title="Arrange">
+        <editor-dimensions-form
+          *ngIf="component.dimensions?.form"
+          [formGroup]="component.dimensions.form"
+          [limits]="component.dimensions.limits"
+          (blurred)="component.dimensions.submit.next()"
+        ></editor-dimensions-form>
+
+        <editor-position-form
+          *ngIf="component.position?.form"
+          [formGroup]="component.position.form"
+          [limits]="component.position.limits"
+          (blurred)="component.position.submit.next()"
+        ></editor-position-form>
+      </peb-editor-sidebar-tab>
+    </peb-editor-sidebar-tabs>
+  </form>
+</div>

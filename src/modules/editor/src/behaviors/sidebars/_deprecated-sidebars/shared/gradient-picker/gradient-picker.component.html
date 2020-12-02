@@ -1,0 +1,36 @@
+<div class="gradient-picker__wrapper">
+  <div class="gradient-picker__color-pickers">
+    <peb-editor-color-picker
+      [control]="firstGradientColor"
+    ></peb-editor-color-picker>
+    <peb-editor-color-picker
+      [control]="secondGradientColor"
+    ></peb-editor-color-picker>
+  </div>
+  <div
+    class="gradient-picker__angle"
+    style="display: flex; align-items: center;"
+  >
+    <span class="gradient-picker__angle-label">Angle</span>
+    <peb-editor-sidebar-angle-picker
+      [control]="angle"
+    ></peb-editor-sidebar-angle-picker>
+  </div>
+  <div class="inputs-group__row">
+    <div>
+      <button class="flip-button" (click)="flipV()">
+        <peb-editor-flip-vertical-icon></peb-editor-flip-vertical-icon>
+      </button>
+      <button class="flip-button" (click)="flipH()">
+        <peb-editor-flip-icon></peb-editor-flip-icon>
+      </button>
+    </div>
+
+    <div class="gradient-picker__angle-input">
+      <peb-editor-number-input-old
+        [control]="angle"
+        unit="&#176;"
+      ></peb-editor-number-input-old>
+    </div>
+  </div>
+</div>

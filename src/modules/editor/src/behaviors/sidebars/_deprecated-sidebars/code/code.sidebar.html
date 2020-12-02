@@ -1,0 +1,17 @@
+<div class="sidebar-container">
+  <div class="sidebar-container__block">
+    <label #codeLabel class="sidebar-container__label">
+      <peb-editor-triangle-right-icon
+        class="group__triangle-icon"
+        [pebEditorAccordion]="codeWrapper"
+        pebEditorAccordionKey="codeWrapper"
+        [showContainerOnInit]="true"
+        [triggerContainer]="codeLabel"
+      ></peb-editor-triangle-right-icon>
+      <span>Add your code here</span>
+    </label>
+    <div #codeWrapper>
+      <textarea [value]="code" placeholder="HTTPS only" class="sidebar-container__textarea" (change)="onCodeChange($event)"></textarea>
+    </div>
+  </div>
+</div>

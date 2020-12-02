@@ -1,0 +1,23 @@
+namespace: default
+priorityClass: app-10stars
+
+replicas:
+  http: 1
+
+
+image:
+  nginx: registry.devpayever.com/frontend/builder-editor
+  pullSecretName: regsecret
+
+service:
+  externalPort: 80
+  containerPort: 80
+  monitoringPort: 8080
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi

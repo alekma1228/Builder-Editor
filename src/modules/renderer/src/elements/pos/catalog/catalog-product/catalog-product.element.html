@@ -1,0 +1,52 @@
+<ng-container [ngSwitch]="context.state">
+  <ng-container *ngSwitchCase="PebElementContextState.Error"
+    >Error</ng-container
+  >
+  <ng-container *ngSwitchCase="PebElementContextState.Empty"
+    >Empty</ng-container
+  >
+<!--
+  <ng-container
+    *ngIf="displayMode === DisplayModes.GRID then gridItem else tableItem"
+  ></ng-container> -->
+
+
+    <div #imageRef class="image" [class.hidden]="displayMode !== DisplayModes.GRID">
+      <div *ngIf="loading" class="loading-spinner-wrapper show">
+        <peb-loading-spinner class="products-spinner"></peb-loading-spinner>
+      </div>
+    </div>
+    <div class="info" [class.hidden]="displayMode !== DisplayModes.GRID">
+      <div class="title" #titleRef>{{ context.data?.title }}</div>
+      <div class="price" #priceRef>
+        {{ context.data?.price | currencyFormatter:context.data?.currency:options.locale }}
+      </div>
+    </div>
+
+
+
+    <div class="table-product" [class.hidden]="displayMode === DisplayModes.GRID">
+      <div class="table-product__image-wrapper">
+        <div #tableImageRef class="table-product__image"></div>
+      </div>
+      <div class="table-product__info">
+        <div class="table-product__info-wrapper">
+          <span class="table-product__title" #tableTitleRef
+            >{{ context.data?.title }}</span
+          >
+          <span
+            *ngIf="context.data?.description as description"
+            [innerHTML]="description"
+            class="table-product__description"
+            ></span
+          >
+        </div>
+        <div>
+          <span #titlePriceRef class="table-product__price">
+            {{ context.data?.price | currencyFormatter:context.data?.currency:options.locale }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+</ng-container>

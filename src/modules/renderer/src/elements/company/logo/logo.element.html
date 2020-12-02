@@ -1,0 +1,23 @@
+<ng-container #CONTROLS></ng-container>
+
+<div #wrapper class="wrapper">
+
+  <img [hidden]="!context?.data?.src" [src]="context?.data?.src | safeUrl" [alt]="element?.data?.name" #image/>
+
+  <ng-container [ngSwitch]="context?.state">
+    <ng-container *ngSwitchCase="PebElementContextState.Error">
+      Error
+    </ng-container>
+    <ng-container *ngSwitchCase="PebElementContextState.Empty">
+      <ng-container *ngTemplateOutlet="emptyIconTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="PebElementContextState.Ready">
+      <!-- <ng-container *ngIf="context.data?.src else emptyIconTemplate">
+      </ng-container> -->
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #emptyIconTemplate>
+  <peb-icon-no-logo></peb-icon-no-logo>
+</ng-template>

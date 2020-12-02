@@ -1,0 +1,38 @@
+<ng-container
+  *ngIf="data.isPalette; then colorPalette; else colorPicker"
+></ng-container>
+
+<ng-template #colorPicker>
+  <div class="color-picker-container" [@transformPanel]="'enter'">
+    <div [@fadeInCalendar]="'enter'">
+      <div
+        cpPositionRelativeToArrow="true"
+        [cpToggle]="true"
+        [cpDialogDisplay]="'inline'"
+        [cpPosition]="cpPosition"
+        [cpPositionOffset]="cpPositionOffset"
+        [cpOutputFormat]="cpOutputFormat"
+        [cpAlphaChannel]="cpAlphaChannel"
+        [colorPicker]="selectedColor"
+        (colorPickerChange)="setColorValue($event)"
+        [style.background]="selectedColor || 'white'"
+      ></div>
+      <div class="color-picker-container__actions">
+        <button mat-button class="submit" (click)="submitColor()">Ok</button>
+        <button mat-button color="warn" (click)="cancelColor()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #colorPalette>
+  <div class="color-picker__wrapper">
+    <div class="color-picker__grid-container">
+      <div
+        *ngFor="let item of palette"
+        [style.background]="item.hex"
+        (click)="setColorValue(item.hex); submitColor();"
+      ></div>
+    </div>
+  </div>
+</ng-template>

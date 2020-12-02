@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/libs/font-loader",
+  "lib": {
+    "entryFile": "src/index.ts",
+    "umdModuleIds": {
+      "webfontloader": "webfontloader"
+    }
+  },
+  "whitelistedNonPeerDependencies": ["webfontloader"]
+}

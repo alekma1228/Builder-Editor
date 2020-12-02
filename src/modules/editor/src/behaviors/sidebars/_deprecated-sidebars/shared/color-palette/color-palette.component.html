@@ -1,0 +1,8 @@
+<div class="colors-grid">
+  <div
+    *ngFor="let color of gridColors"
+    class="color"
+    [style.background-color]="color"
+    (click)="onColorSelect(color)"
+  ></div>
+</div>

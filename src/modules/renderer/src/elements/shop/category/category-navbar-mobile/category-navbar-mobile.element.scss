@@ -1,0 +1,139 @@
+:host {
+  display: grid;
+  grid-template-columns: 1.5fr auto 0.75fr 0.75fr;
+  border-top: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.navbar-button {
+  display: flex;
+  font-size: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  color: unset;
+  padding: 1.53em 0;
+  justify-content: center;
+  align-items: center;
+
+  &__label {
+    user-select: none;
+    padding-left: 5px;
+  }
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+
+  &__sort-by {
+    width: 1.76em;
+    height: 1em;
+  }
+
+  &__grid {
+    width: 1.23em;
+    height: 1.23em;
+  }
+}
+
+.navbar-select {
+  background-color: transparent;
+  border: none;
+  color: unset;
+  font-size: inherit;
+  height: 15px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.close-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #888;
+  }
+}
+
+.reset-filter-btn {
+  display: inline-block;
+  margin-left: 0.6em;
+  cursor: pointer;
+
+  &__pipe {
+    color: #d6d6d6;
+  }
+
+  &__title {
+    margin-left: 0.54em;
+    text-decoration: none;
+    color: #404045;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.search {
+  width: 12.84em;
+  height: 2.46em;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  background-color: rgba(223, 223, 223, 0.3);
+
+  cursor: pointer;
+
+  &__icon {
+    margin-left: 0.6em;
+    margin-top: 0.15em;
+    width: 1.23em;
+    height: 1.23em;
+  }
+
+  &__input {
+    width: 9.4em;
+    margin-left: 0.6em;
+    margin-top: 0.15em;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: #78787d;
+  }
+}
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

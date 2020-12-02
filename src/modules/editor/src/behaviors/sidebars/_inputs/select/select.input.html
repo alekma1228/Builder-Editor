@@ -1,0 +1,9 @@
+<select
+  #input
+  [formControl]="control"
+  (focus)="focused.emit()"
+  (blur)="blurred.emit()"
+  [value]="control.value"
+>
+  <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+</select>

@@ -1,0 +1,41 @@
+<form [formGroup]="formGroup">
+  <div class="input-group__row">
+    <div class="input-group__title">
+      <span>Size</span>
+    </div>
+    <div style="display: flex">
+      <div class="input-group__control">
+        <peb-editor-number-input
+          formControlName="width"
+          label="Width"
+          unit="px"
+          [min]="(limits.width | async)?.min"
+          [max]="(limits.width | async)?.max"
+          (focused)="focused.emit()"
+          (blurred)="blurred.emit()"
+        >
+        </peb-editor-number-input>
+      </div>
+  
+      <div class="input-group__control">
+        <peb-editor-number-input
+          formControlName="height"
+          label="Height"
+          unit="px"
+          [min]="(limits.height | async)?.min"
+          [max]="(limits.height | async)?.max"
+          (focused)="focused.emit()"
+          (blurred)="blurred.emit()"
+        ></peb-editor-number-input>
+      </div>
+    </div>
+  </div>
+  <div class="input-group__row">
+    <div class="input-group__control">
+      <peb-editor-checkbox-input
+        formControlName="constrainProportions"
+        label="Constrain proportions"
+    ></peb-editor-checkbox-input>
+    </div>
+  </div>
+</form>

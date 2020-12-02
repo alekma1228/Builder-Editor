@@ -1,0 +1,67 @@
+@import "../styles/spinner";
+
+$background: #333;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#toolbar {
+  height: 3.85em;
+  background-color: $background;
+  color: #fff;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  height: calc(100% - 3.85em);
+  width: 100%;
+  padding: 0;
+}
+
+.sidebar {
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  background-color: $background;
+  flex-shrink: 0;
+  height: 100%;
+
+  &--right {
+    overflow: hidden;
+    color: #fff;
+    width: 20em;
+  }
+
+  &--documents {
+    width: 14em;
+  }
+}
+
+#content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  box-shadow: inset 0 0 .25em $background;
+  background-color: #e4e4e4;
+  background-image:
+    linear-gradient(to right, rgba(194, 194, 194, .15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(194, 194, 194, .15) 1px, transparent 1px),
+    linear-gradient(to right, rgba(194, 194, 194, .15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(194, 194, 194, .15) 1px, transparent 1px)
+  ;
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+peb-renderer {
+  display: table;
+  margin: 3em;
+  border: none; // do not try to change it unless you know what you are doing
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  height: max-content;
+}

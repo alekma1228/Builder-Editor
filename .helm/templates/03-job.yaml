@@ -1,0 +1,66 @@
+{{ $chartName := .Chart.Name }}
+{{ $values := .Values }}
+{{ $appName := printf "%s-job" $chartName }}
+{{ $urlMapConfigName:= printf "micro-url-map" }}
+
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: {{ $appName}}
+  namespace: {{ $values.namespace }}
+
+  labels:
+    app: {{ $appName }}
+    tier: frontend
+    type: job
+
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "1"
+
+spec:
+  backoffLimit: 1
+
+  template:
+    metadata:
+      labels:
+        app: {{ $appName }}
+        tier: frontend
+        type: job
+
+    spec:
+      priorityClassName: {{ $values.priorityClass }}
+      restartPolicy: Never
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node_worker
+                operator: Exists
+
+      imagePullSecrets:
+        - name: {{ $values.image.pullSecretName }}
+
+      containers:
+        - name: nginx
+          image: {{ $values.image.nginx }}
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/bash", "-c", "/payever/deploy/job.sh" ]
+
+          resources:
+{{ toYaml $values.resources | indent 12 }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ $chartName }}
+            - configMapRef:
+                name: {{ $urlMapConfigName }}
+            - secretRef:
+                name: {{ $chartName }}
+
+          env:
+            - name: KUBERNETES_DEPLOYED
+              value: "{{ now }}"

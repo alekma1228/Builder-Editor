@@ -1,0 +1,65 @@
+<peb-editor-material-style></peb-editor-material-style>
+
+<peb-editor-toolbar
+  id="toolbar"
+  [loading]="!(activePageSnapshot$ | async)"
+  (undo)="onUndo()"
+  (redo)="onRedo()"
+  (openPreview)="onOpenPreview()"
+>
+</peb-editor-toolbar>
+
+<section class="container">
+  <div [@openClose]="(state.sidebarsActivity$| async).navigator ? 'openLeft' : 'closeLeft'">
+    <peb-editor-pages-sidebar
+      class="sidebar"
+      [pages]="pages$ | async"
+      [activePageSnapshot]="activePageSnapshot$ | async"
+      [loading]="!(activePageSnapshot$ | async)"
+      (selected)="onActivatePage($event)"
+      (created)="onCreatePage($event)"
+      (duplicated)="onDuplicatePage($event)"
+      (deleted)="onDeletePage($event)"
+    ></peb-editor-pages-sidebar>
+  </div>
+
+  <div [@openClose]="(state.sidebarsActivity$| async).layers ? 'openLeft' : 'closeLeft'">
+    <ng-container *ngIf="(activePageSnapshot$ | async) as pageSnapshot">
+      <peb-editor-documents-sidebar
+        [element]="pageSnapshot.template"
+        [stylesheet]="pageSnapshot.stylesheet"
+        (changeElementVisible)="onChangeElementVisible($event)"
+        class="sidebar sidebar--documents"
+      ></peb-editor-documents-sidebar>
+    </ng-container>
+  </div>
+
+  <div #contentContainer id="content">
+    <div *ngIf="!(activePageSnapshot$ | async)" class="spinner"></div>
+    <!-- FIXME: Fixed margins for browsers which don't have Resize Observer -->
+    <ng-container *ngIf="(activePageSnapshot$ | async) as pageSnapshot">
+      <peb-renderer
+        [element]="pageSnapshot.template"
+        [stylesheet]="pageSnapshot.stylesheet"
+        [context]="pageSnapshot.context"
+        [options.screen]="state.screen$ | async"
+        [options.scale]="state.scale$ | async"
+        [options.locale]="'en'"
+        [style.margin]="contentPaddings.vertical && contentPaddings.horizontal
+          ? contentPaddings.vertical + 'px ' + contentPaddings.horizontal + 'px'
+          : '10px auto'
+        "
+      ></peb-renderer>
+    </ng-container>
+    <ng-container #contentContainerSlot></ng-container>
+
+  </div>
+
+  <div
+    style="display: none;"
+    class="sidebar sidebar--right"
+    [@openClose]="(state.sidebarsActivity$| async).inspector ? 'openRight' : 'closeRight'"
+  >
+    <ng-container #sidebarSlot></ng-container>
+  </div>
+</section>

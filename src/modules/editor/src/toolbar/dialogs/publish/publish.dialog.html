@@ -1,0 +1,46 @@
+<div class="publish-dialog">
+  <div class="theme-data">
+    <h1 class="header">Your Preview</h1>
+    <div class="preview_container">
+      <ng-scrollbar track="vertical" class="preview">
+        <div *ngFor="let snapshot of pageSnapshots"
+             class="page"
+        >
+          <div class="page__preview">
+            <peb-renderer
+              class="page__preview-renderer"
+              [element]="snapshot.template"
+              [stylesheet]="snapshot.stylesheet"
+              [context]="snapshot.context"
+              [options.scale]=".5"
+              options.locale="en"
+            ></peb-renderer>
+          </div>
+        </div>
+      </ng-scrollbar>
+    </div>
+    <div class="form">
+      <div class="field version">
+        <div class="field__label"><div>Version</div></div>
+        <input class="field__input"
+          autofocus
+          [(ngModel)]="versionName"
+        />
+      </div>
+      <div class="field description">
+        <input class="field__input"
+          [(ngModel)]="description"
+          placeholder="Tag to remember version"
+          />
+          <!-- (keydown.enter)="" -->
+      </div>
+      <button
+      class="field__button"
+      [disabled]="!versionName?.length"
+      (click)="onPublishVersion()"
+    >
+      Publish
+    </button>
+    </div>
+  </div>
+</div>

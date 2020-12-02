@@ -1,0 +1,222 @@
+ @import "../styles/variables";
+
+// Material overrides for components out of ebuilder
+.dialog-publish-versions-panel,
+.dialog-objects-panel,
+.dialog-media-panel {
+  mat-dialog-container {
+    padding: 0;
+  }
+}
+
+.dialog-publish-versions-panel {
+  mat-dialog-container {
+    border-radius: 0.5em;
+  }
+}
+
+.themes-preview-dialog {
+  mat-dialog-container {
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 10px solid #777777;
+  }
+}
+
+.products-dialog {
+  mat-dialog-container {
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+.pe-builder-select {
+  width: 100%;
+  background: $selectOptionsBg;
+  border: 0.0625em $selectBorder solid;
+  border-radius: 0.3125em;
+  backdrop-filter: blur(35px);
+  box-shadow: 0 0.125em 0.125em 0.0625em $boxShadow;
+  color: $formFieldTextColor;
+
+  &.mat-primary {
+    .mat-option {
+      color: $formFieldTextColor;
+      padding: 0 1.625em;
+
+      &.mat-selected {
+        color: $formFieldTextColor;
+        background-color: $selectBorder;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.35);
+      }
+
+      .mat-icon {
+        margin-right: 0;
+        vertical-align: sub;
+      }
+    }
+  }
+
+}
+
+
+.pe-builder-styles {
+  .cdk-overlay-container {
+    z-index: 20000; // same index used in commerceos
+  }
+
+  .mat-dialog-container,
+  .mat-menu-panel {
+    background-color: #4e4e4e;
+    color: #fff;
+    padding: 0;
+  }
+
+  .mat-menu-item {
+    color: #fff;
+  }
+
+
+  .background__actions {
+
+    .mat-form-field-appearance-standard {
+
+      .mat-form-field-flex {
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+
+  mat-form-field {
+    color: $formFieldTextColor;
+    width: 100%;
+
+    &.mat-form-field-disabled {
+      cursor: inherit;
+      opacity: 0.5;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-wrapper,
+    .mat-form-field-flex {
+      padding: 0;
+
+      .mat-form-field-infix {
+        padding: 0;
+        border: none;
+        width: 160px;
+      }
+    }
+
+    mat-select {
+
+      .mat-select-value {
+        color: $formFieldTextColor;
+        line-height: normal;
+        font-size: inherit;
+        padding: 0.35em 0.5em;
+        max-width: 100%;
+        border: none;
+        border-radius: 0.1875em 0 0 0.1875em;
+        min-width: 2em;
+        box-shadow: none;
+        background: $buttonBg;
+        cursor: pointer;
+        -webkit-appearance: none;
+        outline: none;
+        transition: background-color 0.2s;
+        height: calc(#{$defaultInputHeight} - 1em); // Remove padding in height
+      }
+
+      .mat-focused,
+      .mat-select-disabled .mat-select-arrow,
+      .mat-select-arrow {
+        color: $formFieldTextColor;
+      }
+
+      .mat-select-arrow-wrapper {
+        width: auto;
+        height: auto;
+        background-color: $selectButtonBg;
+        border-top-right-radius: 0.1875em;
+        border-bottom-right-radius: 0.1875em;
+        cursor: pointer;
+        transform: none;
+        vertical-align: middle;
+        padding: 0.3125em;
+      }
+    }
+  }
+
+  .mat-form-field.mat-focused.mat-primary {
+
+    .mat-select-arrow {
+      color: $formFieldTextColor;
+    }
+  }
+
+  // Fix for https://github.com/MurhafSousli/ngx-scrollbar/issues/259
+  .scrollbar-control {
+    animation: fadein 800ms linear 1 normal forwards;
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+}
+
+ /* Display default text and boxes for media elements in renderer */
+ .default-video,
+ .carousel-default-item,
+ .default-image {
+   background-color: rgba(200, 200, 200, 0.2);
+   border: 1px solid #c9c9c9;
+
+   &__text {
+     display: block !important;
+   }
+ }
+
+.mat-expansion-panel {
+  background: #5d5d5d;
+  color: #fff;
+
+  .mat-expansion-panel-header {
+    padding: 0 12px;
+  }
+
+  .mat-expansion-panel-header-title {
+    color: #fff;
+    font-size: 13px;
+  }
+
+  .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+    color: rgba(255, 255, 255, 0.54);
+  }
+
+  .mat-expansion-panel-body {
+    font-size: 13px;
+    padding: 0 12px 12px;
+  }
+
+}
+

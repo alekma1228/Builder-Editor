@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/libs/viewer",
+  "lib": {
+    "entryFile": "src/index.ts",
+
+    "umdModuleIds": {
+      "lodash": "lodash",
+      "ngx-scrollbar": "ngx-scrollbar",
+
+      "@pe/builder-core": "@pe/builder-core",
+      "@pe/builder-renderer": "@pe/builder-renderer"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "pebEditor",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "peb-editor",
+      "peb-maker",
+      "kebab-case"
+    ],
+    "component-class-suffix": [
+      true,
+      "Component",
+      "Route",
+      "Dialog",
+      "Maker",
+      "Control",
+      "Form",
+      "Sidebar"
+    ]
+  }
+}

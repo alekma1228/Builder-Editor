@@ -1,0 +1,184 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Style">
+
+    <peb-editor-color-palette
+      [gridColors]="gridColors"
+      [control]="component.background.form.get('bgColor')"
+    ></peb-editor-color-palette>
+
+    <editor-background-form
+      [formGroup]="component.background.form"
+      (blurred)="component.background.submit.next()">
+    </editor-background-form>
+
+<!--      <div class="group">-->
+<!--        <div class="group__row">-->
+<!--          <label class="checkbox">-->
+<!--            <input type="checkbox" formControlName="hasBorder" />-->
+<!--            <span>Border</span>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <ng-container *ngIf="form.value.hasBorder">-->
+<!--          <div class="group__row">-->
+<!--            <div-->
+<!--              *ngIf="element.data?.variant !== PebShapeVariant.Triangle"-->
+<!--              class="group__col"-->
+<!--            >-->
+<!--              <peb-editor-border-sidebar-select-->
+<!--                [control]="form.get('borderStyle')"-->
+<!--              ></peb-editor-border-sidebar-select>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              *ngIf="element.data?.variant === PebShapeVariant.Triangle"-->
+<!--              class="group__col"-->
+<!--            >-->
+<!--              <peb-editor-number-input-->
+<!--                unit="px"-->
+<!--                [control]="form.get('borderTriangleOffset')"-->
+<!--              ></peb-editor-number-input>-->
+<!--            </div>-->
+<!--            <div class="group__col">-->
+<!--              <peb-editor-color-picker-->
+<!--                [control]="form.get('borderColor')"-->
+<!--                [style.width.%]="100"-->
+<!--              ></peb-editor-color-picker>-->
+<!--            </div>-->
+<!--            <div class="group__col">-->
+<!--              <peb-editor-number-input-->
+<!--                unit="px"-->
+<!--                [control]="form.get('borderWidth')"-->
+<!--              ></peb-editor-number-input>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </ng-container>-->
+<!--      </div>-->
+    <form [formGroup]="form">
+      <div class="group">
+        <div class="group__row">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="hasShadow" />
+            <span>Shadow</span>
+          </label>
+        </div>
+        <ng-container *ngIf="form.value.hasShadow">
+          <div class="group__row">
+            <label #blurLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="blurWrapper"
+                pebEditorAccordionKey="blurWrapper"
+                [triggerContainer]="blurLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Blur</span>
+            </label>
+          </div>
+          <div #blurWrapper class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                unit="pt"
+                [control]="form.get('shadowBlur')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="group__row">
+            <label #offsetLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="offsetWrapper"
+                pebEditorAccordionKey="offsetWrapper"
+                [triggerContainer]="offsetLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Offset</span>
+            </label>
+          </div>
+          <div #offsetWrapper class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                unit="pt"
+                [control]="form.get('shadowOffset')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="group__row">
+            <label #opacityLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="opacityWrapper"
+                pebEditorAccordionKey="opacityWrapper"
+                [triggerContainer]="opacityLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Opacity</span>
+            </label>
+          </div>
+          <div #opacityWrapper class="group__row">
+            <div class="group__col">
+              <peb-editor-sidebar-slider
+                unit="%"
+                [control]="form.get('shadowOpacity')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="group__row" [style.marginTop.px]="20">
+            <div class="group__col fixed" [style.width.px]="40">
+              Angle
+            </div>
+            <div class="group__col fixed">
+              <peb-editor-sidebar-angle-picker
+                [control]="form.get('shadowAngle')"
+              ></peb-editor-sidebar-angle-picker>
+            </div>
+            <div class="group__col">
+              <peb-editor-number-input-old
+                unit="°"
+                [control]="form.get('shadowAngle')"
+              ></peb-editor-number-input-old>
+            </div>
+            <div class="group__col">
+              <peb-editor-color-picker
+                [control]="form.get('shadowColor')"
+              ></peb-editor-color-picker>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #opacLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="opacWrapper"
+              pebEditorAccordionKey="opacWrapper"
+              [triggerContainer]="opacLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Opacity</span>
+          </label>
+        </div>
+        <div #opacWrapper class="group__row">
+          <div class="group__col">
+            <peb-editor-sidebar-slider
+              unit="%"
+              [control]="form.get('opacity')"
+            ></peb-editor-sidebar-slider>
+          </div>
+        </div>
+      </div>
+    </form>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Arrange" [active]="true">
+    <editor-dimensions-form
+      *ngIf="component.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (focused)="component.dimensions.activate()"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-position-form
+      *ngIf="component.position?.form"
+      [formGroup]="component.position.form"
+      [limits]="component.position.limits"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

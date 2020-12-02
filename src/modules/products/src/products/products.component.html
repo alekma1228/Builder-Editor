@@ -1,0 +1,11 @@
+<pe-data-grid
+  [items]="data.products"
+  itemsTitle="title"
+  [selectedItems]="selected$ | async"
+  [multipleSelectedActions]="multipleSelectedActions"
+  [singleSelectedAction]="singleSelectedAction"
+  [sortByActions]="sortByActions"
+  [isShowGridItemInfo]="true"
+  (multipleSelectedItemsChanged)="onSelectedItemsChanged($event)"
+  (searchChanged)="onSearchChanged($event)"
+></pe-data-grid>

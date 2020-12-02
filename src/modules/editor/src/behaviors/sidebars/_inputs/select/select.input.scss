@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+}
+
+select {
+  border-radius: 2px;
+  background-color: #6c6c6c;
+  font-size: 13px;
+  color: #ffffff;
+  padding: 4px 6px;
+  width: 100%;
+  outline: none;
+  border: none;
+
+  //* Reset */
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #fff 50%),
+    linear-gradient(135deg, #fff 50%, transparent 50%),
+    linear-gradient(to right, #1767e1, #1767e1);
+  background-position:
+    calc(100% - 12px) calc(1em - 3px),
+    calc(100% - 7px) calc(1em - 3px),
+    100% 0;
+  background-size:
+    3px 3px,
+    5px 5px,
+    1.75em 1.75em;
+  background-repeat: no-repeat;
+  padding-right: 1.75em;
+  transition: box-shadow .2s;
+
+  &:focus {
+    box-shadow: 0 0 1px 1px rgba(107, 76, 76, 0.4);
+  }
+}

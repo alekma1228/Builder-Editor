@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/libs/themes",
+  "lib": {
+    "entryFile": "src/index.ts",
+
+    "umdModuleIds": {
+      "lodash": "lodash",
+      "@angular/material":  "@angular/material",
+      "@angular/cdk": "@angular/cdk",
+      "ngx-scrollbar": "ngx-scrollbar",
+
+      "@pe/builder-core": "@pe/builder-core",
+      "@pe/builder-api": "@pe/builder-api",
+      "@pe/builder-viewer": "@pe/builder-viewer"
+    }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@pe/data-grid"
+  ]
+}

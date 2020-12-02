@@ -1,0 +1,35 @@
+<ng-container #CONTROLS></ng-container>
+
+<img
+  #image
+  *ngIf="src"
+  [src]="src | safeUrl"
+  (load)="loaded($event)"
+  [style.display]="(loadingInProgress || !doesHostHasSize) ? 'none': 'block'"
+/>
+
+<ng-container *ngIf="!src || !doesHostHasSize">
+  <ng-container *ngTemplateOutlet="defaultImg"></ng-container>
+</ng-container>
+
+<ng-container *ngIf="src && loadingInProgress">
+  <ng-container *ngTemplateOutlet="loading"></ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loading-spinner-wrapper" *ngIf="loading">
+    <mat-spinner
+      class="mat-spinner-themed loading-spinner"
+      [strokeWidth]="5"
+    ></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #defaultImg>
+  <div class="default-image" #defaultImage>
+    <ng-container>
+      <peb-image-icon class="icon"></peb-image-icon>
+      <div class="default-image__text">Add image</div>
+    </ng-container>
+  </div>
+</ng-template>

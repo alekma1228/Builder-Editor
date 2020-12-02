@@ -1,0 +1,192 @@
+@import '../../../styles/variables';
+
+$groupDelimiterColor: #525252;
+$buttonBg: #6c6c6c;
+$buttonBgHover: rgba(255, 255, 255, 0.35);
+$selectButtonBg: #1767e1;
+$inputBg: #3f3f3f;
+$groupBtnBg: #474747;
+$white: white;
+
+.inputs-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1em 0;
+  border-bottom: 1px solid $groupDelimiterColor;
+
+  &__header {
+    width: 100%;
+    text-align: left;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5em;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+
+    &__centered {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__title {
+      width: 100%;
+    }
+  }
+
+  &-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__element {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .preview-img {
+    width: 3em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__name {
+      width: 100%;
+      zoom: 0.8em;
+      font-size: 1em;
+      max-width: 17em;
+      align-items: center;
+      justify-content: flex-start;
+      display: flex;
+      margin-left: .5em;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &__default-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  button {
+    margin: 0 0.5em;
+    font-size: 1em;
+    background-color: $groupBtnBg;
+    border: 0;
+    color: $white;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .mask-button {
+    width: 100%;
+    padding: 0.3em 0.9em;
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  .replace-file-button {
+    padding: 0.3em 2em;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 23px;
+    background-color: $groupBtnBg;
+    color: $white;
+    font-size: 1em;
+    transition: background-color 0.2s;
+    position: relative;
+    border-radius: 3px;
+    margin-top: 1em;
+
+    &:hover {
+      background-color: $buttonBgHover;
+    }
+  }
+
+  .styles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: ". . ." ". . .";
+    align-items: center;
+    justify-items: center;
+
+    &__item {
+      width: 53px;
+      height: 40px;
+      margin: 10px;
+      cursor: pointer;
+      position: relative;
+
+      &:active::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(black, 0.25);
+      }
+
+      .default-icon {
+        width: calc(100% - 1.125em);
+        display: block;
+        margin: 0 auto;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+::ng-deep .spinner-container__spinner {
+  margin-bottom: 5px;
+  circle {
+    stroke: white !important;
+  }
+}
+
+form.form {
+  padding: 1em;
+
+  .form-group {
+    span {
+      display: inline-block;
+      width: 4em;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<form class="form" [formGroup]="formGroup">
+  <div class="form__image">
+    <div *ngIf="formGroup.controls.src.value else emptyIconTemplate" [style.backgroundImage]="'url(' + formGroup.controls.src.value + ')'"></div>
+  </div>
+  <editor-file-input
+    formControlName="file"
+    [label]="formGroup.controls.src.value ? 'Replace' : 'Select logo'"
+    (blurred)="blurred.emit()"
+  ></editor-file-input>
+</form>
+
+<ng-template #emptyIconTemplate>
+  <peb-icon-no-logo></peb-icon-no-logo>
+</ng-template>

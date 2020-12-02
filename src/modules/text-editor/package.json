@@ -1,0 +1,13 @@
+{
+  "name": "@pe/builder-text-editor",
+  "version": "4.9.16",
+  "description": "Builder: themes",
+  "repository": "https://gitlab.devpayever.com/frontend/builder-editor",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "webfontloader": "^1.6.28",
+    "@pe/builder-core": "latest"
+  }
+}

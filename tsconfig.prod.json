@@ -1,0 +1,59 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      //"@pe/builder-core": [
+      //  "src/modules/core/src"
+      //],
+      //"@pe/builder-api": [
+      //  "src/modules/api/src"
+      //],
+      //"@pe/builder-ui": [
+      //  "src/modules/ui/src"
+      //],
+      //"@pe/builder-renderer": [
+      //  "src/modules/renderer/src"
+      //],
+      //"@pe/builder-editor": [
+      //  "src/modules/editor/src"
+      //],
+      //"@pe/builder-viewer": [
+      //  "src/modules/viewer/src"
+      //],
+      //"@pe/builder-text-editor": [
+      //  "src/modules/text-editor/src"
+      //],
+      //"@pe/builder-themes": [
+      //  "src/modules/themes/src"
+      //],
+      //"@pe/builder-shop": [
+      //  "src/modules/shop/src"
+      //],
+      //"@pe/builder-products": [
+      //  "src/modules/products/src"
+      //],
+      //"@pe/builder-font-loader": [
+      //  "src/modules/font-loader/src"
+      //]
+    }
+  }
+}

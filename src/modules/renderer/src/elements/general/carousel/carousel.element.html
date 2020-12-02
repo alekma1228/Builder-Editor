@@ -1,0 +1,68 @@
+<ng-container #CONTROLS></ng-container>
+
+<div
+  *ngIf="element.data.images.length; else defCarousel"
+  class="carousel"
+>
+  <div #carousel class="carousel__wrapper" [style.width]="getCarouselWidth()">
+    <div
+      *ngFor="let src of element.data.images"
+      class="carousel__item"
+      [style.background-image]="getImage(src)"
+    ></div>
+  </div>
+
+  <div
+    #control
+    class="carousel__control carousel__control--left"
+    (click)="previousSlide($event)"
+  >
+    <peb-renderer-left-arrow-icon
+      #controlIcon
+      [style.paddingRight.%]="5"
+    ></peb-renderer-left-arrow-icon>
+  </div>
+  <div
+    #control
+    class="carousel__control carousel__control--right"
+    (click)="nextSlide($event)"
+  >
+    <peb-renderer-right-arrow-icon
+      #controlIcon
+      [style.paddingLeft.%]="5"
+    ></peb-renderer-right-arrow-icon>
+  </div>
+</div>
+
+<ng-template #defCarousel>
+  <div class="carousel">
+    <!-- <div
+      #spinnerWrapper
+      class="carousel__loading-spinner-wrapper"
+    >
+      <mat-spinner
+        class="mat-spinner-themed carousel__loading-spinner"
+        [strokeWidth]="5"
+      ></mat-spinner>
+    </div> -->
+    <div class=" carousel__wrapper" [style.width.%]="100">
+      <div class="carousel-default-item">
+        <peb-image-icon class="icon"></peb-image-icon>
+        <div class="carousel-default-item__text">Add image</div>
+      </div>
+    </div>
+
+    <div class="carousel__control carousel__control--left">
+      <peb-renderer-left-arrow-icon
+        class="carousel__default-control"
+        [style.paddingRight.%]="5"
+      ></peb-renderer-left-arrow-icon>
+    </div>
+    <div class="carousel__control carousel__control--right">
+      <peb-renderer-right-arrow-icon
+        class="carousel__default-control"
+        [style.paddingLeft.%]="5"
+      ></peb-renderer-right-arrow-icon>
+    </div>
+  </div>
+</ng-template>

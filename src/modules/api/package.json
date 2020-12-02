@@ -1,0 +1,11 @@
+{
+  "name": "@pe/builder-api",
+  "version": "5.0.0-dev.1",
+  "description": "Builder: api",
+  "repository": "http://gitlab.devpayever.com/frontend/builder-editor.git",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/core": "^9.1.4",
+    "tslib": "^1.10.0"
+  }
+}

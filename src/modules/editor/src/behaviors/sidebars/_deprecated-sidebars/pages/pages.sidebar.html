@@ -1,0 +1,68 @@
+<ng-container *ngIf="pages && !(loading$ | async) else skeleton">
+  <div class="pages">
+    <ng-scrollbar track="vertical" viewClass="pages__scroll-viewport">
+      <div *ngFor="let page of pages"
+           class="page"
+           (click)="onSelect(page)"
+           (contextmenu)="openContextMenu($event, page)"
+           [ngClass]="{
+            'page--active': page.id === activePageSnapshot?.id
+          }"
+           [attr.id]="page.id"
+      >
+        <div class="page__preview">
+          <img
+            *ngIf="store.theme?.source.previews && store.theme?.source.previews[page.id]"
+            [src]="sanitizer.bypassSecurityTrustUrl(store.theme?.source.previews[page.id].previewUrl)"
+          >
+          <peb-renderer
+            *ngIf="page.id === activePageSnapshot?.id || pagesWithPreviewCapturingInProgress[page.id]"
+            class="page__preview-renderer"
+            [element]="getPageSnapshot(page.id).template"
+            [stylesheet]="getPageSnapshot(page.id).stylesheet"
+            [context]="getPageSnapshot(page.id).context"
+            [options.scale]=".06"
+            options.locale="en"
+          ></peb-renderer>
+        </div>
+        <div class="page__name">{{ page.name }}</div>
+      </div>
+    </ng-scrollbar>
+  </div>
+
+  <button class="add-button" (click)="onCreate(onCreatePage)">
+    <div #onCreatePage>
+      <peb-editor-plus-icon></peb-editor-plus-icon>
+    </div>
+  </button>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="pages">
+    <div *ngFor="let i of skeletonPages" class="page page--skeleton">
+      <div class="page__preview"></div>
+      <div class="page__name"></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #pageMenu>
+  <div class="page__menu">
+    <ul>
+      <li
+        *ngIf="contextMenuPage.type === PageType.Master"
+        (click)="createPage(contextMenuPage)"
+      >
+        Fork
+      </li>
+      <li (click)="duplicatePage(contextMenuPage)">Duplicate</li>
+      <li
+        *ngIf="isPageRemovable(contextMenuPage)"
+        [class.disabled]="contextMenuPage.variant === PebPageVariant.Front"
+        (click)="deletePage(contextMenuPage)"
+      >
+        Delete
+      </li>
+    </ul>
+  </div>
+</ng-template>

@@ -1,0 +1,115 @@
+<button class="settings" (click)="resetLocalDB()">
+  Reset
+</button>
+
+<div class="navigation">
+
+  <div style="grid-area: editor">
+    <h2>Shop Editor</h2>
+    <div class="button-group button-group--vertical">
+      <span *ngIf="!(shops$ | async)">
+        Loading...
+      </span>
+      <a
+        *ngFor="let shop of (shops$|async); trackBy: trackShopFn"
+        class="button button--with-sticky"
+        (click)="pickShop(shop)"
+      >
+        {{ shop.type ? shop.type + ': ' : ''}}
+        {{ shop.name }}
+      </a>
+      <div class="button-group__sticky">
+        <a class="button button--with-hotkey" routerLink="editor/new">
+          <span>New</span>
+          <span class="button__hotkey">ctrl / cmd + C</span>
+        </a>
+        <input
+          #shopImportInput
+          hidden
+          multiple
+          type="file"
+          accept=".yml"
+          (change)="onShopThemeImport($event)"
+        />
+        <a class="button" (click)="shopImportInput.click()">
+          <span>Import theme files</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <a routerLink="renderer" style="grid-area: renderer">
+    <h2>Renderer</h2>
+  </a>
+  <div style="grid-area: viewer">
+    <h2>Viewer</h2>
+    <div class="button-group button-group--vertical">
+      <span *ngIf="!(templates$ | async)">
+        Loading...
+      </span>
+      <a
+        *ngFor="let template of (templates$|async);"
+        class="button"
+        [routerLink]="['viewer', 'fixtures', template]"
+      >
+        {{ template }}
+      </a>
+    </div>
+  </div>
+  <div style="grid-area: makers">
+    <h2>Makers</h2>
+    <div class="button-group button-group--vertical">
+      <a class="button" routerLink="makers/text">
+        Text
+      </a>
+      <a class="button" routerLink="makers/button">
+        Button
+      </a>
+      <a class="button" routerLink="makers/table">
+        Table
+      </a>
+    </div>
+  </div>
+  <a routerLink="themes" style="grid-area: themes">
+    <h2>Themes</h2>
+  </a>
+  <div style="grid-area: shop">
+    <h2>Shop</h2>
+    <div class="button-group button-group--vertical">
+      <a class="button" routerLink="shop/list">
+        List
+      </a>
+      <a class="button" routerLink="shop/settings">
+        Settings
+      </a>
+      <a class="button" routerLink="shop/create">
+        Create
+      </a>
+    </div>
+  </div>
+  <a style="grid-area: source-editor" routerLink="source-editor">
+    <h2>Source editor</h2>
+    <div class="button-group button-group--vertical">
+      <span *ngIf="!(rawThemes$ | async)">
+        Loading...
+      </span>
+      <a
+        *ngFor="let rawTheme of (rawThemes$|async);"
+        class="button"
+        [routerLink]="['source-editor']"
+      >
+        {{ rawTheme.info.name }}
+      </a>
+      <input
+        #rawThemeImportInput
+        hidden
+        multiple
+        type="file"
+        accept=".yml"
+        (change)="onRawThemeImport($event)"
+      />
+      <!-- WIP <a class="button button--new" (click)="rawThemeImportInput.click()">
+        <span>Import theme</span>
+      </a> -->
+    </div>
+  </a>
+</div>

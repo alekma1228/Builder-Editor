@@ -1,0 +1,18 @@
+<pe-data-grid
+  [items]="themes$ | async"
+  [selectedItems]="selectedThemes$ | async"
+  [activeItemId]="activeThemeId$ | async"
+  [filters]="filters"
+  [singleSelectedAction]="firstCardAction"
+  [secondSingleSelectedAction]="secondCardAction"
+  [multipleSelectedActions]="multipleSelectedActions$ | async"
+  [isShowGridItemInfo]="true"
+  [dataListOptions]="dataGridListOptions"
+  [showCollectionsCountInHeader]="showCollectionsCountInHeader"
+  searchPlaceholder="Search in Themes"
+  itemsTitle="themes"
+  (filtersChanged)="onFiltersChanged($event)"
+  (searchChanged)="onSearchChanged($event)"
+  (multipleSelectedItemsChanged)="onSelectedItemsChanged($event)"
+>
+</pe-data-grid>

@@ -1,0 +1,167 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Section Layout">
+    <div *ngIf="component.section.form">
+      <form [formGroup]="component.section.form" novalidate>
+        <div class="group">
+          <div class="group__row">
+            <label
+              #sectionOptionLabel
+              class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="sectionOptionWrapper"
+                pebEditorAccordionKey="sectionOptionWrapper"
+                [triggerContainer]="sectionOptionLabel"
+              ></peb-editor-triangle-right-icon>
+              <span class="group__header">Section options</span>
+            </label>
+          </div>
+
+          <div #sectionOptionWrapper>
+            <label
+              class="checkbox group__label">
+              <input type="checkbox"
+                     [formControl]="component.section.form.get('default')">
+              <span>Default</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group__row">
+            <label
+              #sectionNameLabel
+              class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="sectionNameWrapper"
+                pebEditorAccordionKey="sectionNameWrapper"
+                [triggerContainer]="sectionNameLabel"
+              ></peb-editor-triangle-right-icon>
+              <span class="group__header">Section name</span>
+            </label>
+          </div>
+
+          <div #sectionNameWrapper>
+            <input
+              type="text"
+              placeholder="Name"
+              class="sidebar-input"
+              [formControl]="component.section.form.get('name')"
+              (keydown.enter)="pageNameInputEnterHandler($event)">
+          </div>
+        </div>
+
+        <editor-background-form
+          [formGroup]="component.background.form"
+          (blurred)="component.background.submit.next()">
+        </editor-background-form>
+
+        <div class="group">
+          <div class="group__row">
+            <label
+              #sectionHeightLabel
+              class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                pebEditorAccordionKey="sectionNameWrapper"
+                [pebEditorAccordion]="sectionHeightWrapper"
+                [triggerContainer]="sectionHeightLabel"
+              ></peb-editor-triangle-right-icon>
+              <span class="group__header">Height</span>
+            </label>
+          </div>
+
+          <div #sectionHeightWrapper>
+            <form
+              *ngIf="component.dimensions?.form"
+              [formGroup]="component.dimensions.form"
+              class="form"
+            >
+              <peb-editor-number-input
+                *ngIf="(component.dimensions.limits.height | async) as limits"
+                formControlName="height"
+                unit="px"
+                [min]="limits.min"
+                [max]="limits.max"
+                (blurred)="component.dimensions.submit.next()"
+              ></peb-editor-number-input>
+            </form>
+          </div>
+        </div>
+
+        <div
+          *ngIf="component.section.initialValue.isFirstSection"
+          class="group">
+          <div class="group__row">
+            <label
+              #sectionStickyLabel
+              class="group__label">
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="sectionStickyWrapper"
+                pebEditorAccordionKey="sectionStickyWrapper"
+                [triggerContainer]="sectionStickyLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Position</span>
+            </label>
+          </div>
+
+          <div #sectionStickyWrapper>
+            <label class="checkbox group__label">
+              <input
+                type="checkbox"
+                [formControl]="component.section.form.get('sticky')">
+              <span>Fixed</span>
+            </label>
+          </div>
+        </div>
+        <div class="group">
+          <div class="group__row">
+            <label #sectionPositionLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="sectionPositionWrapper"
+                pebEditorAccordionKey="sectionPositionWrapper"
+                [triggerContainer]="sectionPositionLabel"
+              ></peb-editor-triangle-right-icon>
+              <span class="group__header">Section position</span>
+            </label>
+          </div>
+
+          <div #sectionPositionWrapper>
+            <div class="group__row">
+              <button
+                mat-button
+                type="button"
+                class="group__section-button group__section-button--position"
+                (click)="moveSection(false)"
+              >
+               <peb-editor-move-down-icon></peb-editor-move-down-icon>
+              </button>
+              <button
+                mat-button
+                type="button"
+                class="group__section-button group__section-button--position"
+                (click)="moveSection(true)"
+              >
+               <peb-editor-move-up-icon></peb-editor-move-up-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="group">
+          <div class="group__row">
+            <button
+              mat-button
+              class="group__section-button"
+              (click)="addSection()"
+            >
+              Add Section
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

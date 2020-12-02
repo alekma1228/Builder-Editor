@@ -1,0 +1,56 @@
+<ng-container #CONTROLS></ng-container>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  height="100%"
+  viewBox="0 0 32 41"
+  [style.stroke-width.px]="borderWidth"
+  [style.stroke]="borderWidth && styles.borderColor"
+  [style.stroke-linecap]="styles.borderStyle === 'dotted' ? 'round': 'butt'"
+>
+  <g fill="none" fill-rule="evenodd">
+    <circle
+      cx="16"
+      cy="9"
+      [attr.r]="7 + borderWidth / 2 + 0.5"
+      [style.stroke-width.px]="borderWidth"
+      [style.stroke]="borderWidth && styles.borderColor"
+      [style.stroke-linecap]="styles.borderStyle === 'dotted' ? 'round': 'butt'"
+    />
+    <circle
+      cx="16"
+      cy="9"
+      [attr.r]="7 - borderWidth / 2 - 0.5"
+      [style.stroke-width.px]="borderWidth"
+      [style.stroke]="borderWidth && styles.borderColor"
+      [style.stroke-linecap]="styles.borderStyle === 'dotted' ? 'round': 'butt'"
+    />
+    <circle
+      #bagSemiCircle
+      cx="16"
+      cy="9"
+      r="7"
+      stroke-width="1"
+      [attr.stroke]="backgroundColor"
+    />
+    <rect width="32" height="32" y="9" [attr.fill]="backgroundColor" rx="5" />
+  </g>
+  <g>
+    <circle
+      [attr.cx]="33"
+      [attr.cy]="8"
+      [attr.r]="8"
+      [style.fill]="styles.badgeColor || 'red'"
+    ></circle>
+    <text
+      dominant-baseline="middle"
+      text-anchor="middle"
+      x="33"
+      y="9"
+      font-size="0.75em"
+      [style.fill]="styles.badgeTextColor || 'white'"
+    >
+      {{ totalItems }}
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<div class="product-context-menu">
+  <div class="product-context-menu__option" (click)="addProduct(productOptions.Product)">
+    <peb-editor-product-document-icon class="product-context-menu__option__icon"></peb-editor-product-document-icon>
+    {{productOptions.Product}}
+  </div>
+  <div class="product-context-menu__option" (click)="addProduct(productOptions.Detail)">
+    <peb-editor-details-icon class="product-context-menu__option__icon"></peb-editor-details-icon>
+    {{productOptions.Detail}}
+  </div>
+  <div class="product-context-menu__option" (click)="addProduct(productOptions.Catalog)">
+    <peb-editor-catalog-icon class="product-context-menu__option__icon"></peb-editor-catalog-icon>
+    {{productOptions.Catalog}}
+  </div>
+</div>

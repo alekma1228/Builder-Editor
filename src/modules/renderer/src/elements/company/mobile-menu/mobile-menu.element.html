@@ -1,0 +1,33 @@
+<ng-container #CONTROLS></ng-container>
+
+<div class="mobile-menu" #mobileMenuRef>
+  <div class="mobile-menu__header">
+    <div class="mobile-menu__hamburger mobile-menu__hamburger--opened" (click)="hideMobileMenu()">
+      <div class="mobile-menu__hamburger__icon">
+        <div
+          class="mobile-menu__hamburger__line mobile-menu__hamburger__line--top"
+        ></div>
+        <div
+          class="mobile-menu__hamburger__line mobile-menu__hamburger__line--bottom"
+        ></div>
+      </div>
+    </div>
+    <div
+      *ngIf="logoContext?.data?.src as logo"
+      class="mobile-menu__logo"
+      [style.background-image]="getLogoUrl(logo)"
+      >
+    </div>
+  </div>
+  <hr />
+  <div class="mobile-menu__items">
+    <div
+      class="mobile-menu__item"
+      *ngFor="let route of menuContext?.data.routes"
+    >
+      <a class="mobile-menu__item-title" (click)="redirectTo(route.route)">
+        <span>{{ route.title | titlecase }}</span>
+      </a>
+    </div>
+  </div>
+</div>

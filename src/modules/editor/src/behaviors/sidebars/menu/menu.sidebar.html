@@ -1,0 +1,39 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Options">
+    <editor-menu-routes-form
+      *ngIf="component.menuRoutes?.form"
+      [formGroup]="component.menuRoutes.form"
+      [options]="component.menuRoutes.options"
+      (changed)="component.menuRoutes.submit.next()"
+    ></editor-menu-routes-form>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Style">
+    <!-- <editor-background-form
+      *ngIf="component.background?.form"
+    ></editor-background-form> -->
+      <editor-font-form
+        *ngIf="component?.font?.form"
+        [formGroup]="component.font.form"
+        [options]="component.font.options"
+        (blurred)="component.font.submit.next()"
+      ></editor-font-form>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-dimensions-form
+      *ngIf="component.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (focused)="component.dimensions.activate()"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-position-form
+      *ngIf="component.position?.form"
+      [formGroup]="component.position.form"
+      [limits]="component.position.limits"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

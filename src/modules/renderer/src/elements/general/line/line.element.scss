@@ -1,0 +1,13 @@
+.selected {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid rgba(0, 128, 255, 0.5);
+}
+
+:host {
+  // padding: 4px;
+  justify-content: center;
+}

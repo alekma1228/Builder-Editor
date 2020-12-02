@@ -1,0 +1,23 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "pebViewer",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "peb-viewer",
+      "kebab-case"
+    ],
+    "component-class-suffix": [
+      true,
+      "Component",
+      "Viewer",
+      "Dialog"
+    ]
+  }
+}

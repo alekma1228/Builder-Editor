@@ -1,0 +1,24 @@
+<div class="controls">
+  <div class="controls__control controls__control--transparent controls__control--back-icon" (click)="close()">
+    <peb-themes-preview-back-icon></peb-themes-preview-back-icon>
+    Back
+  </div>
+  <div class="controls__control" (click)="changeScreenType(PebScreen.Desktop)">
+    <peb-themes-preview-desktop-icon></peb-themes-preview-desktop-icon>
+  </div>
+  <div class="controls__control" (click)="changeScreenType(PebScreen.Tablet)">
+    <peb-themes-preview-tablet-icon></peb-themes-preview-tablet-icon>
+  </div>
+  <div class="controls__control" (click)="changeScreenType(PebScreen.Mobile)">
+    <peb-themes-preview-mobile-icon></peb-themes-preview-mobile-icon>
+  </div>
+</div>
+
+<div class="frame-wrapper" #frameWrapper>
+  <peb-viewer-device-frame
+    [type]="frameScreenType$ | async"
+    [style.transform] = "deviceFrameTransform$ | async"
+  >
+    <peb-viewer [themeSnapshot]="themeSnapshot"></peb-viewer>
+  </peb-viewer-device-frame>
+</div>

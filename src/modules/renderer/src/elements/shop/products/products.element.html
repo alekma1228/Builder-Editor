@@ -1,0 +1,17 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container [ngSwitch]="context?.state">
+  <ng-container *ngSwitchCase="PebElementContextState.Loading">Loading...</ng-container>
+  <ng-container *ngSwitchCase="PebElementContextState.Error">Error</ng-container>
+  <ng-container *ngSwitchDefault>
+    <div class="products" #productsGridRef>
+      <peb-element-shop-product
+        *ngFor="let product of products"
+        [element]="element"
+        [options]="options"
+        [styles]="styles"
+        [context]="{ state: product ? PebElementContextState.Ready : PebElementContextState.Empty, data: product }"
+      ></peb-element-shop-product>
+    </div>
+  </ng-container>
+</ng-container>

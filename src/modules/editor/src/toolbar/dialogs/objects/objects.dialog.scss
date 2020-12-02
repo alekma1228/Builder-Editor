@@ -1,0 +1,175 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+$objectSize: 3;
+$objectColor: #d4d4d4;
+
+:host {
+  background-color: #4e4e4e;
+  color: #fff;
+  padding: 0;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+}
+
+.dialog-objects {
+  font-size: 13px;
+
+  &__header {
+    min-height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__searchbar-icon {
+      border-radius: 3px 0 0 3px;
+      height: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-right: none;
+      outline: none;
+      background-color: transparent;
+      line-height: 1;
+    }
+
+    &__searchbar-input {
+      border-radius: 0 3px 3px 0;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: none;
+      font-size: inherit;
+      color: inherit;
+      background-color: transparent;
+      padding: 5px;
+      outline: none;
+      width: 75%;
+      line-height: 1;
+      font-family: inherit;
+      box-sizing: border-box;
+
+      &::-webkit-input-placeholder,
+      &::-moz-placeholder,
+      &:-ms-input-placeholder,
+      &:-moz-placeholder,
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+
+    .objects-sidebar {
+      border-right: 1px solid $context-menu-divider;
+      padding-top: 3px;
+      min-width: 100px;
+
+      &__category {
+        padding: 5px 15px;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &.active {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+      }
+    }
+
+    .objects-entry-components {
+      width: 250px;
+      min-height: 200px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1.5em;
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(3, minmax(#{$objectSize}em, max-content));
+      grid-template-rows: max-content;
+      grid-row-gap: 0.5em;
+      grid-column-gap: 0.5em;
+
+      div:hover {
+        cursor: pointer;
+      }
+
+      .icon {
+        @include icon-size(36);
+      }
+
+      .square {
+        width: #{$objectSize}em;
+        height: #{$objectSize}em;
+        background: $objectColor;
+      }
+
+      .circle {
+        width: #{$objectSize}em;
+        height: #{$objectSize}em;
+        background: $objectColor;
+        border-radius: 50%;
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: #{$objectSize/2}em solid transparent;
+        border-right: #{$objectSize/2}em solid transparent;
+        border-bottom: #{$objectSize}em solid $objectColor;
+      }
+
+      .line {
+        height: #{$objectSize * 1.5}em;
+        width: #{$objectSize/2}em;
+        border-right: 0.125em solid $objectColor;
+        transform: translateX(0.5em) rotate(45deg);
+      }
+
+      .button, .button--rounded {
+        height: #{$objectSize}em;
+        width: #{$objectSize * 1.75}em;
+        background: $objectColor;
+        color: $background;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before {
+          content: 'Button';
+        }
+
+        &--rounded {
+          border-radius: 0.35em;
+        }
+      }
+
+      .logo {
+        width: #{$objectSize * 1.5}em;
+        height: #{$objectSize * 1.5}em;
+        background: $objectColor;
+        border-radius: 50%;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        padding: 0.5em;
+
+        &::before {
+          content: 'Logo';
+        }
+      }
+
+      .shop-cart {
+        width: #{$objectSize}em;
+        height: #{$objectSize}em;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='41' viewBox='0 0 32 41'><g fill='none' fill-rule='evenodd'><rect width='32' height='32' y='9' fill='%23d4d4d4' rx='5'/><circle cx='16' cy='9' r='7' stroke='%23d4d4d4' stroke-width='4'/></g></svg>");
+      }
+    }
+  }
+}

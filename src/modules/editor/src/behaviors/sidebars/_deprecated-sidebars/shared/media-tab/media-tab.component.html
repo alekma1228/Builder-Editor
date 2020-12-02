@@ -1,0 +1,92 @@
+<div class="media-tab">
+  <form [formGroup]="mediaFilterSortForm">
+    <div class="media-tab__block">
+      <div class="content">
+        <peb-editor-carousel
+          [images]="previews$ | async"
+          (selectElement)="selectItem($event)"
+        ></peb-editor-carousel>
+      </div>
+    </div>
+    <div class="media-tab__block">
+      <div class="title">
+        <span>Sort by</span>
+      </div>
+      <div class="content">
+        <peb-editor-sidebar-select
+          [options]="sortByOptions"
+          [control]="mediaFilterSortForm.get('sortBy')">
+        </peb-editor-sidebar-select>
+      </div>
+    </div>
+    <div class="media-tab__block" *ngIf="categories$ | async as categories">
+      <div class="title">
+        <span>Categories</span>
+      </div>
+      <div class="content" [formGroup]="categoriesForm">
+        <div class="categories-filter" *ngFor="let category of categories">
+          <input
+            type="checkbox"
+            [id]="'category-' + category"
+            [formControlName]="category">
+          <label [for]="'category-' + category">{{category | titlecase}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="media-tab__block">
+      <div class="title">
+        <span>People</span>
+      </div>
+      <div class="content" [formGroup]="mediaFilterSortForm">
+        <div class="categories-filter">
+          <input
+            type="radio"
+            id="peopleExist-false"
+            [value]=false
+            formControlName="peopleExist"
+          >
+          <label for="peopleExist-false">Without People</label>
+        </div>
+        <div class="categories-filter">
+          <input
+            type="radio"
+            id="peopleExist-true"
+            [value]=true
+            formControlName="peopleExist"
+          >
+          <label for="peopleExist-true">With People</label>
+        </div>
+      </div>
+    </div>
+    <div class="media-tab__block" *ngIf="styles$ | async as styles">
+      <div class="title">
+        <span>Style</span>
+      </div>
+      <div class="content" [formGroup]="stylesForm">
+        <div class="categories-filter" *ngFor="let style of styles; let i = index">
+          <input
+            type="checkbox"
+            [id]="'style-' + i"
+            [formControlName]="style"
+          >
+          <label [for]="'style-' + i">{{style | titlecase}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="media-tab__block" *ngIf="formats$ | async as formats">
+      <div class="title">
+        <span>Format</span>
+      </div>
+      <div class="content" [formGroup]="formatsForm">
+        <div class="categories-filter" *ngFor="let format of formats; let i = index">
+          <input
+            type="checkbox"
+            [id]="'format-' + i"
+            [formControlName]="format"
+          >
+          <label [for]="'format-' + i">{{format | titlecase}}</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

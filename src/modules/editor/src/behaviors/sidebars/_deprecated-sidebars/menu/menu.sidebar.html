@@ -1,0 +1,343 @@
+<peb-editor-sidebar-tabs [disabledScrollTabTitle]="MenuTabs.Options">
+  <peb-editor-sidebar-tab [title]="MenuTabs.Options">
+    <div class="group">
+      <div class="group__label">
+        <label #menuFieldsLabel>
+          <peb-editor-triangle-right-icon
+            class="group__triangle-icon"
+            [pebEditorAccordion]="menuFieldsWrapper"
+            pebEditorAccordionKey="menuFieldsWrapper"
+            [showContainerOnInit]="true"
+            [triggerContainer]="menuFieldsLabel"
+          ></peb-editor-triangle-right-icon>
+          <span>Menu fields</span>
+        </label>
+      </div>
+      <div #menuFieldsWrapper class="group__content">
+        <div class="navbar__menu-fields-wrapper">
+          <ng-scrollbar>
+            <div
+              class="navbar__menu-field-wrapper"
+              *ngFor="let field of fields.controls; let even = even;"
+              [class.navbar__even-field]="even"
+              [class.navbar__selected-field]="field === selectedField"
+              (click)="selectedField = field"
+            >
+              <div class="navbar__menu-field-input-wrapper">
+                <label class="navbar__input-label">Name</label>
+                <input class="sidebar-input" [formControl]="field.controls.title"/>
+              </div>
+              <div class="navbar__menu-field-input-wrapper">
+                <label class="navbar__input-label">Link to</label>
+                <peb-editor-sidebar-select
+                  [control]="field.controls.routeId"
+                  [options]="routes$ | async"
+                  labelKey="url"
+                  valueKey="id"
+                >
+                </peb-editor-sidebar-select>
+              </div>
+            </div>
+          </ng-scrollbar>
+        </div>
+        <div class="navbar__buttons-wrapper">
+          <div class="navbar__button navbar__button-add hover" (click)="addNewField()">
+            <div class="add-icon"></div>
+          </div>
+          <div class="navbar__button navbar__button-delete hover" (click)="deleteField()">
+            <div class="delete-icon"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab [title]="MenuTabs.Style" [active]="true">
+    <div class="group">
+      <div #bgColorLabel class="group__label">
+        <peb-editor-triangle-right-icon
+          class="group__triangle-icon"
+          [pebEditorAccordion]="bgColorWrapper"
+          pebEditorAccordionKey="bgColorWrapper"
+          [triggerContainer]="bgColorLabel"
+        ></peb-editor-triangle-right-icon>
+        <div class="group__col">
+          <div class="background">
+            <div class="background__header">
+              <span>Background color</span>
+            </div>
+          </div>
+        </div>
+        <div class="group__col">
+          <div class="background background--right">
+            <peb-editor-color-picker
+              [pebColorPicker]="backgroundColor"
+              (pebColorPickerChange)="changeStyle.next({backgroundColor: $event})"
+            ></peb-editor-color-picker>
+          </div>
+        </div>
+      </div>
+      <div #bgColorWrapper class="group__content">
+        <div class="group__col">
+          <peb-editor-sidebar-select [control]="backgroundFillControl" [options]="fillOptions">
+          </peb-editor-sidebar-select>
+        </div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="group__label">
+        <label #fontLabel>
+          <peb-editor-triangle-right-icon
+            class="group__triangle-icon"
+            [pebEditorAccordion]="fontWrapper"
+            pebEditorAccordionKey="fontWrapper"
+            [triggerContainer]="fontLabel"
+          ></peb-editor-triangle-right-icon>
+          <span>Font</span>
+        </label>
+      </div>
+      <div #fontWrapper class="group__content">
+        <div class="font">
+          <peb-editor-sidebar-select class="" [control]="fontFamilyControl" [options]="fontOptions">
+          </peb-editor-sidebar-select>
+          <div class="font__format">
+            <peb-editor-sidebar-select [control]="fontStyleControl" class="font__family" [options]="fontStyleOptions">
+            </peb-editor-sidebar-select>
+            <peb-editor-number-input-old class="font__control" [control]="fontSizeControl" [unit]="'px'">
+            </peb-editor-number-input-old>
+          </div>
+          <div class="font__format">
+            <div class="tools-group font__option">
+              <button
+                class="tools-group__item"
+                [class.active]="styles.fontWeight == textStyleType.Bold"
+                (click)="styles.fontWeight === textStyleType.Bold ?
+                  changeStyle.next({fontWeight: 'normal'}):
+                  changeStyle.next({fontWeight: textStyleType.Bold})"
+              >
+                <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.active]="styles.fontStyle == textStyleType.Italic"
+                (click)="styles.fontStyle == textStyleType.Italic ?
+                  changeStyle.next({fontStyle: null}):
+                  changeStyle.next({fontStyle: textStyleType.Italic})"
+              >
+                <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.active]="styles.textDecoration == textStyleType.Underline"
+                (click)="styles.textDecoration == textStyleType.Underline ?
+                  changeStyle.next({textDecoration: null}):
+                  changeStyle.next({textDecoration: textStyleType.Underline})"
+              >
+                <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+              </button>
+              <button
+                class="tools-group__item"
+                [class.active]="styles.strike == textStyleType.Strike"
+                (click)="styles.strike == textStyleType.Strike ?
+                  changeStyle.next({strike: null}):
+                  changeStyle.next({strike: textStyleType.Strike})"
+              >
+                <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+              </button>
+            </div>
+            <peb-editor-color-picker
+              [pebColorPicker]="color"
+              (pebColorPickerChange)="changeStyle.next({color: $event})"
+            ></peb-editor-color-picker>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--    <div class="group">-->
+<!--      <div class="group__label">-->
+<!--        <label #alignmentLabel>-->
+<!--          <peb-editor-triangle-right-icon-->
+<!--            class="group__triangle-icon"-->
+<!--            [pebEditorAccordion]="alignmentWrapper"-->
+<!--            pebEditorAccordionKey="alignmentWrapper"-->
+<!--            [triggerContainer]="alignmentLabel"-->
+<!--          ></peb-editor-triangle-right-icon>-->
+<!--          <span>Alignment</span>-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <div #alignmentWrapper class="group__content">-->
+<!--        <div class="tools-group">-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.justifyContent == textAlignType.FlexStart"-->
+<!--            (click)="changeStyle.next({justifyContent: textAlignType.FlexStart})"-->
+<!--          >-->
+<!--            <peb-editor-alignment-left-icon></peb-editor-alignment-left-icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.justifyContent == textAlignType.Center"-->
+<!--            (click)="changeStyle.next({justifyContent: textAlignType.Center})"-->
+<!--          >-->
+<!--            <peb-editor-alignment-center-icon></peb-editor-alignment-center-icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.justifyContent == textAlignType.FlexEnd"-->
+<!--            (click)="changeStyle.next({justifyContent:textAlignType.FlexEnd})"-->
+<!--          >-->
+<!--            <peb-editor-alignment-right-icon></peb-editor-alignment-right-icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.justifyContent == textAlignType.Between"-->
+<!--            (click)="changeStyle.next({justifyContent:textAlignType.Between})"-->
+<!--          >-->
+<!--            <peb-editor-alignment-justify-icon></peb-editor-alignment-justify-icon>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="tools-group">-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.alignItems == textAlignType.FlexStart"-->
+<!--            (click)="changeStyle.next({alignItems: textAlignType.FlexStart})"-->
+<!--          >-->
+<!--            <peb-editor-vertical-align-top-icon></peb-editor-vertical-align-top-icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.alignItems == textAlignType.Center"-->
+<!--            (click)="changeStyle.next({alignItems: textAlignType.Center})"-->
+<!--          >-->
+<!--            <peb-editor-vertical-align-center-icon></peb-editor-vertical-align-center-icon>-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="tools-group__item"-->
+<!--            [class.active]="styles.alignItems == textAlignType.FlexEnd"-->
+<!--            (click)="changeStyle.next({alignItems: textAlignType.FlexEnd})"-->
+<!--          >-->
+<!--            <peb-editor-vertical-align-bottom-icon></peb-editor-vertical-align-bottom-icon>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="group">-->
+<!--      <div class="group__label">-->
+<!--        <div>-->
+<!--          <input-->
+<!--            #canChangeBorder-->
+<!--            type="checkbox"-->
+<!--            value="button color"-->
+<!--            [checked]="isBorderActive()"-->
+<!--            (change)="canEditBorder(canChangeBorder.checked)"-->
+<!--          />-->
+<!--          Border-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="group__content" *ngIf="canChangeBorder.checked">-->
+<!--        <peb-editor-sidebar-select [control]="borderStyleTypeControl" [options]="borderOptions">-->
+<!--        </peb-editor-sidebar-select>-->
+<!--        <div class="border">-->
+<!--          <peb-editor-border-sidebar-select class="border__control" [control]="borderStyleControl">-->
+<!--          </peb-editor-border-sidebar-select>-->
+<!--          <peb-editor-color-picker-->
+<!--            [pebColorPicker]="borderColor || styles.borderColor"-->
+<!--            (pebColorPickerChange)="changeStyle.next({borderColor: $event})"-->
+<!--          ></peb-editor-color-picker>-->
+<!--          <peb-editor-number-input-->
+<!--            class="border__control"-->
+<!--            [style.width]="'30%'"-->
+<!--            [control]="borderWidthControl"-->
+<!--            [unit]="'px'"-->
+<!--          ></peb-editor-number-input>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="group">-->
+<!--      <div class="group__label">-->
+<!--        <label #cornersLabel>-->
+<!--          <peb-editor-triangle-right-icon-->
+<!--            class="group__triangle-icon"-->
+<!--            [pebEditorAccordion]="cornersWrapper"-->
+<!--            pebEditorAccordionKey="cornersWrapper"-->
+<!--            [triggerContainer]="cornersLabel"-->
+<!--          ></peb-editor-triangle-right-icon>-->
+<!--          <span>Corners</span>-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <div #cornersWrapper class="group__content">-->
+<!--        <peb-editor-sidebar-slider [control]="borderRadiusControl" class="corners__control">-->
+<!--        </peb-editor-sidebar-slider>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="group">-->
+<!--      <div class="group__label">-->
+<!--        <div>-->
+<!--          <input-->
+<!--            #canChangeBoxShadow-->
+<!--            type="checkbox"-->
+<!--            [checked]="styles.boxShadow"-->
+<!--            (change)="changeBoxShadowHandler(canChangeBoxShadow.checked)"-->
+<!--          />-->
+<!--          Shadow-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngIf="canChangeBoxShadow.checked" class="group__content">-->
+<!--        <div class="shadow">-->
+<!--          <div class="shadow__group">-->
+<!--            <div>-->
+<!--              <label #blurLabel>-->
+<!--                <peb-editor-triangle-right-icon-->
+<!--                  class="group__triangle-icon"-->
+<!--                  [pebEditorAccordion]="blurWrapper"-->
+<!--                  pebEditorAccordionKey="blurWrapper"-->
+<!--                  [triggerContainer]="blurLabel"-->
+<!--                ></peb-editor-triangle-right-icon>-->
+<!--                <span>Blur</span>-->
+<!--              </label>-->
+<!--            </div>-->
+<!--            <div #blurWrapper>-->
+<!--              <peb-editor-sidebar-slider class="corners__control" [control]="shadowBlurControl">-->
+<!--              </peb-editor-sidebar-slider>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="shadow__group">-->
+<!--            <div>-->
+<!--              <label #spreadLabel>-->
+<!--                <peb-editor-triangle-right-icon-->
+<!--                  class="group__triangle-icon"-->
+<!--                  [pebEditorAccordion]="spreadWrapper"-->
+<!--                  pebEditorAccordionKey="spreadWrapper"-->
+<!--                  [triggerContainer]="spreadLabel"-->
+<!--                ></peb-editor-triangle-right-icon>-->
+<!--                <span>Spread</span>-->
+<!--              </label>-->
+<!--            </div>-->
+<!--            <div #spreadWrapper>-->
+<!--              <peb-editor-sidebar-slider class="corners__control" [control]="shadowSpreadControl">-->
+<!--              </peb-editor-sidebar-slider>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="group">-->
+<!--      <div class="group__label">-->
+<!--        <div>-->
+<!--          <input type="checkbox" value="button color" />-->
+<!--          Reflection-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab [title]="MenuTabs.Arrange">
+    <peb-editor-arrange-tab
+      [form]="arrangeForm"
+      [withRotation]="false"
+      [withLocking]="false"
+
+    ></peb-editor-arrange-tab>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

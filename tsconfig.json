@@ -1,0 +1,48 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@pe/builder-api": ["src/modules/api/src"],
+      "@pe/builder-ui": ["src/modules/ui/src"],
+      "@pe/builder-core": ["src/modules/core/src"],
+      "@pe/builder-renderer": ["src/modules/renderer/src"],
+      "@pe/builder-editor": ["src/modules/editor/src"],
+      "@pe/builder-viewer": ["src/modules/viewer/src"],
+      "@pe/builder-text-editor": ["src/modules/text-editor/src"],
+      "@pe/builder-themes": ["src/modules/themes/src"],
+      "@pe/builder-shop": ["src/modules/shop/src"],
+      "@pe/builder-products": ["src/modules/products/src"],
+      "@pe/builder-pos": ["src/modules/pos/src"],
+      "@pe/builder-media": ["src/modules/media/src"],
+      "@pe/builder-elements/category": ["src/modules/elements/category"],
+      "@pe/builder-elements/product": ["src/modules/elements/product"],
+      "@pe/builder-renderer-elements/site/logo": ["src/modules/renderer-elements/src/site/logo"],
+      "@pe/builder-renderer-elements/site/menu": ["src/modules/renderer-elements/src/site/menu"],
+      "@pe/builder-renderer-elements/site/mobile-menu": ["src/modules/renderer-elements/src/site/mobile-menu"],
+      "@pe/builder-renderer-elements/shop/cart": ["src/modules/renderer-elements/src/shop/cart"],
+      "@pe/builder-renderer-elements/shop/category": ["src/modules/renderer-elements/src/shop/category"],
+      "@pe/builder-renderer-elements/shop/product-details": ["src/modules/renderer-elements/src/shop/product-details"],
+      "@pe/builder-renderer-elements/shop/product-grid": ["src/modules/renderer-elements/src/shop/product-grid"],
+      "@pe/builder-font-loader": ["src/modules/font-loader/src"]
+    }
+  }
+}

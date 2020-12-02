@@ -1,0 +1,27 @@
+$main-section-color: white;
+$background-section-color: #067af1;
+
+:host {
+  position: absolute;
+  display: flex;
+  top: 0px;
+  left: -1px;
+  z-index: 1000;
+  width: max-content;
+  padding: 0.25rem .75rem;
+  font-size: 0.9rem;
+  font-weight: normal;
+  font-variant: normal;
+  color: $main-section-color;
+  background: $background-section-color;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}

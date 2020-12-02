@@ -1,0 +1,130 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.upload-logo {
+  margin: 0 auto 40px auto;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-primary-8);
+  background-image: linear-gradient(#a0a7aa,#808893);
+  color: var(--color-secondary-0);
+  border-radius: 100%;
+  overflow: hidden;
+  transition: background .2s;
+  cursor: pointer;
+
+  &__input {
+    display: none;
+  }
+
+  &__abbreviation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+    h2 {
+      position: absolute;
+      font-size: 37px;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%,-50%,0);
+      margin: 0;
+      font-weight: 500;
+      font-family: sans-serif;
+    }
+  }
+
+  &__picture {
+    width: 100%;
+    height: 100%;
+
+    img {
+      max-height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      &.large-then-parent {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -11px;
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: auto auto 0 auto;
+  }
+
+  &__label {
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+  }
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  width: 350px;
+
+  input {
+    width: 100%;
+    border: none;
+    color: var(--color-secondary-0);
+    padding: 18px;
+    font-size: 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: var(--color-primary-8);
+    outline: none;
+    transition: background .2s;
+
+    &[disabled] {
+      opacity: 0.3;
+      cursor: initial;
+    }
+
+    &::placeholder {
+      color: var(--color-secondary-4);
+    }
+  }
+
+  button {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-secondary-0);
+    padding: 18px;
+    font-size: 16px;
+    border: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    font-weight: 300;
+    transition: background .2s;
+
+    &[disabled] {
+      color: var(--color-secondary-2);
+      cursor: initial;
+    }
+  }
+}

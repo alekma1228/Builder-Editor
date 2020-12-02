@@ -1,0 +1,77 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container [ngSwitch]="categoryContext.state">
+  <ng-container *ngSwitchCase="PebElementContextState.Loading">Loading...</ng-container>
+  <ng-container *ngSwitchCase="PebElementContextState.Error">Error</ng-container>
+  <ng-container *ngSwitchCase="PebElementContextState.Empty">Empty</ng-container>
+  <ng-container *ngSwitchCase="PebElementContextState.Ready">
+    <shop-category-header
+      *ngIf="categoryContext.data.title"
+      [context]="categoryContext"
+      [options]="options"
+      [styles]="styles"
+      [element]="element"
+    ></shop-category-header>
+    <ng-container
+      *ngIf="options.screen === PebScreen.Mobile then mobileHeader else desktopHeader"
+    ></ng-container>
+    <div class="category-content">
+      <shop-category-filters
+        [context]="categoryContext"
+        [options]="options"
+        [styles]="styles"
+        [element]="element"
+        (toggleFilters)="toggleFilters($event)"
+        (toggleShownFilters)="onToggleShownFilters()"
+      ></shop-category-filters>
+      <div
+        #productsGridRef
+        [class.category-products]="displayMode === DisplayModes.GRID"
+        [class.category-products-table]="displayMode === DisplayModes.TABLE"
+      >
+        <shop-category-product
+          *ngFor="let product of categoryContext.data.products; let i = index"
+          [context]="getFullProductContext(product)"
+          [options]="options"
+          [styles]="styles"
+          [element]="element"
+          [class.first-in-row]="i % styles.columns == 0"
+          [class.last-in-row]="i % styles.columns == styles.columns - 1"
+          [class.category-product]="displayMode === DisplayModes.GRID"
+          [class.category-product-table]="displayMode === DisplayModes.TABLE"
+          (navigateToPage)="navigateToProductPage($event)"
+        ></shop-category-product>
+      </div>
+
+      <ng-template #mobileHeader>
+        <shop-category-navbar-mobile
+          [element]="element"
+          [context]="categoryContext"
+          [options]="options"
+          [styles]="styles"
+          (toggleFilters)="toggleFilters($event)"
+          (resetFilters)="resetFilters()"
+          (sort)="sort($event)"
+          (toggleProductsDisplay)="toggleProductsDisplay()"
+          (searchProducts)="searchProducts($event)"
+        ></shop-category-navbar-mobile>
+      </ng-template>
+
+      <ng-template #desktopHeader>
+        <shop-category-navbar
+          [element]="element"
+          [context]="categoryContext"
+          [options]="options"
+          [styles]="styles"
+          (toggleFilters)="toggleFilters($event)"
+          (resetFilters)="resetFilters()"
+          (toggleShownFilters)="onToggleShownFilters()"
+          (sort)="sort($event)"
+        ></shop-category-navbar>
+      </ng-template>
+
+      <ng-template #grid> </ng-template>
+      <ng-template #table> </ng-template>
+    </div>
+  </ng-container>
+</ng-container>

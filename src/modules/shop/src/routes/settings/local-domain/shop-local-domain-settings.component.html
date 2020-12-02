@@ -1,0 +1,21 @@
+<form class="panel" [formGroup]="form">
+  <div class="field">
+    <input
+      class="field__input"
+      placeholder="Domain"
+      formControlName="internalDomain"
+    />
+    <span class="field__postfix">.{{shopHost}}</span>
+  </div>
+  <button
+    class="field field--button"
+    [disabled]="form.invalid || form.disabled"
+    (click)="onSubmit()"
+  >
+  <mat-spinner class="mat-spinner-themed" *ngIf="loading" [strokeWidth]="2" [diameter]="22">
+  </mat-spinner>
+  <div [class.hidden-content]="loading">
+    Done
+  </div>
+  </button>
+</form>

@@ -1,0 +1,10 @@
+<ng-container #CONTROLS></ng-container>
+
+<div class="content-wrapper">
+  <div
+    class="content"
+    #textContentRef
+    [innerHtml]="sanitizedText"
+    [style.user-select]="options.interactions ? 'auto' : 'none'"
+  ></div>
+</div>

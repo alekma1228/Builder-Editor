@@ -1,0 +1,96 @@
+@import '../../../../styles/variables';
+
+$borderRadiusInput: 0.35em;
+
+.number-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: $defaultInputHeight;
+
+  &__wrapper {
+    border-radius: 3px;
+    border: solid 1px #696c70;
+    background-color: #3f3f3f;
+    width: calc(100% - 1.75em);
+    display: flex;
+    min-width: 50px;
+
+    &.disabled {
+      opacity: 0.6;
+    }
+
+    &--invalid {
+      border: solid 1px #f44336;
+    }
+
+    input[type='number'] {
+      font-size: inherit;
+      color: inherit;
+      width: calc(100% - .83em);
+      padding: 0.25em 0 .3em .1em;
+      outline: none;
+      min-height: 1em;
+      background-color: transparent;
+      border: none;
+      text-align: right;
+      -moz-appearance: textfield;
+      -webkit-appearance: textfield;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__unit {
+    line-height: normal;
+    padding: 0.05em 0.3em;
+  }
+
+  &__btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+  }
+
+  &__btn {
+    padding: 0;
+    font-size: inherit;
+    right: 0;
+    width: 15px;
+    height: calc(1.75em / 2);
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    color: #656565;
+
+    &:last-child {
+      margin-top: -1px;
+    }
+
+    &:disabled {
+      color: #464646;
+    }
+
+    &:not([disabled]):active {
+      color: #145ccc;
+    }
+  }
+
+}
+
+.label {
+  text-align: center;
+  font-size: .75em;
+  color: #ffffff;
+  margin-top: 2px;
+  width: calc(100% - 18px);
+}

@@ -1,0 +1,14 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container pebRendererChildrenSlot="absolute"></ng-container>
+
+<div class="loading-spinner-wrapper">
+  <mat-spinner
+    class="mat-spinner-themed loading-spinner"
+    [strokeWidth]="5"
+  ></mat-spinner>
+</div>
+
+<div id="main-slot" #wrapper>
+  <ng-container pebRendererChildrenSlot=""></ng-container>
+</div>

@@ -1,0 +1,67 @@
+@import '../../../../styles/variables';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.documents {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-left: 1px solid #696C70;
+
+  .element-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 2em;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+
+    .arrow {
+      margin-left: -1.25em;
+      width: 1em;
+      text-align: center;
+      margin-right: 0.25em;
+    }
+
+    .icon {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 2px;
+      margin-right: 3px;
+    }
+
+    &:nth-child(2n) {
+      background: #323232;
+    }
+
+    &:nth-child(2n+1) {
+      background: #3f3f3f;
+    }
+
+    &--top-level {
+      min-height: 2.5em;
+      background-color: #595959;
+      padding-left: 1.5em;
+
+      //.arrow {
+      //  margin-left: 0;
+
+      //}
+    }
+
+    &__icon {
+      margin-left: auto;
+      margin-right: 5px;
+    }
+  }
+}

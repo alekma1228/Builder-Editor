@@ -1,0 +1,36 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container [ngSwitch]="element.data?.variant">
+  <div *ngSwitchCase="PebShapeVariant.Circle" #shape class="circle">
+    <span>{{ element.data?.text }}</span>
+  </div>
+
+  <div *ngSwitchCase="PebShapeVariant.Square" #shape class="square">
+    <span>{{ element.data?.text }}</span>
+  </div>
+
+  <div *ngSwitchCase="PebShapeVariant.Triangle" #shape class="triangle">
+    <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient
+          [attr.id]="'gradient-' + element.id"
+          [attr.x1]="triangleStyles.gradientAngle.x1"
+          [attr.y1]="triangleStyles.gradientAngle.y1"
+          [attr.x2]="triangleStyles.gradientAngle.x2"
+          [attr.y2]="triangleStyles.gradientAngle.y2"
+        >
+          <stop offset="0%" [style.stop-color]="triangleStyles.gradientStartColor"/>
+          <stop offset="100%" [style.stop-color]="triangleStyles.gradientStopColor"/>
+        </linearGradient>
+      </defs>
+      <polygon
+        points="50,0 0,100 100,100"
+        [style.strokeWidth]="triangleStyles.strokeWidth"
+        [style.fill]="triangleStyles.fill"
+        [style.stroke]="triangleStyles.borderColor"
+        [style.strokeDasharray]="triangleStyles.strokeDasharray"
+      />
+    </svg>
+    <span>{{ element.data?.text }}</span>
+  </div>
+</ng-container>

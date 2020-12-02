@@ -1,0 +1,34 @@
+<form class="form" [formGroup]="formGroup" (focusout)="blur()">
+  <div class="group">
+    <div class="group__row">
+      <peb-editor-checkbox-input
+        label="Border"
+        formControlName="hasBorder"
+        (change)="toggleBorder($event.target.checked)"
+      ></peb-editor-checkbox-input>
+    </div>
+    <ng-container *ngIf="formGroup.get('hasBorder').value">
+      <div class="group__row">
+        <div class="group__col">
+          <peb-editor-border-sidebar-select
+            [control]="formGroup.get('borderStyle')"
+          ></peb-editor-border-sidebar-select>
+        </div>
+        <div class="group__col">
+          <editor-color-picker-spectrum-palette-input
+            [formControl]="formGroup.get('borderColor')"
+            (changeBlur)="blur()"
+          ></editor-color-picker-spectrum-palette-input>
+        </div>
+        <div class="group__col">
+          <peb-editor-number-input
+            formControlName="borderWidth"
+            unit="px"
+            min="0"
+            max="100"
+          ></peb-editor-number-input>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>

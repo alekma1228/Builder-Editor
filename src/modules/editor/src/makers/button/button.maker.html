@@ -1,0 +1,11 @@
+<ng-container #CONTROLS></ng-container>
+
+<peb-text-editor
+  #textEditorRef
+  [text]="element.data.text"
+  [styles]="mappedStyles.host"
+  [initialDimensions]="initialRect"
+  [limits]="limits"
+  (textChanged)="onTextChanged($event)"
+  (dimensionsChanged)="onDimensionsChanged($event)"
+></peb-text-editor>

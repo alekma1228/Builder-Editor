@@ -1,0 +1,30 @@
+<ng-container *ngIf="PebElementContextState.Ready">
+  <div class="navbar-button" (click)="onToggleShownFilters()">
+    <div class="navbar-button__icon">
+      <peb-icon-filters></peb-icon-filters>
+    </div>
+    <div class="navbar-button__label">Filter</div>
+  </div>
+  <div
+    *ngIf="atLeastOneFilterActive"
+    class="reset-filter-btn"
+    (click)="onResetFilters()"
+  >
+    <span class="reset-filter-btn__pipe" aria-hidden="true">|</span>
+    <a role="button" aria-hidden="false" class="reset-filter-btn__title">
+      Reset
+    </a>
+  </div>
+
+  <label class="navbar-button navbar-button--right">
+    <span>Sort by:&nbsp;</span>
+    <select
+      class="navbar-select"
+      (change)="onSort($event.target.value)"
+      [disabled]="!options.interactions"
+    >
+      <option value="asc">Price: Low to High</option>
+      <option value="desc">Price: High to Low</option>
+    </select>
+  </label>
+</ng-container>

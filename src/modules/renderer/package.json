@@ -1,0 +1,20 @@
+{
+  "name": "@pe/builder-renderer",
+  "version": "5.0.0-dev.4",
+  "description": "",
+  "repository": "http://gitlab.devpayever.com/frontend/builder-editor.git",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.0.3",
+    "@angular/core": "^9.0.3",
+    "tslib": "^1.10.0",
+    "lodash": "^4.17.15"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 9-11"
+  ]
+}

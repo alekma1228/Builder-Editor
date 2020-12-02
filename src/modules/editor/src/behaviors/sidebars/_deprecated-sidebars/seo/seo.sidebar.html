@@ -1,0 +1,110 @@
+<form [formGroup]="form">
+  <peb-editor-sidebar-tabs>
+    <peb-editor-sidebar-tab title="General">
+      <div class="group">
+        <div class="group__row">
+          <label #titleLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="titleWrapper"
+              pebEditorAccordionKey="titleWrapper"
+              [triggerContainer]="titleLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Title</span>
+          </label>
+        </div>
+        <div #titleWrapper class="group__row">
+          <input formControlName="title" type="text" class="sidebar-input">
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #urlLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="urlWrapper"
+              pebEditorAccordionKey="urlWrapper"
+              [triggerContainer]="urlLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>SEO Url</span>
+          </label>
+        </div>
+        <div #urlWrapper class="group__row">
+          <input formControlName="url" type="text" class="sidebar-input">
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #descriptionLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="descriptionWrapper"
+              pebEditorAccordionKey="descriptionWrapper"
+              [triggerContainer]="descriptionLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Description</span>
+          </label>
+        </div>
+        <div #descriptionWrapper class="group__row">
+          <textarea formControlName="description" type="text" class="textarea"></textarea>
+        </div>
+      </div>
+      <div class="group-no-underline">
+        <label class="checkbox">
+          <input formControlName="showInSearchResults" type="checkbox">
+          <span>Show in search results</span>
+        </label>
+      </div>
+    </peb-editor-sidebar-tab>
+    <peb-editor-sidebar-tab title="Advanced">
+      <div class="group">
+        <div class="group__row">
+          <label #canonicalUrlLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="canonicalUrlWrapper"
+              pebEditorAccordionKey="canonicalUrlWrapper"
+              [triggerContainer]="canonicalUrlLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Canonical URL</span>
+          </label>
+        </div>
+        <div #canonicalUrlWrapper class="group__row">
+          <input formControlName="canonicalUrl" type="text" class="sidebar-input">
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #markupDataLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="markupDataWrapper"
+              pebEditorAccordionKey="markupDataWrapper"
+              [triggerContainer]="markupDataLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Markup Data</span>
+          </label>
+        </div>
+        <div #markupDataWrapper class="group__row">
+          <input formControlName="markupData" type="text" class="sidebar-input">
+        </div>
+      </div>
+      <div class="group">
+        <div class="group__row">
+          <label #customMetaTagsLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="customMetaTagsWrapper"
+              pebEditorAccordionKey="customMetaTagsWrapper"
+              [triggerContainer]="customMetaTagsLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Custom Meta Tags</span>
+          </label>
+        </div>
+        <div #customMetaTagsWrapper class="group__row">
+          <textarea formControlName="customMetaTags" type="text" class="textarea"></textarea>
+        </div>
+      </div>
+    </peb-editor-sidebar-tab>
+  </peb-editor-sidebar-tabs>
+</form>

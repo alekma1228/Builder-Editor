@@ -1,0 +1,53 @@
+.row {
+  display: flex;
+  width: 100%;
+  margin: 5px 0 0 0;
+  align-items: center;
+
+  &__control {
+    width: 100%;
+
+    &--right {
+      display: block;
+      width: 100px;
+      margin-left: 10px;
+    }
+
+    &--picker {
+      margin-left: auto;
+    }
+  }
+}
+
+.inline-controls {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+
+  &__control {
+    display: flex;
+    width: 100%;
+    margin: 0;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #696c70;
+      width: 100%;
+      padding: 2px;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px #5b5b5b;
+      transition: background .2s;
+
+      &:hover {
+        background-color: #737373;
+      }
+
+    }
+
+    input:checked + span {
+      background-color: #007aff;
+    }
+  }
+}

@@ -1,0 +1,105 @@
+<ng-container
+  *ngIf="elementDefinition.type !== PebElementType.Section && selected; then regularAnchors"
+></ng-container>
+<ng-container 
+  *ngIf="elementDefinition.type === PebElementType.Section && selected; then sectionAnchors"
+></ng-container>
+<ng-container
+ *ngIf="elementDefinition.type === PebElementType.Section && !selected; then hoveredSectionAnchors"
+ ></ng-container>
+
+<ng-template #regularAnchors>
+  <svg
+    [style.top.px]="dimensions.top"
+    [style.left.px]="dimensions.left"
+    [style.width.px]="dimensions.width"
+    [style.height.px]="dimensions.height"
+  >
+    <circle
+      class="anchor"
+      *ngFor="let point of points | where:['shown', true]"
+      [class]="getAnchorTypeClass(point.type)"
+      [attr.cx]="point.x"
+      [attr.cy]="point.y"
+      [attr.fill]="color"
+      [attr.anchor-type]="point.type"
+      [attr.anchor-for]="elementId"
+      r="4"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #sectionAnchors>
+  <svg
+    *ngFor="let point of points | where:['shown', true]"
+    class="section-anchor anchor"
+    width="38px"
+    height="20px"
+    viewBox="0 0 38 20"
+    [attr.cx]="point.x"
+    [attr.cy]="point.y"
+    [attr.fill]="color"
+    [attr.anchor-type]="point.type"
+    [attr.anchor-for]="elementId"
+    [style.top.px]="point.y - 10"
+    [style.left.px]="point.x"
+    [ngClass]="[getAnchorTypeClass(point.type)]"
+  >
+    <g stroke="none" stroke-width="1" fill="white" fill-rule="evenodd">
+      <g
+        transform="translate(-627.000000, -570.000000)"
+        stroke-width="2"
+        [attr.stroke]="color"
+      >
+        <g transform="translate(627.000000, 570.000000)">
+          <rect x="1" y="1" width="35.5" height="18" rx="9" />
+          <polyline
+            fill-rule="nonzero"
+            transform="translate(18.750000, 12.857143) scale(-1, 1) translate(-18.750000, -12.857143) "
+            points="22.5 11.4285714 18.75 14.2857143 18.75 14.2857143 15 11.4285714"
+          />
+          <polyline
+            fill-rule="nonzero"
+            transform="translate(18.750000, 7.142857) scale(-1, 1) rotate(-180.000000) translate(-18.750000, -7.142857) "
+            points="22.5 5.71428571 18.75 8.57142857 18.75 8.57142857 15 5.71428571"
+          />
+        </g>
+      </g>
+    </g>
+  </svg>
+</ng-template>
+<ng-template #hoveredSectionAnchors>
+<svg 
+  *ngFor="let point of points | where:['shown', true]"
+  width="20px" 
+  height="20px" 
+  viewBox="0 0 20 20" 
+  version="1.1" 
+  [attr.cx]="point.x"
+  [attr.cy]="point.y"
+  [attr.anchor-type]="point.type"
+  [attr.anchor-for]="elementId"
+  [style.top.px]="point.y - 10"
+  [style.left.px]="point.x"
+  class="section-anchor add"
+  [ngClass]="[getAddSectionAnchorTypeClass(point.type)]"
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+  <title>add-section-icon</title>
+  <desc>Created with Sketch.</desc>
+  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="8-Sections-1" transform="translate(-922.000000, -570.000000)" stroke="#88C6FF" stroke-width="2">
+          <g id="add-section-icon" transform="translate(922.000000, 570.000000)">
+              <g id="drag-resize-copy-2">
+                  <rect id="Rectangle" x="1" y="1" width="18" height="18" rx="9"></rect>
+              </g>
+              <line x1="10" y1="6.25" x2="10" y2="13.75" id="Path-10"></line>
+              <line x1="10" y1="6.25" x2="10" y2="13.75" id="Path-10" transform="translate(10.000000, 10.000000) rotate(-90.000000) translate(-10.000000, -10.000000) "></line>
+          </g>
+      </g>
+  </g>
+</svg>
+
+</ng-template>

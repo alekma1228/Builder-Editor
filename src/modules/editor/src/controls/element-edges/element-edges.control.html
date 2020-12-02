@@ -1,0 +1,12 @@
+<svg
+  [style.top.px]="dimensions.top"
+  [style.left.px]="dimensions.left"
+  [style.width.px]="dimensions.width"
+  [style.height.px]="dimensions.height"
+>
+  <path [attr.d]="makeBordersPath()"
+        fill="none"
+        [attr.stroke]="color"
+        [attr.stroke-width]="strokeWidth"
+  ></path>
+</svg>

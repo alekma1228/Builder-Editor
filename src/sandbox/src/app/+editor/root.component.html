@@ -1,0 +1,11 @@
+<span
+  *cdkPortal
+  class="theme-type-badge"
+  [ngClass]="'theme-type-badge--' + themeType"
+  (click)="setTemplateThemeType()"
+>
+
+  type: {{themeType}}
+</span>
+
+<peb-editor class="pe-builder-styles" [data]="(route.data | async).shop"></peb-editor>

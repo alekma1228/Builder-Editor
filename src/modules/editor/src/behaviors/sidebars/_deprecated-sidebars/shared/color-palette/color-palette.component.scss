@@ -1,0 +1,24 @@
+.colors-grid {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 9px;
+
+  .color {
+    height: 58px;
+    cursor: pointer;
+    position: relative;
+
+    &:active::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(black, 0.25);
+    }
+  }
+}

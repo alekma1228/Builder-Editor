@@ -1,0 +1,31 @@
+$main-color: white;
+$background-color: rgba(17, 17, 17, 0.8);
+
+:host {
+  display: flex;
+  position: absolute;
+  top: -2.25rem;
+  left: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: .32rem 1.2rem;
+  font-weight: normal;
+  font-variant: normal;
+  border-radius: 1rem;
+
+  line-height: 1.2rem;
+  color: $main-color;
+  background: $background-color;
+}
+
+span {
+  font-size: .8rem;
+  margin-right: .4rem;
+  user-select: none;
+  pointer-events: none;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

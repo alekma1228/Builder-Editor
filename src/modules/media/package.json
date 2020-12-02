@@ -1,0 +1,10 @@
+{
+  "name": "@pe/builder-media",
+  "version": "1.0.9",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "@pe/data-grid": "0.0.13",
+    "tslib": "^1.10.0"
+  }
+}

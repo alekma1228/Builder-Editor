@@ -1,0 +1,78 @@
+@import '../../../../../styles/mixins';
+
+.border-select {
+  width: 100%;
+  font-size: 12px;
+  color: #ffffff;
+
+  &__placeholder {
+    font-size: inherit;
+    color: inherit;
+    max-width: 100%;
+    border: none;
+    min-width: 32px;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    outline: none;
+    transition: background-color 0.2s;
+  }
+
+  &__options {
+    .icon {
+      @include icon-size(18);
+    }
+
+    span {
+      position: absolute;
+      top: 15px;
+      padding: 0 20px;
+      max-width: 100%;
+      right: 10px;
+      min-width: 35px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      outline: none;
+    }
+  }
+
+  &__options span,
+  .border-select__placeholder {
+    span {
+      height: 0;
+      border-bottom-width: 1px;
+      border-bottom-color: #ffffff;
+      margin-top: 6px;
+      display: block;
+    }
+  }
+}
+
+::ng-deep .mat-form-field {
+  .mat-form-field-wrapper {
+    .mat-form-field-flex {
+      padding: 0;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-select-trigger {
+    min-height: 20px;
+  }
+}
+
+svg:not(:root) {
+  overflow: visible;
+}
+
+.shortdashed {
+  stroke-width: 0.5px;
+  stroke: #ffffff;
+  stroke-dasharray: 0.7, 0.5;
+}
+.longdashed {
+  stroke-width: 0.5px;
+  stroke: #ffffff;
+  stroke-dasharray: 0.7, 0.5;
+}

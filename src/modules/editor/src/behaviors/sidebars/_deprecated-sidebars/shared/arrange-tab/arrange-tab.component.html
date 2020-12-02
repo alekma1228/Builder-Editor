@@ -1,0 +1,133 @@
+<form [formGroup]="form">
+  <div class="inputs-group" *ngIf="form.controls.align">
+    <div class="inputs-group__row">
+      <div class="select-wrapper">
+        <label class="select">
+          <select formControlName="align">
+            <option [value]="null">Align</option>
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="center">Center</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+            <option value="middle">Middle</option>
+          </select>
+        </label>
+      </div>
+      <div class="select-wrapper">
+        <label class="select">
+          <select disabled>
+            <option selected>Distribute</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="inputs-group" *ngIf="form.controls.size">
+    <div class="inputs-group__row" [formGroup]="form.get('size')">
+      <div class="inputs-group__title">
+        <span>Size</span>
+      </div>
+      <div>
+        <div class="inputs-group__row">
+          <div *ngIf="form.get('size').get('width')" class="inputs-group__control">
+            <peb-editor-number-input-old
+              [control]="sizeFormGroup.get('width')" min="0" label="Width" unit="px"
+              [min]="minWidth"
+              [max]="maxWidth"
+              (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+            >
+            </peb-editor-number-input-old>
+          </div>
+          <div *ngIf="form.get('size').get('height')" class="inputs-group__control">
+            <peb-editor-number-input-old
+              [control]="sizeFormGroup.get('height')" min="0" label="Height" unit="px"
+              [min]="minHeight"
+              [max]="maxHeight"
+              (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+            >
+
+            </peb-editor-number-input-old>
+          </div>
+        </div>
+
+        <div *ngIf="withResizeConstraints && form.get('size').get('width') && form.get('size').get('height')" class="inputs-group__row">
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              [disabled]="form.disabled"
+              [(ngModel)]="constrainProportions"
+              [ngModelOptions]="{ standalone: true }"
+              (change)="constrainProportionsChanged()"
+              (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+            />
+            <span>Constrain Proportions</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="inputs-group" *ngIf="form.controls.position">
+    <div class="inputs-group__row" [formGroup]="form.get('position')">
+      <div class="inputs-group__title">
+        <span>Position</span>
+      </div>
+      <div class="inputs-group__control">
+        <peb-editor-number-input-old
+          [control]="positionFormGroup.get('posX')" label="X" unit="px"
+          (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+        >
+        </peb-editor-number-input-old>
+      </div>
+      <div class="inputs-group__control">
+        <peb-editor-number-input-old
+          [control]="positionFormGroup.get('posY')" label="Y" unit="px"
+          (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+        >
+        </peb-editor-number-input-old>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="withRotation && form.controls.angle" class="inputs-group">
+    <div class="inputs-group__row">
+      <div class="inputs-group__title">
+        <span>Rotate</span>
+      </div>
+    </div>
+    <div class="inputs-group__row">
+      <div class="inputs-group__element">
+        <peb-editor-sidebar-angle-picker [control]="form.get('angle')"></peb-editor-sidebar-angle-picker>
+      </div>
+      <div class="inputs-group__element">
+        <peb-editor-number-input-old
+          [control]="form.get('angle')" unit="&#176;" label="Angle"
+          (changeBlur)="onElementBlur($event)" (changeFocus)="onElementFocus($event)"
+        ></peb-editor-number-input-old>
+      </div>
+      <div class="inputs-group__element">
+        <div class="flip-buttons">
+          <!-- Flip (Horizontal) -->
+          <button class="flip-button" [disabled]="form.disabled" (click)="flipHorizontal.emit()">
+            <peb-editor-flip-icon></peb-editor-flip-icon>
+          </button>
+
+          <!-- Flip (Vertical) -->
+          <button class="flip-button" [disabled]="form.disabled" (click)="flipVertical.emit()">
+            <peb-editor-flip-vertical-icon></peb-editor-flip-vertical-icon>
+          </button>
+        </div>
+        <div class="label">Flip</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="withLocking" class="inputs-group">
+    <div class="inputs-group__row">
+      <button class="group-btn" (click)="lockElem()" [disabled]="form.disabled">
+        Lock
+      </button>
+      <button class="group-btn" (click)="unlockElem()" [disabled]="form.enabled">
+        Unlock
+      </button>
+    </div>
+  </div>
+</form>

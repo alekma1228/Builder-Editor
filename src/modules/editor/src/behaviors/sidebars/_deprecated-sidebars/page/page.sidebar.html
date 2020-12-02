@@ -1,0 +1,91 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Page Layout">
+    <div *ngIf="form">
+      <form [formGroup]="form" novalidate>
+        <!--
+        <div class="group info">
+          <div>
+            <div class="info__preview"></div>
+          </div>
+
+          <div class="info__body">
+            <div class="info__name">Pagename</div>
+            <button class="form-button">Change Page</button>
+          </div>
+        </div>
+        -->
+
+        <div class="group">
+          <div class="group__row">
+            <label #pageOptionsLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="pageOptionsWrapper"
+                pebEditorAccordionKey="pageOptionsWrapper"
+                [triggerContainer]="pageOptionsLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Page options</span>
+            </label>
+          </div>
+          <div #pageOptionsWrapper>
+            <div class="group__content">
+              <label class="checkbox">
+                <input type="checkbox" formControlName="root">
+                <span>Home page</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group__row">
+            <label #pageNameLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="pageNameWrapper"
+                pebEditorAccordionKey="pageNameWrapper"
+                [triggerContainer]="pageNameLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Page name</span>
+            </label>
+          </div>
+          <div #pageNameWrapper>
+            <div class="group__content">
+              <input type="text" placeholder="Name" class="sidebar-input" formControlName="name"
+                 (keydown.enter)="pageNameInputEnterHandler($event)">
+            </div>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group__row">
+            <label #pageTypeLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="pageTypeWrapper"
+                pebEditorAccordionKey="pageTypeWrapper"
+                [triggerContainer]="pageTypeLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Page type</span>
+            </label>
+          </div>
+          <div #pageTypeWrapper>
+            <div class="group__content">
+              <peb-editor-sidebar-select
+                [options]="PageTypes"
+                [control]="getFormControl('type')">
+              </peb-editor-sidebar-select>
+            </div>
+          </div>
+        </div>
+
+        <editor-background-form
+          *ngIf="component?.background?.form"
+          [formGroup]="component.background.form"
+          (blurred)="component.background.submit.next()">
+        </editor-background-form>
+
+      </form>
+    </div>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

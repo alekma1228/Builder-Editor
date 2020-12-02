@@ -1,0 +1,15 @@
+{
+  "name": "@pe/builder-viewer",
+  "version": "4.10.0-dev.32",
+  "description": "",
+  "repository": "http://gitlab.devpayever.com/frontend/builder-editor.git",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.0.3",
+    "@angular/core": "^9.0.3",
+    "tslib": "^1.10.0",
+    "lodash": "^4.17.15",
+    "@pe/builder-core": "^4.3.0",
+    "@pe/builder-renderer": "^4.3.0"
+  }
+}

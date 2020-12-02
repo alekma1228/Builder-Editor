@@ -1,0 +1,12 @@
+<pe-new-platform-header></pe-new-platform-header>
+<ng-container *ngIf="images$ | async as images">
+  <pe-data-grid [items]="images"
+                [dataListOptions]="dataGridListOptions"
+                [filters]="filters"
+                [singleSelectedAction]="singleSelectedAction"
+                [hasPlatformHeader]="true"
+                (filtersChanged)="onFiltersChanged($event)"
+                (reachedPageEnd)="onReachPageEnd($event)"
+                (searchChanged)="search($event)"
+  ></pe-data-grid>
+</ng-container>

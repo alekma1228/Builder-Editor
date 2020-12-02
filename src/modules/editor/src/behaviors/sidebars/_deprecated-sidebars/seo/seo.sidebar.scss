@@ -1,0 +1,25 @@
+@import '../../../../styles/variables';
+
+.group {
+  border-bottom: 1px solid #474747;
+  padding: 15px 0;
+  font-size: 1em;
+  font-weight: 500;
+
+  &-no-underline {
+    padding: 15px 0;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  &_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}

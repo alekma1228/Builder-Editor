@@ -1,0 +1,22 @@
+<form class="form" [formGroup]="formGroup">
+  <editor-expandable-panel>
+    <ng-container slot="header">
+      Opacity
+    </ng-container>
+    <ng-container slot="body">
+      <div class="form__content">
+        <peb-editor-slider-input
+          formControlName="opacity"
+          (blurred)="blurred.emit()"
+        ></peb-editor-slider-input>
+        <peb-editor-number-input
+          formControlName="opacity"
+          [min]="0"
+          [max]="100"
+          unit="%"
+          (blurred)="blurred.emit()"
+        ></peb-editor-number-input>
+      </div>
+    </ng-container>
+  </editor-expandable-panel>
+</form>

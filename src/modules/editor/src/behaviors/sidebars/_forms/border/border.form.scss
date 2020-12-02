@@ -1,0 +1,37 @@
+.group {
+  border-bottom: 1px solid #474747;
+  padding: 15px 0;
+  font-size: 1em;
+  font-weight: 500;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  &__col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &.fixed {
+      flex: none;
+    }
+  }
+}

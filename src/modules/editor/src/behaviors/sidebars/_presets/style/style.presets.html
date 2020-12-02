@@ -1,0 +1,8 @@
+<div
+  *ngFor="let preset of presets"
+  #preset
+  class="preset"
+  [class.preset--empty]="!preset"
+  [style.backgroundImage]="'url(' + source + ')'"
+>
+</div>

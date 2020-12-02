@@ -1,0 +1,63 @@
+<form class="form" [formGroup]="formGroup" (focusout)="blur()">
+  <editor-expandable-panel>
+    <ng-container slot="header">
+      {{ title }}
+    </ng-container>
+    <ng-container slot="body">
+
+      <div class="row">
+        <peb-editor-select-input
+          class="row__control control"
+          formControlName="fontFamily"
+          [options]="options.fontFamilies"
+        ></peb-editor-select-input>
+      </div>
+
+
+      <div class="row">
+        <div class="row__control inline-controls">
+          <label class="inline-controls__control">
+            <input type="checkbox" hidden [checked]="this.bold" (click)="toggleBold()" />
+            <span>
+              <peb-editor-font-bold-icon></peb-editor-font-bold-icon>
+            </span>
+          </label>
+          <label class="inline-controls__control">
+            <input type="checkbox" hidden [checked]="this.italic" (click)="toggleItalic()" />
+            <span>
+              <peb-editor-font-italic-icon></peb-editor-font-italic-icon>
+            </span>
+          </label>
+          <label class="inline-controls__control">
+            <input type="checkbox" hidden [checked]="this.underline" (click)="toggleUnderline()" />
+            <span>
+              <peb-editor-font-underline-icon></peb-editor-font-underline-icon>
+            </span>
+          </label>
+          <label class="inline-controls__control">
+            <input type="checkbox" hidden [checked]="this.lineThrough" (click)="toggleLineThrough()" />
+            <span>
+              <peb-editor-font-stroke-icon></peb-editor-font-stroke-icon>
+            </span>
+          </label>
+        </div>
+
+        <peb-editor-number-input
+          class="row__control row__control--right control"
+          formControlName="fontSize"
+          unit="px"
+        ></peb-editor-number-input>
+      </div>
+
+      <div class="row">
+        <peb-editor-color-picker
+          class="row__control row__control--picker"
+          [control]="formGroup.get('color')"
+          [style.fontSize.em]="1"
+          (pebColorPickerChange)="blur()"
+        ></peb-editor-color-picker>
+      </div>
+
+    </ng-container>
+  </editor-expandable-panel>
+</form>

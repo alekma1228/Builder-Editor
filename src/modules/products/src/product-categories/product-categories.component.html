@@ -1,0 +1,8 @@
+<pe-data-grid
+  [items]="data.categories"
+  itemsTitle="title"
+  [selectedItems]="selected$ | async"
+  [multipleSelectedActions]="multipleSelectedActions"
+  [isShowGridItemInfo]="true"
+  (multipleSelectedItemsChanged)="onSelectedItemsChanged($event)"
+></pe-data-grid>

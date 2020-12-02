@@ -1,0 +1,87 @@
+@import '../../../../styles/variables';
+
+.slides-list-wrapper {
+  height: 100%;
+
+  .slides-list {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    margin: 10px 0;
+    border-radius: 3px;
+    border: solid 1px #696c70;
+    height: 27em;
+    min-height: 10em;
+    background-size: 100% 104px;
+
+    peb-editor-slides-list-element:nth-child(even) {
+      background: #222222;
+    }
+
+    &::-webkit-scrollbar {
+      width: .5em;
+      background: $background;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
+  .toolbar {
+    display: flex;
+    width: 50%;
+
+    .button {
+      padding: 0 1em;
+      background-color: #6c6c6c;
+      display: flex;
+      height: 1.75em;
+      width: 100%;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+
+      &--create {
+        border-radius: .125em 0 0 .125em;
+        border-right: 1px solid grey;
+      }
+
+      &--delete {
+        border-radius: 0 .125em .125em 0;
+      }
+
+      .line {
+        background: #ffffff;
+        width: 12px;
+        height: 1px;
+      }
+
+      .plus {
+        background: #ffffff;
+        width: 13px;
+        height: 1px;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          top: -5px;
+          left: 6px;
+          bottom: 0;
+          content: "";
+          background: #ffffff;
+          width: 1px;
+          height: 11px;
+        }
+      }
+    }
+  }
+}

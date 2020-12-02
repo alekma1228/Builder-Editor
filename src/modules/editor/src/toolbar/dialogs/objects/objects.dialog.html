@@ -1,0 +1,36 @@
+<div class="dialog-objects">
+  <!--Remove Search bar until it'll be needed -->
+  <!--<div class="dialog-objects__header">-->
+  <!--  &lt;!&ndash;    TODO: Add search icon&ndash;&gt;-->
+  <!--  <button-->
+  <!--    class="dialog-objects__header__searchbar-icon"-->
+  <!--  >-->
+  <!--  </button>-->
+  <!--  <input-->
+  <!--    type="text"-->
+  <!--    class="dialog-objects__header__searchbar-input"-->
+  <!--    [ngModel]="searchObject"-->
+  <!--    (ngModelChange)="onSearchObject($event)"-->
+  <!--    placeholder="Search">-->
+  <!--</div>-->
+  <div class="dialog-objects__content">
+    <div class="objects-sidebar">
+      <div
+        *ngFor="let category of categories"
+        (click)="choseCategory(category)"
+        [class.active]="category.name === selectedCategory.name"
+        class="objects-sidebar__category"
+      >
+        {{ category.name }}
+      </div>
+    </div>
+    <div *ngIf="selectedCategory" class="objects-entry-components">
+      <div *ngFor="let obj of selectedCategory.objects"
+           [class]="obj.variant.toLowerCase()"
+           (click)="addObject(obj)"
+      >
+        <mat-icon *ngIf="obj.icon" class="icon">{{ obj.icon }}</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div
+  class="option"
+  [class.active]="options[Option.Navigator].active"
+  [class.disabled]="options[Option.Navigator].disabled"
+  (click)="setValue(Option.Navigator)"
+>
+  <peb-editor-navigator-icon class="option__icon"></peb-editor-navigator-icon>
+  <div>Navigator</div>
+</div>
+<div
+  class="option"
+  [class.active]="options[Option.Inspector].active"
+  [class.disabled]="options[Option.Inspector].disabled"
+  (click)="setValue(Option.Inspector)"
+>
+  <peb-editor-inspector-icon class="option__icon"></peb-editor-inspector-icon>
+  <div>Inspector</div>
+</div>
+<div
+  class="option start-group"
+  [class.active]="options[Option.EditMasterPages].active"
+  (click)="setValue(Option.EditMasterPages)"
+>
+  <peb-editor-edit-master-pages-icon class="option__icon"></peb-editor-edit-master-pages-icon>
+  <div>Edit Master Pages</div>
+</div>
+<div
+  class="option start-group"
+  [class.active]="options[Option.Layers].active"
+  [class.disabled]="options[Option.Layers].disabled"
+  (click)="setValue(Option.Layers)"
+>
+  <peb-editor-hide-layers-list-icon class="option__icon"></peb-editor-hide-layers-list-icon>
+  <div>Layers List</div>
+</div>

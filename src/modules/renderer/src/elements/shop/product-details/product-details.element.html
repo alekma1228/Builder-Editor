@@ -1,0 +1,87 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container *ngIf="context?.state === ElementContextState.Ready">
+  <div class="content" #wrapper>
+    <ng-container *ngIf="isMobile">
+      <div class="data__title" #titleRef>
+        {{ (activeProduct$ | async)?.title || context.data.title }}
+      </div>
+    </ng-container>
+    <div class="preview" #carousel>
+      <ng-container *ngTemplateOutlet="isDesktop ? desktopCarousel : mobileCarousel"></ng-container>
+    </div>
+    <div class="data">
+      <div *ngIf="!isMobile" class="data__title" #titleRef>
+        {{ (activeProduct$ | async)?.title || context.data.title }}
+      </div>
+      <div class="data__price" *ngIf="{
+        price: (activeProduct$ | async)?.price || context.data.price,
+        currency: context.data?.currency
+      } as currencyData">
+        {{ currencyData.price | currencyFormatter: currencyData.currency: options.locale }}
+        <span class="price-vat">{{ options?.locale === 'de' ? 'inkl. MwSt.' :  'VAT included' }}</span>
+      </div>
+
+      <div
+        class="data__description"
+        [innerHTML]="(activeProduct$ | async)?.description || context.data.description"
+      ></div>
+
+      <select
+        class="data__variants"
+        *ngFor="let option of ((activeProduct$ | async)?.options?.length ? (activeProduct$ | async)?.options : context.data.variants[0]?.options); let i = index"
+        [(ngModel)]="selectedOptions[option.name]"
+        (ngModelChange)="onChangeOption($event, option)"
+        [disabled]="!options.interactions"
+      >
+        <ng-container *ngIf="getAvailableOptions(option) as availableOptions">
+          <option
+            *ngFor="let option of availableOptions"
+            [value]="option.value"
+            [hidden]="i && option.disabled"
+            >{{ option.value }}</option
+          >
+        </ng-container>
+      </select>
+
+      <button
+        class="button"
+        #button
+        [disabled]="!allOptionsSelected(context.data.options)"
+        (click)="addToCart()"
+      >
+        <ng-container [ngSwitch]="options?.locale">
+          <ng-container *ngSwitchCase="'de'">In den Warenkorb</ng-container>
+          <ng-container *ngSwitchCase="'sv'">Lägg i kundvagn</ng-container>
+          <ng-container *ngSwitchDefault>Add to cart</ng-container>
+        </ng-container>
+      </button>
+    </div>
+  </div>
+
+  <ng-template #desktopCarousel>
+    <shop-product-details-carousel
+      [element]="element"
+      [styles]="styles"
+      [options]="options"
+      [context]="context"
+      [activeProduct]="activeProduct$ | async"
+    ></shop-product-details-carousel>
+  </ng-template>
+
+  <ng-template #mobileCarousel>
+    <shop-product-details-mobile-carousel
+      [element]="element"
+      [styles]="styles"
+      [options]="options"
+      [context]="context"
+      [activeProduct]="activeProduct$ | async"
+    ></shop-product-details-mobile-carousel>
+  </ng-template>
+
+  <ng-template #preview>
+    <div class="slider-preview">
+      <peb-editor-product-icon class="preview-image"></peb-editor-product-icon>
+    </div>
+  </ng-template>
+</ng-container>

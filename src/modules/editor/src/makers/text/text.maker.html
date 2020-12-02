@@ -1,0 +1,16 @@
+<ng-container #CONTROLS></ng-container>
+
+<div class="content-wrapper">
+  <peb-text-editor
+    class="content"
+    #textEditorRef
+    [text]="getContent()"
+    [styles]="mappedStyles.host"
+    [initialDimensions]="initialRect"
+    [limits]="limits"
+    (textChanged)="onTextChanged($event)"
+    (selectionStylesChanged)="onSelectionStylesChanged($event)"
+    (dimensionsChanged)="onDimensionsChanged($event)"
+    (focused)="onTextFocused()"
+  ></peb-text-editor>
+</div>

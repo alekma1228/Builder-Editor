@@ -1,0 +1,12 @@
+<input
+  type="range"
+  [min]="min"
+  [max]="max"
+  [value]="control.value"
+  [formControl]="control"
+  class="slider"
+  (focus)="focus()"
+  (blur)="blur()"
+/>
+<div class="filled" [style.width.%]="control.value"></div>
+<div class="unfilled"></div>

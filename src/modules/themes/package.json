@@ -1,0 +1,26 @@
+{
+  "name": "@pe/builder-themes",
+  "version": "4.8.4-dev.123",
+  "description": "Builder: themes",
+  "repository": "https://gitlab.devpayever.com/frontend/builder-editor",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "@angular/material": "latest",
+    "@angular/cdk": "latest",
+    "@pe/builder-core": "latest",
+    "@pe/builder-api": "latest",
+    "@pe/builder-viewer": "latest",
+    "@pe/data-grid": "0.0.14",
+    "tslib": "^1.10.0",
+    "lodash": "*"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 9-11"
+  ]
+}

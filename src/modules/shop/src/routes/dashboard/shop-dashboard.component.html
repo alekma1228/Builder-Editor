@@ -1,0 +1,44 @@
+<div class="dashboard-header">
+  <div class="dashboard-header__title">Your Shop</div>
+  <button class="dashboard-header__open" (click)="onOpenClick()">
+    Open
+  </button>
+  <button class="dashboard-header__menu" [matMenuTriggerFor]="itemMenu">
+    <svg>
+      <use [attr.xlink:href]="'#icon-dots-h-24'"></use>
+    </svg>
+  </button>
+
+  <mat-menu #itemMenu="matMenu" class="shop-menu">
+      <button mat-menu-item
+        (click)="onEditClick()">
+        Edit
+      </button>
+  </mat-menu>
+</div>
+<div class="dashboard-viewer-container">
+  <mat-spinner
+    *ngIf="!(preview$ | async)"
+    class="mat-spinner-themed dashboard-spinner"
+    [strokeWidth]="2"
+    [diameter]="22"
+  ></mat-spinner>
+
+  <ng-scrollbar visibility="always" class="viewer-scrollbar">
+    <ng-container *ngIf="(preview$ | async) as preview">
+      <h2 *ngIf="!preview.published && !preview.current">
+        Shop doesn't have neither theme, not published version. Nothing to preview here.
+      </h2>
+      <peb-viewer
+        *ngIf="preview.published"
+        class="dashboard-viewer"
+        [themeCompiled]="preview.published"
+      ></peb-viewer>
+      <peb-viewer
+        *ngIf="!preview.published && preview.current"
+        class="dashboard-viewer"
+        [themeSnapshot]="preview.current"
+      ></peb-viewer>
+    </ng-container>
+  </ng-scrollbar>
+</div>

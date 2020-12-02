@@ -1,0 +1,12 @@
+{
+  "name": "@pe/builder-font-loader",
+  "version": "0.0.2",
+  "description": "Builder: font loader",
+  "repository": "https://gitlab.devpayever.com/frontend/builder-editor",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "tslib": "^1.10.0"
+  }
+}

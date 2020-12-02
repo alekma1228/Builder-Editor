@@ -1,0 +1,43 @@
+<div class="number-input">
+  <div
+    class="number-input__wrapper"
+    [ngClass]="{ disabled: control?.disabled }"
+  >
+    <input
+      type="number"
+      [formControl]="control"
+      (keydown)="onKeydown($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.placeholder]="placeholder"
+      [value]="control.value"
+    />
+    <span class="number-input__unit">{{ unit }}</span>
+  </div>
+  <div class="number-input__btn-wrapper">
+    <button
+      class="number-input__btn up"
+      [disabled]="control.disabled"
+      (click)="increment()"
+      (clickAndHold)="control.enabled && increment()"
+    >
+      <peb-editor-number-input-arrow-up-icon
+        [arrowColor]="control.disabled ? '#ACACAC' : '#E7E7E7'"
+      ></peb-editor-number-input-arrow-up-icon>
+    </button>
+
+    <button
+      class="number-input__btn down"
+      [disabled]="control.disabled"
+      (click)="decrement()"
+      (clickAndHold)="control.enabled && decrement()"
+    >
+      <peb-editor-number-input-arrow-down-icon
+        [arrowColor]="control.disabled ? '#ACACAC' : '#E7E7E7'"
+      ></peb-editor-number-input-arrow-down-icon>
+    </button>
+  </div>
+</div>
+<div class="label" *ngIf="label">{{ label }}</div>

@@ -1,0 +1,27 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 35px;
+}
+
+.preset {
+  width: 55px;
+  height: 40px;
+  background-color: #000000;
+  margin: auto;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+
+  &:not(.preset--empty):hover {
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  &--empty {
+    background-image: none !important;
+    opacity: 0.1;
+    cursor: initial;
+  }
+}

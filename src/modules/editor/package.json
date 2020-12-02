@@ -1,0 +1,33 @@
+{
+  "name": "@pe/builder-editor",
+  "version": "5.0.0-dev.13",
+  "description": "Builder: editor",
+  "repository": "https://gitlab.devpayever.com/frontend/builder-editor",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@angular/common": "^9.0.3",
+    "@angular/core": "^9.0.3",
+    "@angular/cdk": "latest",
+    "@angular/material": "latest",
+    "@pe/builder-api": "latest",
+    "@pe/builder-core": "latest",
+    "@pe/builder-renderer": "latest",
+    "@pe/builder-text-editor": "latest",
+    "@pe/builder-products": "latest",
+    "@pe/builder-font-loader": "latest",
+    "@pe/color-picker": "1.0.1",
+    "@pe/dom-to-image": "0.1.1",
+    "lodash": "latest",
+    "ngx-hm-carousel": "latest",
+    "ngx-scrollbar": "^7.2.1-beta.0",
+    "tslib": "^1.10.0",
+    "webfontloader": "^1.6.28"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 9-11"
+  ]
+}

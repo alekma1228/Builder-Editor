@@ -1,0 +1,22 @@
+<form class="input-group__row" [formGroup]="formGroup">
+  <div class="input-group__title">
+    <span>Position</span>
+  </div>
+  <div style="display: flex">
+    <div class="input-group__control">
+      <peb-editor-number-input
+        formControlName="x"
+        label="X"
+        unit="px"
+      ></peb-editor-number-input>
+    </div>
+
+    <div class="input-group__control">
+      <peb-editor-number-input
+        formControlName="y"
+        label="Y"
+        unit="px"
+      ></peb-editor-number-input>
+    </div>
+  </div>
+</form>

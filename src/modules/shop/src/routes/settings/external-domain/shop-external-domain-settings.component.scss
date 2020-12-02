@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.panel {
+  background-color: var(--color-primary-8);
+  color: var(--color-secondary-0);
+  width: 475px;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 15px;
+  margin: 0px 12px;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 24px;
+  min-height: 55px;
+
+  &__input {
+    background-color: var(--color-primary-8);
+    border-radius: 8px;
+    border: none;
+    font-size: inherit;
+    width: 100%;
+    padding: 19px;
+    color: var(--color-secondary-0);
+    outline: none;
+
+    &[disabled] {
+      opacity: 0.3;
+      cursor: initial;
+    }
+  }
+
+  &--button {
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    font-size: inherit;
+    background-color: var(--color-primary-overlap);
+    width: 100%;
+    color: var(--color-secondary-0);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-weight: 300;
+
+    &[disabled] {
+      color: var(--color-secondary-2);
+      cursor: initial;
+    }
+  }
+}

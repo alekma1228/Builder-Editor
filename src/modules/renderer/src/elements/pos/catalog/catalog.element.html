@@ -1,0 +1,73 @@
+<ng-container #CONTROLS></ng-container>
+
+<ng-container [ngSwitch]="catalogContext?.state">
+  <ng-container *ngSwitchCase="PebElementContextState.Loading"
+    >Loading...</ng-container
+  >
+  <ng-container *ngSwitchCase="PebElementContextState.Error"
+    >Error</ng-container
+  >
+  <ng-container *ngSwitchCase="PebElementContextState.Empty"
+    >Empty</ng-container
+  >
+  <ng-container *ngSwitchCase="PebElementContextState.Ready">
+    <ng-container
+      *ngIf="options.screen === PebScreen.Mobile then mobileHeader else desktopHeader"
+    ></ng-container>
+    <div class="catalog-content">
+      <pos-catalog-filters
+        [context]="catalogContext"
+        [options]="options"
+        [styles]="styles"
+        (toggleFilters)="onToggleShownFilters()"
+        (toggleFilter)="onToggleFilter($event)"
+      ></pos-catalog-filters>
+      <div
+        #productsGridRef
+        [class.catalog-products]="displayMode === DisplayModes.GRID"
+        [class.catalog-products-table]="displayMode === DisplayModes.TABLE"
+      >
+        <pos-catalog-product
+          *ngFor="let product of catalogContext.data.products; let i = index"
+          [context]="getFullProductContext(product)"
+          [options]="options"
+          [styles]="styles"
+          [element]="element"
+          [class.first-in-row]="i % styles.columns == 0"
+          [class.last-in-row]="i % styles.columns == styles.columns - 1"
+          [class.catalog-product]="displayMode === DisplayModes.GRID"
+          [class.catalog-product-table]="displayMode === DisplayModes.TABLE"
+          (navigateToPage)="showProductDetails($event)"
+        ></pos-catalog-product>
+      </div>
+
+      <ng-template #mobileHeader>
+        <pos-catalog-navbar-mobile
+          [context]="catalogContext"
+          [options]="options"
+          [styles]="styles"
+          (toggleFilters)="onToggleShownFilters()"
+          (toggleFilter)="onToggleFilter($event)"
+          (resetFilters)="resetFilters()"
+          (sort)="sort($event)"
+          (toggleProductsDisplay)="toggleProductsDisplay()"
+          (searchProducts)="searchProducts($event)"
+        ></pos-catalog-navbar-mobile>
+      </ng-template>
+
+      <ng-template #desktopHeader>
+        <pos-catalog-navbar
+          [context]="catalogContext"
+          [options]="options"
+          [styles]="styles"
+          (toggleFilters)="onToggleShownFilters()"
+          (resetFilters)="resetFilters()"
+          (sort)="sort($event)"
+        ></pos-catalog-navbar>
+      </ng-template>
+
+      <ng-template #grid> </ng-template>
+      <ng-template #table> </ng-template>
+    </div>
+  </ng-container>
+</ng-container>

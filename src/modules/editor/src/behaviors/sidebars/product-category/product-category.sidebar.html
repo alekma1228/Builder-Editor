@@ -1,0 +1,187 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Product">
+
+    <editor-categories-form
+      *ngIf="component?.categories?.form as categoriesForm"
+      [formGroup]="categoriesForm"
+      (blurred)="component.categories.submit.next()"
+    ></editor-categories-form>
+
+    <form [formGroup]="styleForm">
+      <div class="group">
+        <div class="group_row">
+          <div class="group_label-wrapper">
+            <label class="group__label">
+              <span>Products per row</span>
+            </label>
+          </div>
+          <peb-editor-number-input
+            formControlName="columns"
+            [min]="productsPerRowLimits.min"
+            [max]="productsPerRowLimits.max"
+          >
+          </peb-editor-number-input>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group_row">
+          <label class="group__label">
+            <span>Options</span>
+          </label>
+        </div>
+        <div class="group__content">
+          <div class="product">
+            <div class="product__option light">
+              <peb-editor-checkbox-input
+                class="group__label"
+                label="Select all"
+                [formControl]="productSettingsForm.get('selectAll')"
+              ></peb-editor-checkbox-input>
+            </div>
+            <div class="product__option product__label">
+              <label class="group__label">
+                <span>Product Info</span>
+              </label>
+            </div>
+            <div class="product__option light">
+              <peb-editor-checkbox-input
+                label="Show Price"
+                [formControl]="productSettingsForm.get('showPrice')"
+              ></peb-editor-checkbox-input>
+            </div>
+            <div class="product__option">
+              <peb-editor-checkbox-input
+                label="Show Product name"
+                [formControl]="productSettingsForm.get('showProductName')"
+              ></peb-editor-checkbox-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Style">
+    <form [formGroup]="styleForm">
+      <div class="group">
+        <div class="group_row">
+          Position
+        </div>
+        <div class="group__content">
+          <div
+            *ngIf="styleForm.get('textAlign') as textAlign"
+            class="tools-group"
+          >
+            <button
+              class="tools-group__item"
+              [class.active]="textAlign.value === textAlignmentConstants.LEFT"
+              (click)="textAlign.patchValue(textAlignmentConstants.LEFT)"
+            >
+              <peb-editor-alignment-left-icon></peb-editor-alignment-left-icon>
+            </button>
+            <button
+              class="tools-group__item"
+              [class.active]="textAlign.value === textAlignmentConstants.CENTER"
+              (click)="textAlign.patchValue(textAlignmentConstants.CENTER)"
+            >
+              <peb-editor-alignment-center-icon></peb-editor-alignment-center-icon>
+            </button>
+            <button
+              class="tools-group__item"
+              [class.active]="textAlign.value === textAlignmentConstants.RIGHT"
+              (click)="textAlign.patchValue(textAlignmentConstants.RIGHT)"
+            >
+              <peb-editor-alignment-right-icon></peb-editor-alignment-right-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group_row">
+          Image corners
+        </div>
+        <div class="group__content">
+          <div
+            *ngIf="styleForm.get('imageCorners') as imageCorners"
+            class="tools-group"
+          >
+            <button
+              class="tools-group__item"
+              [class.active]="imageCorners.value === imageCornersConstants.RIGHT"
+              (click)="imageCorners.patchValue(imageCornersConstants.RIGHT)"
+            >
+              <peb-editor-right-angle-icon></peb-editor-right-angle-icon>
+            </button>
+            <button
+              class="tools-group__item"
+              [class.active]="imageCorners.value === imageCornersConstants.ROUNDED"
+              (click)="imageCorners.patchValue(imageCornersConstants.ROUNDED)"
+            >
+              <peb-editor-rounded-border-icon></peb-editor-rounded-border-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group_row">
+          <label class="group__label">
+            <span>Products</span>
+          </label>
+        </div>
+      </div>
+
+      <editor-font-form
+        *ngIf="productTitleFont?.form as form"
+        title="Title"
+        [formGroup]="form"
+        [options]="productTitleFont?.options"
+        (blurred)="productTitleFont?.submit.next()"
+      ></editor-font-form>
+
+      <editor-font-form
+        *ngIf="productPriceFont?.form as form"
+        title="Price"
+        [formGroup]="form"
+        [options]="productPriceFont?.options"
+        (blurred)="productPriceFont?.submit.next()"
+      ></editor-font-form>
+
+      <div class="group">
+        <div class="group_row">
+          <label class="group__label">
+            <span>Category</span>
+          </label>
+        </div>
+      </div>
+
+      <editor-font-form
+        *ngIf="categoryTitleFont?.form as form"
+        title="Title"
+        [formGroup]="form"
+        [options]="categoryTitleFont?.options"
+        (blurred)="categoryTitleFont?.submit.next()"
+      ></editor-font-form>
+
+      <editor-font-form
+        *ngIf="categoryFilterFont?.form as form"
+        title="Filter"
+        [formGroup]="form"
+        [options]="categoryFilterFont?.options"
+        (blurred)="categoryFilterFont?.submit.next()"
+      ></editor-font-form>
+
+      <editor-border-form
+        *ngIf="component.border?.form as form"
+        [formGroup]="form"
+        (blurred)="component.border?.submit.next()"
+      ></editor-border-form>
+    </form>
+  </peb-editor-sidebar-tab>
+
+  <!-- <peb-editor-sidebar-tab title="Arrange">
+    <peb-editor-arrange-tab
+      [form]="arrangeForm"
+      (flipHorizontal)="flipH()"
+      (flipVertical)="flipV()"
+    ></peb-editor-arrange-tab>
+  </peb-editor-sidebar-tab> -->
+</peb-editor-sidebar-tabs>

@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+}
+
+input {
+  border-radius: 2px;
+  border: none;
+  background-color: #3f3f3f;
+  font-size: 13px;
+  color: #ffffff;
+  padding: 3px 6px;
+  outline: none;
+  width: 100%;
+  transition: box-shadow .2s;
+  border: solid 1px #696c70;
+
+  &:focus {
+    box-shadow: 0 0 1px 1px rgba(255,255,255,0.4);
+  }
+
+  &::placeholder {
+    color: rgba(255,255,255,.2);
+ }
+}

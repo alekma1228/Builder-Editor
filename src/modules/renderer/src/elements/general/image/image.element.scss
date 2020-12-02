@@ -1,0 +1,44 @@
+@import "../../spinner";
+
+:host {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  box-sizing: border-box;
+
+  img {
+    width: inherit;
+    height: inherit;
+    user-select: none;
+    pointer-events: none;
+    object-fit: contain;
+  }
+
+  .loading-spinner-wrapper {
+    display: flex;
+    position: absolute;
+  }
+
+  .default-image {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border-radius: 0.125em;
+    display: grid;
+    justify-content: center;
+    color: #aaa;
+    text-align: center;
+
+    &__text {
+      display: none;
+    }
+
+    .icon {
+      justify-self: center;
+      align-self: end;
+    }
+  }
+}

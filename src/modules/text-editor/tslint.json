@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "component-selector": [
+      true,
+      "pe-",
+      "peb-",
+      "kebab-case"
+    ],
+    "no-floating-promises": false
+  }
+}

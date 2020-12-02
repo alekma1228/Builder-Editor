@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  background: white;
+}
+
+// Need for overriding user agent stylesheet for innerHTML
+p {
+  margin: unset;
+}

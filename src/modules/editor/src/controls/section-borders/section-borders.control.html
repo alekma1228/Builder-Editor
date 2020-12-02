@@ -1,0 +1,15 @@
+<div
+  class="border border--left"
+  [style.margin-left.px]="(spaceWidth$ | async) - 1"
+  [style.borderColor]="color$ | async"
+></div>
+<div
+  class="border border--right"
+  [style.margin-right.px]="(spaceWidth$ | async) - 1"
+  [style.borderColor]="color$ | async"
+></div>
+<div
+  class="horizontal horizontal--top"
+  *ngFor="let height of (sectionHeights$ | async)"
+  [style.top.px]="height"
+></div>

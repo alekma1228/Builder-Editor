@@ -1,0 +1,291 @@
+<peb-editor-sidebar-tabs>
+  <peb-editor-sidebar-tab title="Style">
+    <div class="inputs-group">
+      <div class="styles">
+        <div
+          *ngFor="let example of predefinedStyles"
+          class="styles__item"
+          [ngStyle]="example.styles"
+          (click)="this.styleForm.patchValue(example.form)"
+        >
+          <img
+            *ngIf="imageSource.value; else defImg"
+            [src]="imageSource.value | safeUrl"
+          />
+          <ng-template #defImg>
+            <peb-editor-picture-icon
+              class="default-icon"
+              color="#C9C9C9"
+            ></peb-editor-picture-icon>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="form.get('style')">
+      <div class="inputs-group">
+        <div class="inputs-group__header">
+          <label class="checkbox">
+            <input type="checkbox" [formControl]="borderForm.get('enabled')" />
+            <span>Border</span>
+          </label>
+        </div>
+        <div *ngIf="borderForm.get('enabled').value" class="inputs-group__body">
+          <div class="inputs-group__row">
+            <div class="inputs-group__element">
+              <peb-editor-border-sidebar-select
+                [control]="borderForm.get('type')"
+                [style.width.px]="80"
+              ></peb-editor-border-sidebar-select>
+            </div>
+            <div class="inputs-group__element">
+              <editor-color-picker-spectrum-palette-input
+                cpPosition="bottom"
+                [formControl]="borderForm.get('color')"
+              ></editor-color-picker-spectrum-palette-input>
+            </div>
+            <div class="inputs-group__element">
+              <peb-editor-number-input-old
+                unit="px"
+                [control]="borderForm.get('size')"
+              ></peb-editor-number-input-old>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inputs-group">
+        <div class="inputs-group__header">
+          <label class="checkbox">
+            <input type="checkbox" [formControl]="shadowForm.get('enabled')" />
+            <span>Shadow</span>
+          </label>
+        </div>
+        <div *ngIf="shadowForm.get('enabled').value" class="inputs-group__body">
+          <div class="inputs-group__row__title">
+            <label #blurLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="blurWrapper"
+                pebEditorAccordionKey="blurWrapper"
+                [triggerContainer]="blurLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Blur</span>
+            </label>
+          </div>
+          <div #blurWrapper class="inputs-group__row">
+            <div class="inputs-group__element">
+              <peb-editor-sidebar-slider
+                unit="px"
+                [control]="shadowForm.get('blur')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="inputs-group__row__title">
+            <label #offsetLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="offsetWrapper"
+                pebEditorAccordionKey="offsetWrapper"
+                [triggerContainer]="offsetLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Offset</span>
+            </label>
+          </div>
+          <div #offsetWrapper class="inputs-group__row">
+            <div class="inputs-group__element">
+              <peb-editor-sidebar-slider
+                unit="px"
+                [control]="shadowForm.get('offset')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="inputs-group__row__title">
+            <label #opacityLabel>
+              <peb-editor-triangle-right-icon
+                class="group__triangle-icon"
+                [pebEditorAccordion]="opacityWrapper"
+                pebEditorAccordionKey="opacityWrapper"
+                [triggerContainer]="opacityLabel"
+              ></peb-editor-triangle-right-icon>
+              <span>Opacity</span>
+            </label>
+          </div>
+          <div #opacityWrapper class="inputs-group__row">
+            <div class="inputs-group__element">
+              <peb-editor-sidebar-slider
+                unit="%"
+                [control]="shadowForm.get('opacity')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+          <div class="inputs-group__row">
+            <div class="inputs-group__element">
+              <label #angleLabel>
+                <peb-editor-triangle-right-icon
+                  class="group__triangle-icon"
+                  [pebEditorAccordion]="angleWrapper"
+                  pebEditorAccordionKey="angleWrapper"
+                  [triggerContainer]="angleLabel"
+                ></peb-editor-triangle-right-icon>
+                <span>Angle</span>
+              </label>
+            </div>
+            <div #angleWrapper class="inputs-group__element">
+              <peb-editor-sidebar-angle-picker
+                [control]="shadowForm.get('angle')"
+              ></peb-editor-sidebar-angle-picker>
+            </div>
+            <div class="inputs-group__element">
+              <peb-editor-number-input-old
+                unit="°"
+                [control]="shadowForm.get('angle')"
+                [style.width.px]="80"
+              >
+              </peb-editor-number-input-old>
+            </div>
+            <div class="inputs-group__element">
+              <peb-editor-color-picker
+                [control]="shadowForm.get('color')"
+              >
+              </peb-editor-color-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="inputs-group">
+        <div class="inputs-group__header">
+          <label #opacLabel>
+            <peb-editor-triangle-right-icon
+              class="group__triangle-icon"
+              [pebEditorAccordion]="opacWrapper"
+              pebEditorAccordionKey="opacWrapper"
+              [triggerContainer]="opacLabel"
+            ></peb-editor-triangle-right-icon>
+            <span>Opacity</span>
+          </label>
+        </div>
+        <div #opacWrapper class="inputs-group__body">
+          <div class="inputs-group__row">
+            <div class="inputs-group__element">
+              <peb-editor-sidebar-slider
+                unit="%"
+                [control]="styleForm.get('opacity')"
+              ></peb-editor-sidebar-slider>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="group">
+      <div class="group__row">
+        <label for="syncCheckbox" class="checkbox">
+          <input
+            type="checkbox"
+            id="syncCheckbox"
+            [formControl]="form.get('sync')"
+          />
+          <span>Synchronization</span>
+        </label>
+      </div>
+    </div>
+  </peb-editor-sidebar-tab>
+  <peb-editor-sidebar-tab title="Image">
+    <div *ngIf="element.type === PebElementType.Image" class="tabs-headers">
+      <button
+        class="tab-button"
+        [class.selected]="imageSubTab === ImageSubTab.Media"
+        (click)="imageSubTab = ImageSubTab.Media"
+      >
+        Media
+      </button>
+      <button
+        class="tab-button"
+        [class.selected]="imageSubTab === ImageSubTab.Details"
+        (click)="imageSubTab = ImageSubTab.Details"
+      >
+        Details
+      </button>
+    </div>
+
+    <peb-editor-media-tab
+      *ngIf="imageSubTab === ImageSubTab.Media"
+      (selected)="onSelect($event)"
+    >
+    </peb-editor-media-tab>
+
+    <ng-container *ngIf="imageSubTab === ImageSubTab.Details">
+      <div *ngIf="{ src: imageSource.value } as image" class="inputs-group">
+        <div class="inputs-group__row__title" *ngIf="image.src">
+          File Info
+        </div>
+        <div
+          class="inputs-group__row"
+          [class.inputs-group-center]="!image.src"
+        >
+          <ng-container *ngIf="image.src; else defaultImage">
+            <div class="preview-img">
+              <img *ngIf="!(isLoading$ | async); else spinner" [src]="image.src | safeUrl" />
+            </div>
+            <div class="preview-img__name">
+              <span>{{ fileName }}</span>
+            </div>
+          </ng-container>
+          <ng-template #defaultImage>
+            <div class="preview-img" *ngIf="!(isLoading$ | async); else spinner">
+              <peb-editor-picture-icon
+                class="preview-img__default-icon"
+                color="#C9C9C9"
+              ></peb-editor-picture-icon>
+            </div>
+          </ng-template>
+          <ng-template #spinner>
+            <div class="spinner-container">
+              <mat-progress-spinner
+                  class="spinner-container__spinner"
+                  strokeWidth="2"
+                  diameter="22"
+                  [value]="uploadProgress | async"
+              >
+              </mat-progress-spinner>
+              <span class="spinner-container__text">{{ currentUploadName }}</span>
+            </div>
+          </ng-template>
+        </div>
+        <div class="inputs-group__row__centered">
+          <input
+            #fileInput
+            hidden
+            type="file"
+            accept="image/*"
+            (change)="onFileChange($event)"
+          />
+          <button class="replace-file-button" (click)="fileInput.click()">
+            Upload
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </peb-editor-sidebar-tab>
+
+  <peb-editor-sidebar-tab title="Arrange">
+    <editor-dimensions-form
+      *ngIf="component.dimensions?.form"
+      [formGroup]="component.dimensions.form"
+      [limits]="component.dimensions.limits"
+      (blurred)="component.dimensions.submit.next()"
+    ></editor-dimensions-form>
+
+    <editor-proportions-form
+      *ngIf="component.proportions?.form"
+      [formGroup]="component.proportions.form"
+      (blurred)="component.proportions.submit.next()"
+    ></editor-proportions-form>
+
+    <editor-position-form
+      *ngIf="component.position?.form"
+      [formGroup]="component.position.form"
+      [limits]="component.position.limits"
+      (blurred)="component.position.submit.next()"
+    ></editor-position-form>
+  </peb-editor-sidebar-tab>
+</peb-editor-sidebar-tabs>

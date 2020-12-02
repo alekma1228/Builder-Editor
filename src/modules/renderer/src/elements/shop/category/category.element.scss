@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+  background-color: #ffffff;
+  height: fit-content;
+  display: default;
+  overflow: hidden;
+}
+
+.category-content {
+  position: relative;
+  display: flex;
+}
+
+.category-products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: auto;
+  width: 100%;
+  transition: all 0.2s;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.category-products-table {
+  display: flex !important;
+  flex-direction: column;
+  width: 100% !important;
+  box-shadow: none !important;
+  min-height: 34em;
+}
+
+.category-product-table {
+  border-bottom: none !important;
+  width: 100% !important;
+  border-left: none;
+}
+
+peb-element-shop-category-product.last-in-row {
+  border-right: none;
+}
